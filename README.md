@@ -2,14 +2,24 @@
 ## Computation and comparison of the stable Northeastern US marine boundary layer
 _Everything to know and do for the Scitech paper_
 
+### Paper objectives
+_What did we promise to do?_
+- Continue offshore ABL computations from the Torque 2020 study --> include stable conditions
+- Compare stable ABLs with neutral and unstable
+- Examine what happens to statistics (spectra, turbulent length scales, etc.) as a function of height
+- Compare AMR-Wind vs Nalu-wind results for offshore ABLs.
+
 ## Getting started
-Take a look at some of the previously published items
+Here's everything that's been done so far
+
 ### Previous papers/publications
+Take a look at some of the previously published items
 - Read the paper by [Archer et al](literature/Archer_JGR_2016JD024896.pdf), which describes the Cape Wind met mast measurements
 - Look at the [Torque 2020 paper](literature/Cheung_2020_J_Phys_Conf_Ser_1618_062038.pdf) which describes the unstable and neutral results
 - Look at the [AIAA scitech abstract](literature/Scitech2021_Abstract_SAND2020-5758A.pdf) to see what we promised to do
 
 ### Previous runs
+Neutral and unstable have already been completed
 - [Outline of cases](PreliminaryThoughts.ipynb): A jupyter notebook summarizing the targeted conditions for stable, unstable, and neutral (based on Archer et al)
 - [NaluWindRuns neutral](NaluWindRuns/neutral): Directory of neutral Nalu-Wind input files for neutral 5m/s, 10m/s and 15 m/s
 - [NaluWindRuns unstable](NaluWindRuns/unstable): Directory of unstable Nalu-Wind input files for neutral 5m/s, 10m/s and 15 m/s
