@@ -56,6 +56,7 @@ and of course,
 ## Due dates and info
 For latest information, see [AIAA 2021 website](https://www.aiaa.org/SciTech).
 **Conference, paper, and registration deadlines:**
+- **Target submit for NREL review: 21 November 2020**
 - Manuscript due: **1 December 2020**
 - Early Member Registration Ends: **21 December 2020**
 - Conference dates: **11-15 Janurary 2021** (possibly changed due to virtual format)
