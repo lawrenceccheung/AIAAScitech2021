@@ -183,6 +183,16 @@ class AMRWind2Stats(ABLStats):
           'svv': d.variables['svv'][:,:],
           'sww': d.variables['sww'][:,:]
         }
+    self.tflux_var = {
+      "<T'u'>" : a["u'theta'_r"],
+      "<T'v'>" : a["v'theta'_r"],
+      "<T'w'>" : a["w'theta'_r"],
+    }
+    self.sfstflux_var = {
+      "<T'u'>" : [],
+      "<T'v'>" : [],
+      "<T'w'>" : [],
+    }
 
 
 class PedersonData(ABLStats):
