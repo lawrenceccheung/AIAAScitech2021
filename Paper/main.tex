@@ -7,7 +7,11 @@
 \usepackage[version=4]{mhchem}
 \usepackage{siunitx}
 \usepackage{longtable,tabularx}
+\usepackage{fixme}
 \setlength\LTleft{0pt} 
+
+% Setup fixme env for collaborative notes
+\fxsetup{status=draft, layout=inline, theme=color}
 
 \title{Computation and comparison of the stable Northeastern US marine boundary layer}
 
@@ -46,6 +50,9 @@ $TI$      & Turbulence intensity
 \end{longtable*}}
 
 \section{Introduction}
+\fxnote{This is the introduction from the abstract.  Update with real
+  introduction.}
+
 \lettrine{P}{ut} the introduction here.
 
 The planned installation of several offshore wind energy plants in the
@@ -93,12 +100,15 @@ conditions of onshore boundary layers, such as the GABLS1 boundary
 layer \cite{beare2006intercomparison}.  However, a complete comparison
 including offshore stable ABL conditions has yet to be completed.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SECTION 2: METHODOLOGY
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{methodology}
 
-\section{Methodology}
-Write something about Nalu-Wind and AMR-Wind.
-
-\section{Results}
-Write something about Nalu-Wind and AMR-Wind.
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SECTION 3: RESULTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{results}
 
 \section{Conclusion}
 Put conclusion here.
@@ -117,6 +127,8 @@ Inc., for the U.S. Department of Energy's National Nuclear Security
 Administration under contract DE-NA0003525. The views expressed in the
 article do not necessarily represent the views of the U.S. Department
 of Energy or the United States Government.
+
+\fxnote{ADD ANY NREL ACKNOWLEDGEMENTS NECESSARY HERE}
 
 % \bibliography{sample}
 \bibliography{references}
