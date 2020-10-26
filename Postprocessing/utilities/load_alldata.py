@@ -156,8 +156,8 @@ class AMRWindStats(ABLStats):
 
 class AMRWind2Stats(ABLStats):
   """ABLStats class specific to AMRWind output using netcdf"""
-  def __init__(self,dir_name):
-    a = pd.read_csv(dir_name+'/line_average_data.csv')
+  def __init__(self,dir_name, lineavgfilename='line_average_data.csv'):
+    a = pd.read_csv(dir_name+'/'+lineavgfilename)
     self.z = a['z'].values
     self.u = a['u'].values
     self.v = a['v'].values
