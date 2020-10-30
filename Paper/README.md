@@ -11,7 +11,7 @@
         - 2. AMR-Wind [`Mike`]
     - C. Computational set up [`Lawrence`]
     - D. Lower wall model BC [`Ganesh`]
-    - E. Simulation workflow
+    - E. Simulation workflow [`Lawrence`]
 4. **Results**  
     _This will be a joint effort from everyone_
     - A. ABL integrated quantities 
