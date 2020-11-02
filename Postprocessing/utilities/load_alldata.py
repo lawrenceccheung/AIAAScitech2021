@@ -173,7 +173,10 @@ class AMRWind2Stats(ABLStats):
       "<w'w'>" : a["w'w'_r"],
       "<w'w'w'>": a["w'w'w'_r"]
     }
-    self.istats = yaml.load(open(dir_name+'/istats.yaml'),Loader=yaml.BaseLoader)
+    try:
+      self.istats = yaml.load(open(dir_name+'/istats.yaml'),Loader=yaml.BaseLoader)
+    except:
+      self.istats = {}
     if (len(glob.glob(dir_name+'/avg_spectra.nc'))>0):
       with Dataset(dir_name+'/avg_spectra.nc') as d:
         self.ps_data = {

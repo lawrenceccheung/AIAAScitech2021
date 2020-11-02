@@ -37,9 +37,10 @@ runlist=[
     #['stable 15m/s', 'stable/15ms/15ms_iter01',     [15000, 20000],  'abl_stable15ms_iter01_run1.yaml', {'ablfile':'abl_statistics.nc','color':'b', 'lw':2, 'pngimage':'HHplane_0014000_0_plane0.png'}],
     #['stable 15m/s', 'stable/15ms/15ms_iter02',     [15000, 20000],  'abl_stable15ms_iter02_run1.yaml', {'ablfile':'abl_statistics.nc','color':'b', 'lw':2, 'pngimage':'HHplane_0014000_0_plane0.png'}],
     #['stable  5m/s', 'stable/05ms/05ms_iter02',     [15000, 20000],  'abl_stable05ms_iter02_run1.yaml', {'ablfile':'abl_statistics.nc','color':'b', 'lw':2, 'pngimage':'HHplane_0014000_0_plane0.png'}],
-    ['stable  5m/s', 'stable/05ms/05ms_iter02',     [10000, 15000],  'abl_stable05ms_iter02_run1.yaml', {'ablfile':'abl_statistics.nc','color':'b', 'lw':2, 'savedir':'../../NaluWindRuns/stable/05ms/05ms_iter02/10k_15k'}],
+    #['stable  5m/s', 'stable/05ms/05ms_iter02',     [10000, 15000],  'abl_stable05ms_iter02_run1.yaml', {'ablfile':'abl_statistics.nc','color':'b', 'lw':2, 'savedir':'../../NaluWindRuns/stable/05ms/05ms_iter02/10k_15k'}],
     
-   # # -- Neutral runs --
+    # -- Neutral runs --
+    ['neutral 5m/s',  'neutral/05ms/mini05_iter07.fine',  [15000, 20000], 'abl_neut05ms_iter07_run1.yaml', {'ablfile':'abl_statistics.nc', 'color':'g', 'lstyle':'-', 'lw':2.5, 'savedir':'../../NaluWindRuns/neutral/05ms/05ms_iter07.fine'}],
    # ['neutral 5m/s',  'neutral/05ms/05ms_iter07',  [15000, 20000], 'abl_neut05ms_iter07_run1.yaml', {'ablfile':'abl_statistics.nc', 'color':'g', 'lstyle':'-', 'lw':2.5, 'pngimage':'HHplane_0030000_0_plane0.png'}],
    # ['neutral 10m/s', 'neutral/10ms/10ms_iter03',  [15000, 20000], 'abl_neut10ms_iter03_run1.yaml', {'color':'g', 'lstyle':'--', 'lw':2.5, 'pngimage':'HHplane_0030000_0_plane0.png'}],
    # ['neutral 15m/s', 'neutral/15ms/15ms_iter03',  [15000, 20000], 'abl_neut15ms_iter03_run1.yaml', {'color':'g', 'lstyle':'-.', 'lw':2.5, 'pngimage':'HHplane_0030000_0_plane0.png'}],
