@@ -21,6 +21,8 @@ Question 1 can be addressed in one of two ways.
 
 Method (A) is simple to set up and run, but might require more jobs.  Method (B) can be done in a single simulation, but requires more finesse in setting up the domain and statistics sampling.  Method (B) might also let us test the transition region between refinement zones and its impact on turbulence behavior.
 
+Ideally the turbulence should be resolved to the extent needed to feed into the near-turbine mesh.
+
 ## Resolving question 2
 Once the correct mesh resolution is determined from Question 1, re-run all stable wind speeds (5m/s, 10m/s, 15m/s) with correct resolution.
 Compute at multiple heights (z=20m, 40m, 60m) the
