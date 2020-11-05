@@ -7,11 +7,12 @@
 3. **Methodology**
     - A. Measured offshore conditions [`Lawrence`]
     - B. LES Codes
+        - LES Formulation 
+        - Boundary conditions
         - 1. Nalu-Wind [`Shreyas`]
         - 2. AMR-Wind [`Mike`]
     - C. Computational set up [`Lawrence`]
-    - D. Lower wall model BC [`Ganesh`]
-    - E. Simulation workflow [`Lawrence`]
+    - D. Simulation workflow [`Lawrence`]
 4. **Results**  
     _This will be a joint effort from everyone_
     - A. ABL integrated quantities 
