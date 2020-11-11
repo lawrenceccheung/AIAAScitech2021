@@ -77,11 +77,71 @@ avgbins = []
 # Friction velocity.  Eventually this should be pulled from the ABL stats file
 utau     = 0.1492
 ```
-    The `planenum`, `ivector`, and `jvector` should correspond to points used in step #1.  You can set `avgbins` to 
-    separate the time-series into multiple bins, and `utau` is used in non-dimensionalization of the plots.
+The `planenum`, `ivector`, and `jvector` should correspond to points used in step #1.  You can set `avgbins` to 
+separate the time-series into multiple bins, and `utau` is used in non-dimensionalization of the plots.
 
-### Integral length scale
+### Turbulent integral length scale
+Calculating the two point Rij correlation and turbulent integral length scale is done 
+through the [correlate.py](Postprocessing/utilities/correlate.py) script.
+An example of its usage is in the [ABLLengthscale_Stable_05](NaluWindRuns/stable/05ms/05ms_iter02/ABLLengthscale_Stable_05.ipynb) 
+jupyter notebook.
 
+1.  Set up the paths to data and which iterations to use for calculating correlations
+```python
+# Set the parameters
+prefix='stable05'
+basedir='rundir/sliceData'
+filebase='HHplane_%07i_0.dat'
 
+iters=np.arange(30001,31001, 5) 
+loadfromplanes = True   # If True, calculate the average from individual plane files.  If False, load from avgsavefile
+plotprobept    = True   # If True, plot the probe locations
+iplane = 0
+ij   = [0,0]
+
+avgsavefile     = prefix+'_avgplane_%i_%i_%i.dat'%(iters[0],iters[-1],len(iters))
+Rijsavefile     = prefix+'_avgRij_%i_%i_%i_iplane_%i.dat'%(iters[0],iters[-1],len(iters),iplane)
+```
+
+2. Compute the mean across all sample plans
+```python
+# Load the average (compute if needed)
+avgdat, headers       = corr.loadavg(filelist, loadfromplanes, avgsavefile, verbose=True)
+ws, winddir           = corr.getavgwind(avgdat, headers, iplane)
+```
+
+3.  Compute the probe sample points for correlation computations using `corr.makeprobeline()`
+```python
+# Create the probe list for LONGITUDINAL
+# Set parameters
+winddir= 225
+if (winddir>270): s=-1
+else:             s=+1
+startx = np.arange(0,61,5)
+starty = np.arange(0,61,5)[::s]
+probelength = 750 # Probe length should be a few hundred meters
+startp = []
+yoffset=0
+[[startp.append([x,y+yoffset*iy,iplane]) for x in startx] for iy, y in enumerate(starty)]
+
+plistLONG = corr.makeprobeline(startp, winddir, probelength, avgdat)
+```
+
+4.  Compute the Rij correlations
+```python
+allf, allRij = corr.makeRij(ij, plist, filelist, loadfromplanes, avgsavefile, verbose=True)
+```
+Averaged Rij results should look like this:  
+![RijAveraging](https://user-images.githubusercontent.com/15526007/98852222-34dc6a80-240c-11eb-89ec-b8ec13306010.png)
+
+Across multiple conditions it should look like  
+![Rij](https://user-images.githubusercontent.com/15526007/98851539-4113f800-240b-11eb-92ae-58f1770b6822.png)
+
+5.  Integrate Rij to get the integral length scale
+```python
+# Calculate lengthscale
+lengthscale = corr.calclengthscale(allf[0], avgRijLong)
+print('LONG lengthscale = %f'%lengthscale)
+```
 ## AMR-Wind
 [_Fill in this section_]
