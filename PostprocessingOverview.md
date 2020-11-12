@@ -34,7 +34,12 @@ were written out using a `data_probes` section like this:
 ```
 
 ### Mean statistics
-[_Fill in this section_]
+1.  Use the [NaluWindAvg.py](Postprocessing/utilities/NaluWindAvg.py)
+    script to generate mean profiles and mean ABL statistics.  It uses
+    the [plotABLstats.py](Postprocessing/utilities/NaluWindAvg.py)
+    library to process the `abl_statistics.nc` output.
+	
+	
 
 ### Single-point wind spectra
 Processing the horizontal planes to extract single-point wind spectra
