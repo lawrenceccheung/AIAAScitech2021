@@ -6,7 +6,7 @@ time.max_step                =   -1          # Max number of time steps
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #         TIME STEP COMPUTATION         #
 #.......................................#
-time.fixed_dt         =   0.0625        # Use this constant dt if > 0
+time.fixed_dt         =   0.25        # Use this constant dt if > 0
 time.cfl              =   0.95       # CFL factor
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #            INPUT AND OUTPUT           #
@@ -36,39 +36,40 @@ CoriolisForcing.latitude = 41.5
 CoriolisForcing.rotational_time_period = 86164.0900027328
 ABLForcing.abl_forcing_height = 20.0
 
-incflo.velocity = 10.606601717798211 10.606601717798211 0.0
+incflo.velocity = 3.5355339059327373 3.5355339059327373 0.0
 ABL.reference_temperature = 300.0
-ABL.temperature_heights =  0.0 650.0 750.0 1000.0
-ABL.temperature_values = 300.0 300.0 308.0 308.75 
+ABL.temperature_heights =  0.0 1050.0 1150.0 2000.0
+ABL.temperature_values = 300.0 300.0 308.0 308.7544378698 
 ABL.perturb_temperature = false
 ABL.cutoff_height = 50.0
 ABL.perturb_velocity = true
 ABL.perturb_ref_height = 50.0
 ABL.kappa = 0.40
 ABL.surface_roughness_z0 = 0.0005
-ABL.surface_temp_rate = -1.5
+# 15/1.164/1007 = 0.01279701881
+ABL.surface_temp_flux = 0.01279701881
 ABL.normal_direction = 2
-ABL.stats_output_frequency = 4 
+ABL.stats_output_frequency = 2
 ABL.stats_output_format = netcdf
 
 
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
-amr.n_cell              = 576 576 384    # Grid cells at coarsest AMRlevel
+amr.n_cell              = 768 768 256    # Grid cells at coarsest AMRlevel
 amr.max_level           = 0           # Max AMR level in hierarchy
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #              GEOMETRY                 #
 #.......................................#
 geometry.prob_lo        =   0.       0.     0.  # Lo corner coordinates
-geometry.prob_hi        =   1500.  1500.  1000.  # Hi corner coordinates
+geometry.prob_hi        =   6000.  6000.  2000.  # Hi corner coordinates
 geometry.is_periodic    =   1   1   0   # Periodicity x y z (0/1)
 # Boundary conditions
 zlo.type =   "wall_model"
 zlo.temperature_type = "wall_model"
 zhi.type =   "slip_wall"
 zhi.temperature_type = "fixed_gradient"
-zhi.temperature = 0.003
+zhi.temperature = 0.0008875739645
 zlo.tke_type = "fixed_gradient"
 incflo.verbose          =   0
 # MLMG settings
