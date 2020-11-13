@@ -1,6 +1,7 @@
 # Grid sizes for simulations
 
 Nalu-Wind branch: Matt Churchfield's branch commit
+Sample planes at least 1 per second.
 
 Stable 5m/s  [Alan SNL]
 -------------------
