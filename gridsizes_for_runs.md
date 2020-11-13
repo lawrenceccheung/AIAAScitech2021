@@ -11,19 +11,19 @@ dz = 2.5 m  Lz=1000m
 dt = 0.25 sec  
 T  = 20,000s  
 
-Stable 10m/s [Ganesh Eagle]
+Stable 10m/s [Ganesh Eagle]  
 -------------------
-dx = 2.5 m  Lx=750m
-dy = 2.5 m  Ly=750m
-dz = 2.5 m  Lz=1000m
-dt = 0.125 sec
-T  = 20,000s
+dx = 2.5 m  Lx=750m  
+dy = 2.5 m  Ly=750m  
+dz = 2.5 m  Lz=1000m  
+dt = 0.125 sec  
+T  = 20,000s  
 
 Stable 15m/s [Ganesh Eagle]
 --------------------
-dx = 2.5 m  Lx=750m
-dy = 2.5 m  Ly=750m
-dz = 2.5 m  Lz=1000m
-dt = 0.0625 sec
-T  = 20,000s
+dx = 2.5 m  Lx=750m  
+dy = 2.5 m  Ly=750m  
+dz = 2.5 m  Lz=1000m  
+dt = 0.0625 sec  
+T  = 20,000s  
 
