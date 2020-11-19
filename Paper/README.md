@@ -9,15 +9,19 @@
     - B. LES Codes
         - LES Formulation 
         - Boundary conditions
-        - 1. Nalu-Wind [`Shreyas`]
-        - 2. AMR-Wind [`Mike`]
+        - Nalu-Wind details [`Shreyas`]
+        - AMR-Wind details [`Mike`]
     - C. Computational set up [`Lawrence`]
     - D. Simulation workflow [`Lawrence`]
 4. **Results**  
     _This will be a joint effort from everyone_
-    - A. ABL integrated quantities 
-    - B. Horizontally averaged profiles
-    - C. Wind spectra and turbulence statistics
+    - A. Grid resolution study  
+         _Do this study on stable 5m/s case_
+    - B. AMR-Wind vs. Nalu-Wind comparison
+    - C. Stable ABL physics
+       - 1. ABL integrated quantities 
+       - 2. Horizontally averaged profiles
+       - 3. Wind spectra and turbulence statistics
 5. **Conclusion** [`Lawrence`]
 
 ## File locations
