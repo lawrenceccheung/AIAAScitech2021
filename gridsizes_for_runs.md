@@ -32,9 +32,9 @@ T  = 20,000s  (Run to 10k sec first, then start sampling)
 
 Sampling planes (all cases above)
 =================================
-dx = 2.5m
-dy = 2.5m
-Lx = 750m 
-Ly = 750m 
-dz = 20m, 40, 60m
+dx = 2.5m  
+dy = 2.5m  
+Lx = 750m   
+Ly = 750m   
+dz = 20m, 40, 60m   
 dt = 1 sample every 2s
