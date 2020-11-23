@@ -6,6 +6,71 @@ import sys
 import os
 import copy
 
+# === Stuff for the netcdf file handling ====
+try:
+    from netCDF4 import Dataset
+    netCDF4loaded = True
+except:
+    netCDF4loaded = False
+
+def avgNCPlane(ncfilename, tindices, filename, verbose=False):
+    """    
+    Average the netcdf data over tindices and optionally save to file
+    """
+    if (not netCDF4loaded): Exception("netCDF4 not loaded") 
+    ncdat  = Dataset(ncfilename, 'r')
+
+    allvx  = ncdat['p_h'].variables['velocityx']
+    allvy  = ncdat['p_h'].variables['velocityy']
+    allvz  = ncdat['p_h'].variables['velocityz']
+    allT   = ncdat['p_h'].variables['temperature']
+        
+    # Get coordinates
+    # -- Zindex of all planes matching z --
+    #zind = (ncdat['p_h'].variables['coordinates'][:,2]==zplane)
+    allx = ncdat['p_h'].variables['coordinates'][:,0]
+    ally = ncdat['p_h'].variables['coordinates'][:,1]
+    allz = ncdat['p_h'].variables['coordinates'][:,2]
+    # -- Get the i,j indices ---
+    #ji=np.array([[j, i] for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
+    kji=np.array([[k, j, i] for k in range(ncdat['p_h'].ijk_dims[2]) for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
+    
+    # Get the means 
+    avgvx = np.mean(allvx[tindices, :], axis=0)
+    avgvy = np.mean(allvy[tindices, :], axis=0)
+    avgvz = np.mean(allvz[tindices, :], axis=0)
+    avgT  = np.mean(allT[tindices, :], axis=0)
+    # Assemble the return matrix
+    avgdat = np.vstack((kji.transpose(), allx,ally,allz, avgvx, avgvy, avgvz, avgT)).transpose()
+    if len(filename)>0:
+        header="Plane_Number Index_j Index_i coordinates[0] coordinates[1] coordinates[2] velocity_probe[0] velocity_probe[1] velocity_probe[2] temperature_probe[0]"
+        np.savetxt(filename, avgdat, header=header)
+    return avgdat, header.split()
+
+def extractNCplane(ncdat, tindex):
+    """
+    Extracts a plane at time tindex out of the ncdat netcdf data
+    """
+    # Get variables and coordinates
+    t      = ncdat['time'][:]
+    allvx  = ncdat['p_h'].variables['velocityx']
+    allvy  = ncdat['p_h'].variables['velocityy']
+    allvz  = ncdat['p_h'].variables['velocityz']
+    allT   = ncdat['p_h'].variables['temperature']
+    allx   = ncdat['p_h'].variables['coordinates'][:,0]
+    ally   = ncdat['p_h'].variables['coordinates'][:,1]
+    allz   = ncdat['p_h'].variables['coordinates'][:,2]
+    # -- Get the i,j indices ---
+    kji      = np.array([[k, j, i] for k in range(ncdat['p_h'].ijk_dims[2]) for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
+    slicevx  = allvx[tindex,:]
+    slicevy  = allvy[tindex,:]
+    slicevz  = allvz[tindex,:]
+    sliceT   = allT[tindex,:]
+    planedat = np.vstack((kji.transpose(), allx,ally,allz, slicevx, slicevy, slicevz, sliceT)).transpose()
+    return planedat
+
+# ===============================
+
 # Load all of the information needed from the file
 def loadplanefile(filename):
     dat=np.loadtxt(filename, skiprows=2)
@@ -65,16 +130,22 @@ def avgplanefiles(filelist, verbose=False):
     return avgdat/(float(N)), headers
 
 
-def loadavg(filelist, loadfromplanes, avgsavefile, verbose=False):
+def loadavg(filelist, loadfromplanes, avgsavefile, 
+            nctindices=[], verbose=False):
     """
     Load the average of all planes
     """
     if (loadfromplanes):
-        # load planes and average them
-        avgdat, headers=avgplanefiles(filelist, verbose=verbose)
-        # Save it
-        if len(avgsavefile)>0:
-            np.savetxt(avgsavefile, avgdat, header=' '.join(headers))
+        if len(nctindices)>0:
+            # load from NC file
+            avgdat, headers=avgNCPlane(filelist, nctindices, avgsavefile, 
+                                       verbose=verbose)
+        else:
+            # load text file planes and average them
+            avgdat, headers=avgplanefiles(filelist, verbose=verbose)
+            # Save it
+            if len(avgsavefile)>0:
+                np.savetxt(avgsavefile, avgdat, header=' '.join(headers))
     else:
         avgdat=np.loadtxt(avgsavefile)
         with open(avgsavefile) as fp:
@@ -139,7 +210,7 @@ def convertUVWtoLongLat(uvw, avguvw):
     return [ulong, ulat, uvert]
 
 def makeRij(ij, allplist, filelist, loadfromplanes, avgsavefile, 
-            verbose=False, norm=1):
+            ncfilename='', verbose=False, norm=1):
     # Get the average data
     avgdat, headers       = loadavg(filelist, loadfromplanes, avgsavefile, 
                                     verbose=verbose)
@@ -177,13 +248,25 @@ def makeRij(ij, allplist, filelist, loadfromplanes, avgsavefile,
     u0prime2 = np.zeros((Nplist, Npt))
     u1prime2 = np.zeros((Nplist, Npt))
 
+    if len(ncfilename)>0:
+        if (not netCDF4loaded): Exception("netCDF4 not loaded") 
+        ncdata   = Dataset(ncfilename, 'r')
+
     # -- Construct the Rij --
     # Loop through all files
     for ifile, filename in enumerate(filelist):
         if (verbose): 
-            shortfname=os.path.basename(filename)
-            print('Computing [%i/%i]: %s'%(ifile+1, len(filelist), shortfname))
-        dat, time, headers=loadplanefile(filename)
+            if len(ncfilename)>0:
+                statusstring='Computing [%i/%i]'%(ifile+1, len(filelist))
+            else:
+                shortfname=os.path.basename(filename)            
+                statusstring='Computing [%i/%i]: %s'%(ifile+1, len(filelist), shortfname)
+            print(statusstring)
+        if len(ncfilename)>0:
+            tindex = filename
+            dat = extractNCplane(ncdata, tindex)
+        else:
+            dat, time, headers=loadplanefile(filename)
         for ilist, plist in enumerate(allplist):
             p0   = sanitizepoint(plist[0], Ni, Nj, Nplanes) #plist[0]
             i0   = getplaneindex(p0[0], p0[1], p0[2], Ni, Nj)
