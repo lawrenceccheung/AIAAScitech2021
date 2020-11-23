@@ -88,7 +88,7 @@ incflo.post_processing = sampling
 # Frequency of output for the data
 sampling.output_frequency = 100
 # Type of probes to output
-sampling.labels = p_h 
+sampling.labels = p_h p_f
 
 # Fields to output
 sampling.fields = velocity temperature
@@ -101,3 +101,11 @@ sampling/p_h.origin = 0.0 0.0 20.0
 sampling/p_h.num_points = 76 76
 sampling/p_h.normal = 0.0 0.0 1.0
 sampling/p_h.offsets = 0.0 20.0 40.0
+
+sampling/p_f.type = PlaneSampler
+sampling/p_f.axis1 = 750.0 0.0 0.0
+sampling/p_f.axis2 = 0.0 750.0 0.0
+sampling/p_f.origin = 375.0 375.0 20.0
+sampling/p_f.num_points = 288 288
+sampling/p_f.normal = 0.0 0.0 1.0
+sampling/p_f.offsets = 0.0 20.0 40.0
