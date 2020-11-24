@@ -13,27 +13,27 @@ try:
 except:
     netCDF4loaded = False
 
-def avgNCPlane(ncfilename, tindices, filename, verbose=False):
+def avgNCPlane(ncfilename, tindices, filename, group='p_f', verbose=False):
     """    
     Average the netcdf data over tindices and optionally save to file
     """
     if (not netCDF4loaded): Exception("netCDF4 not loaded") 
     ncdat  = Dataset(ncfilename, 'r')
 
-    allvx  = ncdat['p_h'].variables['velocityx']
-    allvy  = ncdat['p_h'].variables['velocityy']
-    allvz  = ncdat['p_h'].variables['velocityz']
-    allT   = ncdat['p_h'].variables['temperature']
+    allvx  = ncdat[group].variables['velocityx']
+    allvy  = ncdat[group].variables['velocityy']
+    allvz  = ncdat[group].variables['velocityz']
+    allT   = ncdat[group].variables['temperature']
         
     # Get coordinates
     # -- Zindex of all planes matching z --
-    #zind = (ncdat['p_h'].variables['coordinates'][:,2]==zplane)
-    allx = ncdat['p_h'].variables['coordinates'][:,0]
-    ally = ncdat['p_h'].variables['coordinates'][:,1]
-    allz = ncdat['p_h'].variables['coordinates'][:,2]
+    #zind = (ncdat[group].variables['coordinates'][:,2]==zplane)
+    allx = ncdat[group].variables['coordinates'][:,0]
+    ally = ncdat[group].variables['coordinates'][:,1]
+    allz = ncdat[group].variables['coordinates'][:,2]
     # -- Get the i,j indices ---
-    #ji=np.array([[j, i] for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
-    kji=np.array([[k, j, i] for k in range(ncdat['p_h'].ijk_dims[2]) for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
+    #ji=np.array([[j, i] for j in range(ncdat[group].ijk_dims[1]) for i in range(ncdat[group].ijk_dims[0])])
+    kji=np.array([[k, j, i] for k in range(ncdat[group].ijk_dims[2]) for j in range(ncdat[group].ijk_dims[1]) for i in range(ncdat[group].ijk_dims[0])])
     
     # Get the means 
     avgvx = np.mean(allvx[tindices, :], axis=0)
@@ -47,21 +47,21 @@ def avgNCPlane(ncfilename, tindices, filename, verbose=False):
         np.savetxt(filename, avgdat, header=header)
     return avgdat, header.split()
 
-def extractNCplane(ncdat, tindex):
+def extractNCplane(ncdat, tindex, group='p_f'):
     """
     Extracts a plane at time tindex out of the ncdat netcdf data
     """
     # Get variables and coordinates
     t      = ncdat['time'][:]
-    allvx  = ncdat['p_h'].variables['velocityx']
-    allvy  = ncdat['p_h'].variables['velocityy']
-    allvz  = ncdat['p_h'].variables['velocityz']
-    allT   = ncdat['p_h'].variables['temperature']
-    allx   = ncdat['p_h'].variables['coordinates'][:,0]
-    ally   = ncdat['p_h'].variables['coordinates'][:,1]
-    allz   = ncdat['p_h'].variables['coordinates'][:,2]
+    allvx  = ncdat[group].variables['velocityx']
+    allvy  = ncdat[group].variables['velocityy']
+    allvz  = ncdat[group].variables['velocityz']
+    allT   = ncdat[group].variables['temperature']
+    allx   = ncdat[group].variables['coordinates'][:,0]
+    ally   = ncdat[group].variables['coordinates'][:,1]
+    allz   = ncdat[group].variables['coordinates'][:,2]
     # -- Get the i,j indices ---
-    kji      = np.array([[k, j, i] for k in range(ncdat['p_h'].ijk_dims[2]) for j in range(ncdat['p_h'].ijk_dims[1]) for i in range(ncdat['p_h'].ijk_dims[0])])
+    kji      = np.array([[k, j, i] for k in range(ncdat[group].ijk_dims[2]) for j in range(ncdat[group].ijk_dims[1]) for i in range(ncdat[group].ijk_dims[0])])
     slicevx  = allvx[tindex,:]
     slicevy  = allvy[tindex,:]
     slicevz  = allvz[tindex,:]
