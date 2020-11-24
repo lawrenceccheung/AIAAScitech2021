@@ -102,10 +102,10 @@ sampling/p_h.normal = 0.0 0.0 1.0
 sampling/p_h.offsets = 0.0 20.0 40.0
 
 sampling/p_f.type = PlaneSampler
-sampling/p_f.axis1 = 750.0 0.0 0.0
-sampling/p_f.axis2 = 0.0 750.0 0.0
-sampling/p_f.origin = 375.0 375.0 20.0
-sampling/p_f.num_points = 288 288
+sampling/p_f.axis1 = 1500.0 0.0 0.0
+sampling/p_f.axis2 = 0.0 1500.0 0.0
+sampling/p_f.origin = 0.0 0.0 20.0
+sampling/p_f.num_points = 576 576
 sampling/p_f.normal = 0.0 0.0 1.0
 sampling/p_f.offsets = 0.0 20.0 40.0
 
