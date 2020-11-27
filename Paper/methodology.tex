@@ -5,10 +5,72 @@ using, and how we set up the simulations.
 \subsection{Measured offshore conditions}
 \fxnote{Lawrence write this part}
 
-Write something about Cape Wind measurements from \cite{archer2016predominance}.
+Following the work of Cheung et al \cite{cheung2020large}, we use
+measurements of the offshore coastal marine boundary layer, collected
+by the Cape Wind meteorological tower in Nantucket Sound, as the basis
+for this computational study.  The Cape Wind platform collected wind
+measurements at 20m, 41m, and 60m above the mean water level, along
+with temperature and barometric measurements from the years 2003-2011.
+From the observations, Archer et al.\cite{archer2016predominance}
+found that the marine boundary layer is predominantly unstable, with
+61\% of conditions classified as unstable, versus 21\% neutral and
+18\% stable.  The stratification of the marine boundary layer, as
+determined by the Obukhov length, also had a large impact on the wind
+speed profile, with flatter, non-logarithmic profiles seen during
+unstable conditions.
 
-\subsection{LES Codes}
+From the measured distribution of atmospheric stabilities, turbulent
+kinetic energies (TKE), and wind speeds from the Cape Wind platform, a
+specific set of conditions were chosen as targets for this
+computational study.  A summary of the conditions for all stability
+classes is given table \ref{tab:CapeWindMeasurements}. In this work we
+focus on the three stable atmospheric conditions at wind speeds of
+5m/s, 10m/s, and 15m/s, while the neutral and unstable conditions
+where studied in previous work \cite{cheung2020large}.
+
+To maintain consistency with the measured data, the turbulence
+intensity (TI) is calculated using the TKE as
+\begin{equation}
+  \textrm{TI} =
+  \frac{\sqrt{\frac{2}{3}\times\textrm{TKE}}}{\overline{U}_{horiz}} =
+  \frac{\sqrt{\frac{1}{3}\left( \overline{u'u' + v'v' + w'w'}
+      \right)}}{\overline{U}_{horiz}}
+\end{equation}
+The averaged wind speeds were enforced at the measurement height of
+20m, and the wind directions...
+
+\begin{table}
+\caption{\label{tab:CapeWindMeasurements} Measured conditions at Cape
+  Wind.  The stable atmospheric conditions used in this study are
+  highlighted in bold below.} \centering
+\begin{tabular}{cccc}
+  \hline
+  Stability    & Wind speed [m/s] & Wind dir [deg] & Turbulence intensity \\
+  \hline
+  Neutral      & 5                & 225            & 0.055           \\
+  Neutral      & 10               & 225            & 0.055           \\
+  Neutral      & 15               & 225            & 0.065           \\
+  Unstable     & 5                & 315            & 0.080           \\
+  Unstable     & 10               & 315            & 0.075           \\
+  Unstable     & 15               & 315            & 0.090           \\
+  \bf{Stable}  & \bf{5}           & \bf{225}       & \bf{0.045}      \\
+  \bf{Stable}  & \bf{10}          & \bf{225}       & \bf{0.050}      \\
+  \bf{Stable}  & \bf{15}          & \bf{225}       & \bf{0.060}      \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Computational methodlogy}
 Provide a general description of the LES codes that we use.
+
+\subsection{LES formulation}
+
+\subsubsection{Governing equations}
+
+\subsubsection{Lower wall model BC}
+\fxnote{Ganesh write this part}\\
+What we implemented in terms of the lower boundary condition.
 
 \subsubsection{Nalu-Wind}
 \fxnote{Shreyas write this part}\\
@@ -22,9 +84,19 @@ Describe AMR-Wind
 \fxnote{Lawrence write this part}\\
 Domains, grids, boundary conditions
 
-\subsubsection{Lower wall model BC}
-\fxnote{Ganesh write this part}\\
-What we implemented in terms of the lower boundary condition.
+\begin{table}
+\caption{\label{tab:Computational parameters} LES parameters for stable conditions}
+\centering
+\begin{tabular}{cccc}
+  \hline
+  Stability    & Wind speed  & Surface roughness $z_0$ & Temperature gradient \\
+  \hline
+  Stable       & 5  m/s           & 0.0005 m       & -0.32 K/hr      \\
+  Stable       & 10 m/s           & 0.0005 m       & -1.40 K/hr      \\
+  Stable       & 15 m/s           & 0.0005 m       & -1.50 K/hr      \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsubsection{Simulation workflow}
 \fxnote{Lawrence write this part}\\
