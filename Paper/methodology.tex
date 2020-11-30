@@ -3,7 +3,7 @@ Write something about what we're comparing with, the codes we're
 using, and how we set up the simulations.
 
 \subsection{Measured offshore conditions}
-\fxnote{Lawrence write this part}
+% \fxnote{Lawrence write this part}
 
 Following the work of Cheung et al \cite{cheung2020large}, we use
 measurements of the offshore coastal marine boundary layer, collected
@@ -20,8 +20,8 @@ speed profile, with flatter, non-logarithmic profiles seen during
 unstable conditions.
 
 From the measured distribution of atmospheric stabilities, turbulent
-kinetic energies (TKE), and wind speeds from the Cape Wind platform, a
-specific set of conditions were chosen as targets for this
+kinetic energies (TKE), and wind speeds from the Cape Wind platform at
+z=20m, a stable set of conditions were chosen as targets for this
 computational study.  A summary of the conditions for all stability
 classes is given table \ref{tab:CapeWindMeasurements}. In this work we
 focus on the three stable atmospheric conditions at wind speeds of
@@ -37,7 +37,8 @@ intensity (TI) is calculated using the TKE as
       \right)}}{\overline{U}_{horiz}}
 \end{equation}
 The averaged wind speeds were enforced at the measurement height of
-20m, and the wind directions...
+20m, and the applied wind directions were consistent with the
+predominant stable direction of 225 degrees southwest.
 
 \begin{table}
 \caption{\label{tab:CapeWindMeasurements} Measured conditions at Cape
@@ -61,14 +62,14 @@ The averaged wind speeds were enforced at the measurement height of
 \end{table}
 
 
-\subsection{Computational methodlogy}
+\subsection{Computational methodology}
 Provide a general description of the LES codes that we use.
 
 \subsection{LES formulation}
 
 \subsubsection{Governing equations}
 
-\subsubsection{Lower wall model BC}
+\subsubsection{\label{sec:wallmodelBC}Lower wall model BC}
 \fxnote{Ganesh write this part}\\
 What we implemented in terms of the lower boundary condition.
 
@@ -80,28 +81,82 @@ Describe Nalu-Wind
 \fxnote{Mike write this part}\\
 Describe AMR-Wind
 
-\subsection{Computational set up}
-\fxnote{Lawrence write this part}\\
-Domains, grids, boundary conditions
+\subsection{Computational setup}
+% \fxnote{Domains, grids, boundary conditions}
+
 
 \begin{table}
-\caption{\label{tab:Computational parameters} LES parameters for stable conditions}
+\caption{\label{tab:z0tempparam} LES parameters for stable ABL conditions}
 \centering
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
   \hline
-  Stability    & Wind speed  & Surface roughness $z_0$ & Temperature gradient \\
+  Stability & Wind speed & Surface roughness $z_0$ & Surface
+  temperature change & timestep\\
   \hline
-  Stable       & 5  m/s           & 0.0005 m       & -0.32 K/hr      \\
-  Stable       & 10 m/s           & 0.0005 m       & -1.40 K/hr      \\
-  Stable       & 15 m/s           & 0.0005 m       & -1.50 K/hr      \\
+  Stable       & 5  m/s           & 0.0005 m       & -0.32 K/hr   & 0.25 sec   \\
+  Stable       & 10 m/s           & 0.0005 m       & -1.40 K/hr   & 0.125 sec  \\
+  Stable       & 15 m/s           & 0.0005 m       & -1.50 K/hr   & 0.0625 sec \\
 \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{Simulation workflow}
-\fxnote{Lawrence write this part}\\
-Describe the process to hit target conditions.
+The computational methodology for the AMR-Wind and Nalu-Wind LES codes
+follows practices similar to the previous offshore ABL study, with
+some modifications to handle the stable stratification.  As in
+\cite{cheung2020large}, the domain was a square prism geometry, with
+the $x$ and $y$ coordinates aligned in the East and North directions,
+respectively.  The domain size and mesh requirements were determined
+through a numerical grid study.  As discussed in section
+\ref{sec:gridstudy}, the horizontal dimensions of 750m $\times$ 750m
+were found to be sufficient to capture any large scale structures in
+the boundary layer, and in all cases the vertical dimension of 1000m
+was also used.  The grid study in section \ref{sec:gridstudy} also
+showed that the stable stratification required greater mesh refinement
+to capture the smaller turbulent scales, and a uniform cell size of
+2.5m was adopted for the offshore LES computations across both codes.
 
+Momentum source terms were included in Nalu-Wind and AMR-Wind to
+ensure that the horizontally averaged velocity matched the targeted
+wind speed at the z=20 m height.  These source terms are based on the
+difference between the desired wind velocity and the instantaneous
+horizontally averaged velocity, and are only a function of time and
+height z.  Coriolis forcing matching the Cape Wind latitude was
+included to capture the effect of wind change with elevation.
 
+\subsubsection{Boundary and initial conditions}
+In both horizontal directions of the computational domain, periodic
+boundary conditions were applied.  At the lower boundary, we chose to
+represent the air/ocean interface using flat boundary with small
+amount of surface roughness.  This allowed the wall model discussed in
+section \ref{sec:wallmodelBC} to be applied.  Monin-Obukhov similarity
+theory was used to determine the velocity and temperature profiles
+near the lower surface given a surface roughness height $z_0$ and the
+prescribed surface temperature as a function of time.  At the upper
+surface of the domain, a potential flow based boundary condition is
+applied along with a normal temperature gradient of 0.003 K/m.
 
+The initial temperature profile in all cases was a constant 300K until
+the specified inversion height of 650m.  The inversion layer thickness
+was 100m, and above this, the temperature linearly increased until it
+reached 308.75K at the upper boundary.  The initial mean velocity
+profile was uniform throughout the domain with superimposed sinusoidal
+velocity perturbations of magnitude 1 m/s to promote the development
+of turbulence.
 
+\subsubsection{Determination of surface roughness and prescribed temperature }
+To match the measured TI conditions given in table
+\ref{tab:CapeWindMeasurements}, the surface roughness and prescribed
+surface temperature change were adjusted through an initial
+trial-and-error process.  The final surface roughness of $z_0$=0.0005m
+used the stable offshore conditions (see table \ref{tab:z0tempparam})
+matched the roughness used in the neutral 15m/s and unstable 5m/s and
+10m/s cases from the previous study \cite{cheung2020large}.  This
+value of surface roughness is consistent with the measurements from
+the North Sea \cite{taylor2001dependence}, which found values of $z_0$
+ranging from $5 \times 10^{-5}$m to $5\times 10^{-3}$m.
+
+The values of the prescribed temperature change at the ocean surface
+is also given in table \ref{tab:CapeWindMeasurements}.  As the wind
+speed increases, a larger temperature decrease was used to maintain
+similar levels of stable stratification, as expected from
+Monin-Obukhov similarity theory.
