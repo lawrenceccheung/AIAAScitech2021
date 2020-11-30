@@ -325,7 +325,10 @@ def plotprobes(allplist, dat, headers, verbose=False, skip=1):
     plt.plot(xlines, ylines, 'b-')
     # plot the probe points
     for ilist, plist in enumerate(allplist):
-        if (verbose): print("On %i of %i"%(ilist, len(allplist)))
+        #if (verbose): print("On %i of %i"%(ilist, len(allplist)))
+        if (verbose):
+            sys.stdout.write("\r%d%%" % int((ilist+1)*100.0/len(allplist)))
+            sys.stdout.flush()
         for ip, pt in enumerate(plist[::skip]):
             pts   = sanitizepoint(pt, Ni, Nj, Nplanes)
             i1    = getplaneindex(pts[0], pts[1], pts[2], Ni, Nj)
@@ -335,7 +338,7 @@ def plotprobes(allplist, dat, headers, verbose=False, skip=1):
             if (ip==0): 
                 ms = 10
                 color='g'
-            if (i1>=Ni*Nj): 
+            if (i1>=Ni*Nj*(pts[2]+1)): 
                 ms = 10
                 color='r'
             plt.plot(xyz1[0], xyz1[1], '.', color=color, markersize=ms)
