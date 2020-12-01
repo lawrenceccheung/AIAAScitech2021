@@ -175,17 +175,16 @@ turbulent structures to develop and evolve without interference from
 the boundaries or other structures.
 
 %%%%%%%%%%%%%%% GRID STUDY: INTEGRAL LENGTH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h!]
+\begin{table} %[h!]
 \caption{\label{tab:GridStudyLscale} The calculated turbulent integral
   lengthscale for each of the grid resolutions} \centering
 \begin{tabular}{ccccc}
   \hline
   Case              & dx [m] & Longitudinal L  & Lateral L \\
   \hline
-  Nalu-wind coarse  &  10.0  & 36.43 m         & 0.0 m     \\
-  Nalu-wind medium  &   5.0  & 21.49 m         & 4.52 m    \\
-  Nalu-wind fine    &   2.5  & 25.25 m         & 5.92 m    \\
-% AMR-wind fine     &   2.5  & 27.689340 m     & 9.332672   \\
+  Nalu-wind coarse  &  10.0  & 36.4 m         & 0.0 m     \\
+  Nalu-wind medium  &   5.0  & 21.5 m         & 4.52 m    \\
+  Nalu-wind fine    &   2.5  & 25.3 m         & 5.92 m    \\
 \hline
 \end{tabular}
 \end{table}
@@ -270,8 +269,6 @@ the two temperature profiles $T(z)$.
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Wind spectra and turbulent correlation}
-
 In addition to the mean profiles described above, we also examined the
 wind spectra and turbulent correlation statistics from both AMR-Wind
 and Nalu-Wind for the stable 5m/s case.  A comparison of the computed
@@ -281,10 +278,6 @@ and Nalu-Wind predict similar spectral behavior, and both codes
 predict relatively similar spectral peaks for the $S_v$ and $S_w$
 spectra.  For the longitudinal spectra $S_u$, however, AMR-wind
 predicts a slightly lower the peak amplitude than Nalu-Wind.
-
-A comparison of the averaged $\langle R_{11}(\boldsymbol{\xi})\rangle$
-correlation coefficient is shown in figure
-\ref{fig:CompareAMRvsNaluRij}.
 
 %%%%%%%%%%% Compare Nalu/AMR spectra %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Postprocessing/ABLSpectra/AMRWind_NaluWind_Spectra_Stable.ipynb
@@ -298,19 +291,22 @@ correlation coefficient is shown in figure
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%% Compare Nalu/AMR lengthscale %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Postprocessing/ABLLength/CompareAMRNalu_ABL_Lengthscales.ipynb
-\begin{figure} %[hbt!]
-  \centering
-  \fxnote{UPDATE THIS FIGURE}\\
-  \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Longitudinal.png}
-  \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Lateral.png}
+%% A comparison of the averaged $\langle R_{11}(\boldsymbol{\xi})\rangle$
+%% correlation coefficient is shown in figure \ref{fig:CompareAMRvsNaluRij}.
 
-  \caption{\label{fig:CompareAMRvsNaluRij}
-    Comparison of AMR-Wind and Nalu-Wind $\langle R_{11}
-    \rangle$ correlation at z=20m. }
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%% Compare Nalu/AMR lengthscale %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% % Postprocessing/ABLLength/CompareAMRNalu_ABL_Lengthscales.ipynb
+%% \begin{figure} %[hbt!]
+%%   \centering
+%%   \fxnote{UPDATE THIS FIGURE}\\
+%%   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Longitudinal.png}
+%%   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Lateral.png}
+
+%%   \caption{\label{fig:CompareAMRvsNaluRij}
+%%     Comparison of AMR-Wind and Nalu-Wind $\langle R_{11}
+%%     \rangle$ correlation at z=20m. }
+%% \end{figure}
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Computational efficiency}
 How much faster is AMR-Wind compared to Nalu-Wind?  \\
@@ -318,27 +314,80 @@ How much faster is AMR-Wind compared to Nalu-Wind?  \\
 
 \subsection{Comparison of stable offshore ABL for different wind speeds and stabilities}
 
+Using the results of the stable cases described in \ref{sec:CFDsetup},
+as well as the computations from the previous study in
+\cite{cheung2020large}, we can examine the influence of wind speed and
+stratification on offshore ABL behavior.  In this section we first
+compare the differences between the three stable ABL cases, and then
+compare their behavior with the previously computed neutral and
+unstable counterparts.
+
 \subsubsection{ABL integrated quantities}
-Describe integrated quantities
+From the AMR-Wind calculations of the stable ABL at 5m/s, 10m/s, and
+15m/s, a number of quantities can be computed to compare with the
+measured targets from Archer et al \cite{archer2016predominance}.  
+
+The Obukhov length $L_{Ob}$ can be calculated as
+\begin{equation}
+  L_{Ob} = -\frac{u_\tau^3 T_0}{\kappa g \langle \overline{w'T'} \rangle}
+\end{equation}
+where the $\kappa$=0.41 is the Kolmogorov constant, $g$ is the
+gravitational acceleration, and $\langle \overline{w'T'} \rangle$ is the
+horizontally and time-averaged temperature flux.  In this study we use
+the same classification guidelines as Archer et al
+\cite{archer2016predominance}, and identify cases where $100 < L_{Ob}
+< 500$ as ``stable'', and cases where $5 < L_{Ob}<100$ as ``very stable''.
 
 %%%%%%%%%%%%%%% Compare AMR integrated quantities, all WS %%%%%%%%%%%%%%
 % See Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{table}
 \caption{\label{tab:CompareAMRallWS} Comparison of Stable ABL for all
   wind speeds} \centering
-\begin{tabular}{cccccc}
+\begin{tabular}{ccccccc}
   \hline
-  Code & Wind speed & TI      &  $\alpha$  &   $u_\tau$  &  Obukhov  L \\
+  Code & Wind speed & TI      &  $\alpha$  &   $u_\tau$  &  Obukhov  $L_{Ob}$ & Stability \\
   \hline
-  AMRWind & 5m/s      & 0.048255 &  0.165552 &  0.157399  & 52.512434 \\
-  AMRWind & 10m/s     & 0.050580 &  0.160337 &  0.318941  &  57.233491 \\
-  AMRWind & 15m/s     & 0.055034 &  0.118190 &  0.510645  & 131.341634 \\
+  AMRWind & 5m/s      & 0.0483 &  0.166 &  0.157 m/s  &  52.5 m   & Very stable\\
+  AMRWind & 10m/s     & 0.0506 &  0.160 &  0.319 m/s  &  57.2 m   & Very stable\\
+  AMRWind & 15m/s     & 0.0550 &  0.118 &  0.511 m/s  & 131.3 m   & Stable \\
   \hline
 \end{tabular}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Horizontally averaged profiles}
+\subsubsection{Flow behavior and horizontally averaged profiles}
+
+%%%%%%%%%%% z=20m snapshot pics %%%%%%%%%%%%%%%%%%%%%%%%%
+% Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
+\begin{figure}[hbt!]
+  \centering
+  \includegraphics[width=2.5in]{figures/snapshots/05ms/velh_mag_z20.png}
+  \includegraphics[width=2.5in]{figures/snapshots/05ms/velz_z20.png} \\
+  
+  \includegraphics[width=2.5in]{figures/snapshots/10ms/velh_mag_z20.png}
+  \includegraphics[width=2.5in]{figures/snapshots/10ms/velz_z20.png} \\
+  
+  \includegraphics[width=2.5in]{figures/snapshots/15ms/velh_mag_z20.png}
+  \includegraphics[width=2.5in]{figures/snapshots/15ms/velz_z20.png} \\
+  \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
+    velocity and vertical velocity }
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% side snapshot pics %%%%%%%%%%%%%%%%%%%%%%%%%
+% Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
+\begin{figure}[hbt!]
+  \centering
+  \includegraphics[height=2.0in]{figures/snapshots/05ms/velh_mag_side.png} \\
+
+  \includegraphics[height=2.0in]{figures/snapshots/10ms/velh_mag_side.png} \\
+
+  \includegraphics[height=2.0in]{figures/snapshots/15ms/velh_mag_side.png} \\
+    
+  \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
+    velocity and vertical velocity }
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% stable WS profiles %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
@@ -347,10 +396,20 @@ Describe integrated quantities
   \centering
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WS.png}
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WDir.png}
-  \caption{Calculation of the wind spectra $S_i$ for LES of stable
-    5m/s, 10m/s, and 15m/s cases at z=20m, 40m, and 60m.  The black
-    vertical lines correspond to the maximum resolvable frequency
-    $f_{max}$ according to equation (\ref{eq:fmax}). }
+  \caption{Comparison of the horizontal wind speed and wind direction
+    profile for the stable 5m/s, 10m/s, and 15m/s boundary layers. }
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% stable WS profiles %%%%%%%%%%%%%%%%%%%%%%%%%
+% Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
+\begin{figure}[hbt!]
+  \label{fig:CompareAMRallTTI}
+  \centering
+  \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_TI.png}
+  \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_T.png}
+  \caption{Comparison of the turbulence intensity and temperature
+    profile for the stable 5m/s, 10m/s, and 15m/s boundary layers. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
