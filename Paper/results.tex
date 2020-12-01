@@ -258,7 +258,7 @@ the two temperature profiles $T(z)$.
 
 %%%%%%%%%%% Compare Nalu/AMR TI/Temp profiles %%%%%%%%%%%%%%%%%%%%%%
 % Postprocessing/ABLStats/AMRWind_NaluWind_stable_05ms_mesh2_5x2_5x2_5_paper.ipynb
-\begin{figure} %[hbt!]
+\begin{figure} [hbt!]
   \centering
   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_stable_05ms_mesh2p5_2p5_2p5_TI.png}
   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_stable_05ms_mesh2p5_2p5_2p5_T.png}
@@ -322,34 +322,52 @@ compare the differences between the three stable ABL cases, and then
 compare their behavior with the previously computed neutral and
 unstable counterparts.
 
-\subsubsection{ABL integrated quantities}
+\subsubsection{\label{sec:stableABLStats} ABL integrated quantities}
 From the AMR-Wind calculations of the stable ABL at 5m/s, 10m/s, and
 15m/s, a number of quantities can be computed to compare with the
-measured targets from Archer et al \cite{archer2016predominance}.  
+measured targets from Archer et al \cite{archer2016predominance}.  In
+table \ref{tab:CompareAMRallWS}, we list the TI, shear exponent
+$\alpha$, friction velocity $u_\tau$, Obukhov length $L_{Ob}$,
+longitudinal lengthscale $L$, and stability classification for each of
+these three cases.  The TI values, calculated at the height $z$=20m
+fall within the target range of 4.5\% to 6.0\% for stable conditions
+from the Cape Wind measurements.  The calculated friction velocities
+are also similar to the values from the neutral offshore ABL
+calculations of \cite{cheung2020large}, where $u_\tau$ varied from
+0.15 m/s to 0.51 m/s for wind speeds of 5 m/s to 15 m/s.
 
-The Obukhov length $L_{Ob}$ can be calculated as
+The degree of stratification in each of the marine boundary layers can
+be quantified through the Obukhov length $L_{Ob}$, defined here as 
 \begin{equation}
   L_{Ob} = -\frac{u_\tau^3 T_0}{\kappa g \langle \overline{w'T'} \rangle}
 \end{equation}
 where the $\kappa$=0.41 is the Kolmogorov constant, $g$ is the
-gravitational acceleration, and $\langle \overline{w'T'} \rangle$ is the
-horizontally and time-averaged temperature flux.  In this study we use
-the same classification guidelines as Archer et al
-\cite{archer2016predominance}, and identify cases where $100 < L_{Ob}
-< 500$ as ``stable'', and cases where $5 < L_{Ob}<100$ as ``very stable''.
+gravitational acceleration, $T_0$ is the reference temperature, and
+$\langle \overline{w'T'} \rangle$ is the horizontally and
+time-averaged temperature flux.  In this study we adopt the same
+classification guidelines as Archer et al
+\cite{archer2016predominance}, and identify boundary layer cases where
+$100 < L_{Ob} < 500$ as ``stable'', and cases where $5 < L_{Ob}<100$
+as ``very stable''.  From the values listed in table
+\ref{tab:CompareAMRallWS}, we find that the lower wind speeds are
+``very stable'', while the highest 15 m/s wind speed is classified as
+``stable''.  This is consistent with the measured Cape Wind
+distributions, where very stable conditions are more frequent than
+stable conditions at lower wind speeds, and gradually disappear beyond
+13 m/s (c.f. figure 5b in \cite{archer2016predominance}).
 
 %%%%%%%%%%%%%%% Compare AMR integrated quantities, all WS %%%%%%%%%%%%%%
 % See Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{table}
 \caption{\label{tab:CompareAMRallWS} Comparison of Stable ABL for all
   wind speeds} \centering
-\begin{tabular}{ccccccc}
+\begin{tabular}{cccccccc}
   \hline
-  Code & Wind speed & TI      &  $\alpha$  &   $u_\tau$  &  Obukhov  $L_{Ob}$ & Stability \\
+  Code & Wind speed   & TI     & $\alpha$& $u_\tau$ & Obukhov $L_{Ob}$ & Longitudinal $L$ & Stability \\
   \hline
-  AMRWind & 5m/s      & 0.0483 &  0.166 &  0.157 m/s  &  52.5 m   & Very stable\\
-  AMRWind & 10m/s     & 0.0506 &  0.160 &  0.319 m/s  &  57.2 m   & Very stable\\
-  AMRWind & 15m/s     & 0.0550 &  0.118 &  0.511 m/s  & 131.3 m   & Stable \\
+  AMRWind & 5m/s      & 0.0483 &  0.166 &  0.157 m/s  &  52.5 m & 27.7 m  & Very stable\\
+  AMRWind & 10m/s     & 0.0506 &  0.160 &  0.319 m/s  &  57.2 m & 29.6 m  & Very stable\\
+  AMRWind & 15m/s     & 0.0550 &  0.118 &  0.511 m/s  & 131.3 m & 43.8 m  & Stable \\
   \hline
 \end{tabular}
 \end{table}
@@ -357,127 +375,204 @@ the same classification guidelines as Archer et al
 
 \subsubsection{Flow behavior and horizontally averaged profiles}
 
+The qualitative behavior of the stable boundary layers can be seen
+through snapshots of the flow taken from each of the simulations.  In
+figure \ref{fig:SnapshotsZ20}, instantaneous snapshots of the
+horizontal and vertical velocities for each of the three cases at the
+z=20m measurement height are shown.  The largest difference can be
+seen in the size of the flow structures between the very unstable and
+stable cases.  Longer streaks are evident in the 15 m/s case compared
+to the 5 m/s and 15 m/s cases, which is consistent with the nearly
+50\% larger integral lengthscale $L$ given in table
+\ref{tab:CompareAMRallWS}.  The differences in the vertical velocity
+are also evident in \ref{fig:SnapshotsZ20}.  At higher wind speeds the
+magnitude of the vertical $w'$ fluctuations increase, which plays a
+strong role in the growth the boundary layer.
+
 %%%%%%%%%%% z=20m snapshot pics %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
   \centering
-  \includegraphics[width=2.5in]{figures/snapshots/05ms/velh_mag_z20.png}
-  \includegraphics[width=2.5in]{figures/snapshots/05ms/velz_z20.png} \\
+  \fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
+  \includegraphics[width=3.0in]{figures/snapshots/05ms/velh_mag_z20.png}
+  \includegraphics[width=3.0in]{figures/snapshots/05ms/velz_z20.png} \\
   
-  \includegraphics[width=2.5in]{figures/snapshots/10ms/velh_mag_z20.png}
-  \includegraphics[width=2.5in]{figures/snapshots/10ms/velz_z20.png} \\
+  \includegraphics[width=3.0in]{figures/snapshots/10ms/velh_mag_z20.png}
+  \includegraphics[width=3.0in]{figures/snapshots/10ms/velz_z20.png} \\
   
-  \includegraphics[width=2.5in]{figures/snapshots/15ms/velh_mag_z20.png}
-  \includegraphics[width=2.5in]{figures/snapshots/15ms/velz_z20.png} \\
+  \includegraphics[width=3.0in]{figures/snapshots/15ms/velh_mag_z20.png}
+  \includegraphics[width=3.0in]{figures/snapshots/15ms/velz_z20.png} \\
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
-    velocity and vertical velocity }
+    velocity and vertical velocity, taken at t=20,000 seconds of the
+    simulations at height z=20m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This observation can also be seen in images taken along the flow
+direction $\theta=225^\circ$, as shown in figure
+\ref{fig:SnapshotsSide}.  At the time t=20,000 seconds, the growth the
+of 15 m/s stable boundary layer is considerably larger than the very
+stable 5 m/s and 10 m/s cases, and has nearly reached the inversion
+layer height.  To reach the same level of boundary layer growth, the
+very stable ABL cases would require longer simulation times, possibly
+longer than the nighttime conditions measured experimentally.
 
 %%%%%%%%%%% side snapshot pics %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
   \centering
-  \includegraphics[height=2.0in]{figures/snapshots/05ms/velh_mag_side.png} \\
+  \fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
+  \includegraphics[height=2.5in]{figures/snapshots/05ms/velh_mag_side.png} \\
 
-  \includegraphics[height=2.0in]{figures/snapshots/10ms/velh_mag_side.png} \\
+  \includegraphics[height=2.5in]{figures/snapshots/10ms/velh_mag_side.png} \\
 
-  \includegraphics[height=2.0in]{figures/snapshots/15ms/velh_mag_side.png} \\
+  \includegraphics[height=2.5in]{figures/snapshots/15ms/velh_mag_side.png} \\
     
   \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
-    velocity and vertical velocity }
+    velocity, taken at t=20,000 seconds along the wind direction. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Horizontally averaged flow profiles shown in figures
+\ref{fig:CompareAMRallWS} and \ref{fig:CompareAMRallTTI} provide a
+more quantitative assessment of the ABL evolution.  The rapid growth
+of the 15 m/s stable case leads to strong shear throughout the
+boundary layer up to the inversion height, while the very stable 5 m/s
+and 10 m/s cases showed minimal shear at higher elevations.  The
+change in wind direction is also indicative of the boundary layer
+penetration.  Approximately linear veer profiles are visible up to
+heights of $z\approx$250 m and $z\approx$350 m for the 5 m/s and 10
+m/s cases, respectively, while the linear veer is present in the 15
+m/s stable case up to $z$=650m.
+
+The behavior of the TI and temperature profiles in figure
+\ref{fig:CompareAMRallTTI} closely follows the shear and veer profiles
+discussed above.  Despite all cases reaching a similar TI levels at
+$z$=20m, the turbulence decays at different rates for each case until
+reaching the top of the boundary layer.  The effect of the different
+surface temperature changes is also visible in the horizontally
+averaged temperature profiles.  Both the 10 m/s and 15 m/s impose
+similar temperature changes (-1.4 K/hr and -1.5 K/hr, respectively)
+and each similar temperatures at the ocean surface.  However, the
+cooling effect in the very unstable 10 m/s case is limited to $z$<350
+m, similar to the veer and turbulence profiles.
 
 %%%%%%%%%%% stable WS profiles %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
-  \label{fig:CompareAMRallWS}
   \centering
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WS.png}
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WDir.png}
-  \caption{Comparison of the horizontal wind speed and wind direction
-    profile for the stable 5m/s, 10m/s, and 15m/s boundary layers. }
+  \caption{ \label{fig:CompareAMRallWS} Comparison of the horizontal
+    wind speed and wind direction profile for the stable 5m/s, 10m/s,
+    and 15m/s boundary layers. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% stable WS profiles %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
-  \label{fig:CompareAMRallTTI}
   \centering
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_TI.png}
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_T.png}
-  \caption{Comparison of the turbulence intensity and temperature
-    profile for the stable 5m/s, 10m/s, and 15m/s boundary layers. }
+  \caption{ \label{fig:CompareAMRallTTI} Comparison of the turbulence
+    intensity and temperature profile for the stable 5m/s, 10m/s, and
+    15m/s boundary layers. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Wind spectra and turbulence statistics}
+%% \subsubsection{Wind spectra and turbulence statistics}
 
-The Kaimal model for spectra \cite{kaimal1973turbulence,
-  cheynet2017spectral} for neutral atmospheric conditions:
-\begin{equation}
-  \label{eq:kaimal}
-  \frac{fS_i}{u_\tau^2} = \frac{a_i(fz/\bar{U})}{\left(1+b_i(fz/\bar{U})^{\alpha_i}\right)^{\beta_i}}
-\end{equation}
+%% The Kaimal model for spectra \cite{kaimal1973turbulence,
+%%   cheynet2017spectral} for neutral atmospheric conditions:
+%% \begin{equation}
+%%   \label{eq:kaimal}
+%%   \frac{fS_i}{u_\tau^2} = \frac{a_i(fz/\bar{U})}{\left(1+b_i(fz/\bar{U})^{\alpha_i}\right)^{\beta_i}}
+%% \end{equation}
 
-%%%%%%%%%%%%%%% KAIMAL MODEL PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
-\caption{\label{tab:KaimalParameters} Parameters for Kaimal model}
-\centering
-\begin{tabular}{ccccc}
-  \hline
-  Index $i$& $a_i$ & $b_i$ & $\alpha_i$  & $\beta_i$ \\
-  \hline
-  $u$      & 105.0 & 33.0  & 1           & 5/3  \\
-  $v$      &  17.0 &  9.5  & 1           & 5/3  \\
-  $w$      &   2.1 &  5.3  & 5/3         &   1  \\
-\hline
-\end{tabular}
-\end{table}
+%% %%%%%%%%%%%%%%% KAIMAL MODEL PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \begin{table}[h]
+%% \caption{\label{tab:KaimalParameters} Parameters for Kaimal model}
+%% \centering
+%% \begin{tabular}{ccccc}
+%%   \hline
+%%   Index $i$& $a_i$ & $b_i$ & $\alpha_i$  & $\beta_i$ \\
+%%   \hline
+%%   $u$      & 105.0 & 33.0  & 1           & 5/3  \\
+%%   $v$      &  17.0 &  9.5  & 1           & 5/3  \\
+%%   $w$      &   2.1 &  5.3  & 5/3         &   1  \\
+%% \hline
+%% \end{tabular}
+%% \end{table}
 
 
-%%%%%%%%%%% Stable spectra, all Z figure %%%%%%%%%%%%%%%%%%%%%%%%%
-% Created in Postprocessing/ABLSpectra/Stable_Spectra_Allz.ipynb
-\begin{figure}[hbt!]
-  \label{fig:ABLSpectra_AllZ}
-  \centering
-  \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_05ms.png}\\
-  \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_10ms.png}\\
-  \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_15ms.png}
-  \caption{Calculation of the wind spectra $S_i$ for LES of stable
-    5m/s, 10m/s, and 15m/s cases at z=20m, 40m, and 60m.  The black
-    vertical lines correspond to the maximum resolvable frequency
-    $f_{max}$ according to equation (\ref{eq:fmax}). }
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%% Stable spectra, all Z figure %%%%%%%%%%%%%%%%%%%%%%%%%
+%% % Created in Postprocessing/ABLSpectra/Stable_Spectra_Allz.ipynb
+%% \begin{figure}[hbt!]
+%%   \label{fig:ABLSpectra_AllZ}
+%%   \centering
+%%   \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_05ms.png}\\
+%%   \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_10ms.png}\\
+%%   \includegraphics[width=7.0in]{figures/Stable_Spectra_AllZ_15ms.png}
+%%   \caption{Calculation of the wind spectra $S_i$ for LES of stable
+%%     5m/s, 10m/s, and 15m/s cases at z=20m, 40m, and 60m.  The black
+%%     vertical lines correspond to the maximum resolvable frequency
+%%     $f_{max}$ according to equation (\ref{eq:fmax}). }
+%% \end{figure}
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \subsubsection{Comparison with neutral and unstable conditions}
 
+Strong differences based on the atmospheric stratification can also be
+seen when we compare the stable ABL cases with the neutral and
+unstable counterparts from \cite{cheung2020large}.  In the previous
+study, both neutral and unstable offshore boundary layer cases were
+considered at the same 5 m/s, 10 m/s and 15 m/s wind speeds.  Similar
+to the findings in \ref{sec:stableABLStats}, the 5 m/s and 10 m/s
+unstable cases were classified as ``very unstable'', while the 15 m/s
+was identified as ``stable'' based on the Obukhov length scale.
+
+The impact of the stability on the turbulent structures can be seen
+through the correlation statistics and calculated lengthscales in
+figure \ref{fig:AllStabilityRij} and
+\ref{fig:AllStabilityLengthscale}.  The large disparity between the
+size of the turbulent structures in the stable and neutral or unstable
+cases is immediately evident from the calculated $\langle
+R_{11}(\boldsymbol{\xi})\rangle$ coefficients.  The longitudinal
+lengthscales for the unstable ABL cases can also be an order of
+magnitude larger than the stable ABL cases.  The large lateral
+lengthscales for the very unstable ABL cases, compared to the lateral
+lengthscales for the neutral and stable cases, is also worth noting.
+For the 5 m/s and 10 m/s very unstable ABL cases, the lateral
+dimensions of the turbulent structures are similar to the longitudinal
+lengthscale.  This is consistent with the large convective structures
+which develops in those cases.  For the unstable 15 m/s case, the
+lateral lengthscales was closer to neutral and stable cases.  
 
 %%%%%%%%%%% All stability correlation figure %%%%%%%%%%%%%%%%%%%%
 % created in Postprocessing/ABLLength/CompareAll_ABL_Lengthscales.ipynb 
 \begin{figure}[hbt!]
-  \label{fig:AllStabilityRij}
   \centering
+  \fxnote{Fix legend and line styles} \\
   \includegraphics[width=3in]{figures/AllStability_Rij_Longitudinal.png}
   \includegraphics[width=3in]{figures/AllStability_Rij_Lateral.png}
-  \caption{Calculation of the averaged longitudinal and lateral
-    $R_{11}(\xi)$ coefficient at $z$=20m for all ABL stability cases.}
+  \caption{ \label{fig:AllStabilityRij} Calculation of the averaged
+    longitudinal and lateral $R_{11}(\xi)$ coefficient at $z$=20m for
+    all ABL stability cases.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% All stability, turbulent L figure %%%%%%%%%%%%%%%%%%%%
 % created in Postprocessing/ABLLength/CompareAll_ABL_Lengthscales.ipynb 
 \begin{figure}[hbt!]
-  \label{fig:AllStabilityLengthscale}
   \centering
+  \fxnote{Fix legend and marker styles} \\
   \includegraphics[width=3in]{figures/AllStability_Rij_LongitudinalLengthscale.png}
   \includegraphics[width=3in]{figures/AllStability_Rij_LateralLengthscale.png}
-  \caption{Calculation of the averaged longitudinal and lateral
-    lengthscale at $z$=20m for all ABL stability cases.}
+  \caption{ \label{fig:AllStabilityLengthscale} Calculation of the
+    averaged longitudinal and lateral lengthscale at $z$=20m for all
+    ABL stability cases.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
