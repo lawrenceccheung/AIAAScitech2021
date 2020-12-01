@@ -166,13 +166,19 @@ and the results are shown in table \ref{tab:GridStudyLscale}.  With a
 resolution of 2.5m, the ratio of the longitudinal length scale to the
 grid size $L/\textrm{d}x \approx 10.1$, while in the lateral direction
 $L/\textrm{d}x \approx 2.36$, suggesting even finer resolution is
-required to capture the lateral scales.  Based on this longitudinal
-length scale, we also determined the overall domain size necessary for
-stable ABL calculations.  A minimum domain of 750m $\times$ 750m in
-the horizontal directions was used in all Nalu-Wind and AMR-Wind LES
-calculations, which provided sufficient space for the largest
-turbulent structures to develop and evolve without interference from
-the boundaries or other structures.
+required to capture the lateral scales.
+
+Based on this longitudinal length scale, we also determined the
+overall domain size necessary for stable ABL calculations.  To provide
+sufficient space to ensure development and decorrelation of turbulent
+structures, domain sizes of approximately 10 times the longitudinal
+lengthscale is recommended.  However, the inclusion of sample probes
+with sufficient separation distance to accurately calculate $\langle
+R_{11}(\boldsymbol{\xi}) \rangle$ roughly doubles the domain size
+requirements.  Assuming the longitudinal length scales on the order of
+30 m, we estimated a minimum domain size of 750m $\times$ 750m in the
+horizontal directions for both the Nalu-Wind and AMR-Wind LES
+calculations.
 
 %%%%%%%%%%%%%%% GRID STUDY: INTEGRAL LENGTH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table} %[h!]
@@ -558,8 +564,8 @@ lateral lengthscales was closer to neutral and stable cases.
   \includegraphics[width=3in]{figures/AllStability_Rij_Longitudinal.png}
   \includegraphics[width=3in]{figures/AllStability_Rij_Lateral.png}
   \caption{ \label{fig:AllStabilityRij} Calculation of the averaged
-    longitudinal and lateral $R_{11}(\xi)$ coefficient at $z$=20m for
-    all ABL stability cases.}
+    longitudinal and lateral $\langle R_{11}(\boldsymbol{\xi})\rangle$
+    coefficient at $z$=20m for all ABL stability cases.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
