@@ -68,6 +68,17 @@ Provide a general description of the LES codes that we use.
 \subsection{LES formulation}
 
 \subsubsection{Governing equations}
+\fxnote{Shreyas write this part.  Currently placeholder equations below.}\\
+
+The low-Mach number equations:
+\begin{align}
+  \frac{\partial \rho} {\partial t} + \frac{\partial \rho u_j}{\partial x_j} & = 0, \\
+\frac{\partial \rho u_i}{\partial t} + \frac{\partial \rho u_j u_i}{\partial x_j}
++ \frac{\partial P}{\partial x_i} & = \frac{\partial \tau_{ij}}{\partial x_j}
++ \left( \rho - \rho_{\circ} \right) g_i, \\
+\frac{\partial \rho h}{\partial t} + \frac{\partial \rho u_j h}{\partial x_j} & =
+- \frac{\partial q_j}{\partial x_j} + \frac{\partial P_{th}}{\partial t},
+\end{align}
 
 \subsubsection{\label{sec:wallmodelBC}Lower wall model BC}
 \fxnote{Ganesh write this part}\\
@@ -160,3 +171,12 @@ is also given in table \ref{tab:CapeWindMeasurements}.  As the wind
 speed increases, a larger temperature decrease was used to maintain
 similar levels of stable stratification, as expected from
 Monin-Obukhov similarity theory.
+
+Once the appropriate surface roughness and prescribed temperature were
+determined, and the correct mesh requirements known from the study in
+section \ref{sec:gridstudy}, the LES computations for the stable 5m/s,
+10m/s, and 15m/s ABL cases could be set up and run.  Each of the cases
+was run for 15,000 seconds before collecting statistics for another
+5,000 seconds.  To maintain a CFL number less than unity during these
+runs, a smaller timestep was used for the higher wind speeds (see
+table \ref{tab:z0tempparam}).
