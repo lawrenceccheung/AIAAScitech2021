@@ -65,28 +65,168 @@ predominant stable direction of 225 degrees southwest.
 \subsection{Computational methodology}
 Provide a general description of the LES codes that we use.
 
+Large Eddy Simulations (LES) of the stable atmopsheric conditions described in
+Table~\ref{tab:CapeWindMeasurements} are performed using the open-source,
+ExaWind simulation environment\footnote{\url{https://github.com/exawind}}.
+ExaWind is a suite of high-fidelity modeling tools for analyzing complex
+microscale atmospheric boundary layer flows and wind farm flows. The present
+study uses two different incompressible computational fluid dynamic solvers
+available within the ExaWind suite --
+Nalu-Wind~\footnote{\url{https://github.com/exawind/nalu-wind}} and
+AMR-Wind~\footnote{\url{https://github.com/exawind/amr-wind}}. This section
+briefly describes the incompressible Navier-Stokes equations solved in the
+solvers, the specifics of the turbulence model and the wall shear stress
+formulation used to model the terrain, and the details of the numerical
+discretization of the two equations in the two codes.
+
 \subsection{LES formulation}
 
 \subsubsection{Governing equations}
-\fxnote{Shreyas write this part.  Currently placeholder equations below.}\\
+Both CFD codes solve the incompressible form of Navier-Stokes equations with
+appropriate models for turbulence closure. Equation~\ref{eqn:ns-les} shows the
+continuity and momentum equations with all the terms necessary to model the
+atmospheric boundary layer problem. Term $\mathbf{I}$ represents the pressure
+gradient forces as a deviation from hydrostatic and horizontal mean gradient,
+term $\mathbf{II}$ represents the contribution from viscous and sub-filter scale
+stresses, term $\mathbf{III}$ represents the contribution from Coriolis forces
+due to earth's rotation, term $\mathbf{IV}$ represents the effects of buoyancy,
+and term $\mathbf{V}$ represents source terms necessary to drive the flow to a
+desired horizontal mean velocity at prescribed heights.
 
-The low-Mach number equations:
 \begin{align}
-  \frac{\partial \rho} {\partial t} + \frac{\partial \rho u_j}{\partial x_j} & = 0, \\
-\frac{\partial \rho u_i}{\partial t} + \frac{\partial \rho u_j u_i}{\partial x_j}
-+ \frac{\partial P}{\partial x_i} & = \frac{\partial \tau_{ij}}{\partial x_j}
-+ \left( \rho - \rho_{\circ} \right) g_i, \\
-\frac{\partial \rho h}{\partial t} + \frac{\partial \rho u_j h}{\partial x_j} & =
-- \frac{\partial q_j}{\partial x_j} + \frac{\partial P_{th}}{\partial t},
+  \frac{\partial \bar{\rho}} {\partial t} + \frac{\partial \bar{\rho} \widetilde{u_j}}{\partial x_j} & = 0, \nonumber\\
+  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{u}_i\right) +
+  \frac{\partial}{\partial x_j} \left( \bar{\rho}\, \widetilde{u}_i \widetilde{u}_j \right) &=
+  - \underbrace{\frac{\partial p'}{\partial x_j} \delta_{ij}}_\mathbf{I}
+  - \underbrace{\frac{\partial \tau_{ij}}{\partial x_j}}_\mathbf{II}
+  - \underbrace{2\bar{\rho}\,\epsilon_{ijk}\,\Omega_j\widetilde{u_k}}_\mathbf{III}
+  + \underbrace{\left(\rho - \rho_\circ \right) g_i}_\mathbf{IV}
+  + \underbrace{S^{u}_{i}}_\mathbf{V} \label{eqn:ns-les}
 \end{align}
+
+For the simulations presented in this paper, the buoyancy term ($\mathbf{IV}$)
+is approximated using the Bousinessq model. The Bousinessq model ignores the
+effect of density gradients on inertia while retaining its effects on buoyancy.
+The density fluctuations governing the buoyancy effects are approximated as
+
+\begin{align*}
+  \frac{\rho}{\rho_\circ} \approx 1 - \beta \left( \theta - \theta_\circ \right)
+\end{align*}
+This leads to a forcing term that depends on potential temperature ($\theta$),
+the reference density $\rho_\circ = \bar{\rho}$, and thermal expansion
+coefficient $\beta \approx 1 / \theta_\circ$ as
+\begin{align}
+  \left(\rho - \rho_\circ \right) g_i = -\rho_\circ\, \beta\, g_i \left( \theta - \theta_\circ \right)
+\end{align}
+
+For ABL problems, the conservation of energy equation is usually written in
+terms of potential temperature as shown in Eq.~\ref{eqn:pot-temp-les}.
+\begin{align}
+  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{\theta}\right) +
+  \frac{\partial}{\partial x_j} \left(\bar{\rho}\, \widetilde{u}_j \widetilde{\theta} \right) = - \frac{\partial}{\partial x_j} \hat{q}_j \label{eqn:pot-temp-les}
+\end{align}
+Under the assumption of ideal gas conditions and constant specific heat capacity
+$c_p$, the gradients in potential temperature are proportional to the gradients
+in absolute temperature, i.e.,
+\begin{align*}
+   \left[ \frac{\partial T}{\partial t}, \frac{\partial T}{\partial x}, \frac{\partial T}{\partial y} \right] =
+   \left( \frac{\bar{p}}{p_\circ} \right)^{\left(\frac{R}{c_p}\right)} \left[ \frac{\partial \theta}{\partial t}, \frac{\partial \theta}{\partial x}, \frac{\partial \theta}{\partial y} \right]
+\end{align*}
+Furthermore, ignoring the pressure and viscous work terms in
+Eq.~\ref{eqn:pot-temp-les}, for incompressible flows, it can be shown that
+solving the enthalpy equation is equivalent to solving the potential temperature
+equation. The enthalpy equation solved in Nalu-Wind for wind energy problems is
+shown below
+\begin{align}
+  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{h}\right) +
+  \frac{\partial}{\partial x_j} \left(\bar{\rho}\, \widetilde{u}_j \widetilde{h} \right) = - \frac{\partial}{\partial x_j} q_j \label{eqn:enthalpy-les}
+\end{align}
+It is noted here that the terms $\hat{q}_j$ (Eq.~\ref{eqn:pot-temp-les}) and
+$q_j$ (Eq.~\ref{eqn:enthalpy-les}) are not equivalent and must be scaled
+appropriately. User can still provide the appropriate initial and boundary
+conditions in terms of potential temperature field. Under these assumptions and
+conditions, the resulting solution can then be interpreted as the variation of
+potential temperature field in the computational domain.
+
+The subgrid-scale kinetic energy ($k$) one-equation turbulence model
+(Eq.~\ref{eqn:ksgs-les}), based on Moeng~\cite{Moeng1984}, is used for
+LES turbulence closure.
+
+\begin{align}
+  \frac{\partial}{\partial t}\left(\bar{\rho} k \right) + \frac{\partial}{\partial x_j} \bar{\rho} k \widetilde{u_j} &= \frac{\partial}{\partial x_j} \left (2 \nu_t \frac{\partial k}{\partial x_j} \right) - 2 \nu_t \widetilde{S_{ij}} \widetilde{S_{ij}} + \frac{g}{\theta_\circ} \tau_{\theta_i} - C_{\epsilon} \frac{k^{3/2}}{l} \label{eqn:ksgs-les}
+\end{align}
+where
+\begin{align*}
+  C_\epsilon &= 0.93 & \nu_t &= C_\epsilon l \sqrt{k} \\
+  \tau_{\theta i} &= - 2\ \frac{\nu_t}{\mathrm{Pr}_t}\ \frac{\partial \widetilde{\theta}}{\partial x_i} & \mathrm{Pr}_t &= \left( 1 + \frac{2l}{\Delta} \right)^{-1} \\
+\end{align*}
+The choice of the length scale ($l$) depends on whether the stratification is positive
+or negative, based on the recommendation by Moeng~\cite{Moeng1984}, and is given
+by
+\begin{align*}
+  l =
+  \begin{cases}
+    \Delta = \sqrt{\Delta_x \Delta_y \Delta_z}, & \frac{\partial \widetilde{\theta}}{\partial z} < 0 \\
+    0.76\, \sqrt{k}\, \frac{g}{\theta_\circ}\, \left( \frac{\partial \widetilde{\theta}}{\partial z}\right)^{-1/2}, &  \frac{\partial \widetilde{\theta}}{\partial z} > 0 \\
+  \end{cases}
+\end{align*}
+
+\begin{comment}
+  \fxnote{Shreyas write this part.  Currently placeholder equations below.}\\
+
+  The low-Mach number equations:
+  \begin{align}
+    \frac{\partial \rho} {\partial t} + \frac{\partial \rho u_j}{\partial x_j} & = 0, \\
+    \frac{\partial \rho u_i}{\partial t} + \frac{\partial \rho u_j u_i}{\partial x_j}
+    + \frac{\partial P}{\partial x_i} & = \frac{\partial \tau_{ij}}{\partial x_j}
+                                        + \left( \rho - \rho_{\circ} \right) g_i, \\
+    \frac{\partial \rho h}{\partial t} + \frac{\partial \rho u_j h}{\partial x_j} & =
+                                                                                    - \frac{\partial q_j}{\partial x_j} + \frac{\partial P_{th}}{\partial t},
+  \end{align}
+\end{comment}
 
 \subsubsection{\label{sec:wallmodelBC}Lower wall model BC}
 \fxnote{Ganesh write this part}\\
 What we implemented in terms of the lower boundary condition.
 
 \subsubsection{Nalu-Wind}
-\fxnote{Shreyas write this part}\\
-Describe Nalu-Wind
+
+Nalu-Wind~\cite{SpragueAVR2020} is an open-source, wind-focused fork of the Nalu CFD
+code~\cite{Domino:2015}. The codebase heavily leverages the open-source Trilinos
+suite of numerical libraries~\cite{Heroux:2003}. Nalu-Wind uses an
+unstructured-grid, node-centered, finite-volume formulation for solving the incompressible
+Navier-Stokes equations. Two spatial discretization approaches are supported
+within the codebase -- the edge-based scheme and control-volume finite-element
+scheme. The edge-based scheme, used in the present study, is similar to the
+classical cell-centered finite volume formulation formulated on a dual volume
+surrounding the nodes of the mesh. The governing equations are discretized in
+time using a split-operator approach. Implicit backward difference formula
+(BDF2) timestepping algorithm with an approximate pressure projection
+scheme~\cite{Moen-Domino:2003} is used to advance the equations in time.
+Multiple Picard-style outer-loop iterations are employed within each timestep
+to minimize the errors introduced from split-operator approximations. Nalu-Wind
+comes equipped with a suite of Reynolds-Averaged Navier-Stokes (RANS), LES, and
+Detached Eddy Simulation (DES) turbulence models to resolve the disparate
+spatial and temporal scales encountered when modeling wind plant flows.
+
+Nalu-Wind heavily utilizes the Sierra Toolkit (STK) library~\cite{Edwards:2010}
+for managing the unstructured mesh data structures. The linear systems resulting
+from the discretized equations are solved using solvers available within the
+Belos and MueLu libraries within Trilinos. The momentum and scalar transport
+equations are solved using GMRES iterative solver with symmetric Gauss-Seidel
+(SGS) preconditioners. The elliptic pressure-Poisson equation is solved using
+GMRES solvers with a smoothed-aggregated algebraic multigrid preconditioner. The
+reader is referred to Sprague et al.~\cite{SpragueAVR2020} and
+Domino~\cite{Domino:2015} more more details.
+
+While the primary objective of Nalu-Wind within the ExaWind simulation suite is
+to support blade-resolved simulations of wind turbines, it comes equipped
+with all the physics models necessary for modeling atmospheric boundary flows.
+In the present work, the prognostic equation for temperature is solved using the
+enthalpy equation (Eq.~\ref{eqn:enthalpy-les}). The prognostic one-equation,
+subgrid-scale kinetic energy equation (Eq.~\ref{eqn:ksgs-les}) is used for LES
+turbulence closure. Two Picard iterations were employed within each timestep to
+minimize splitting errors and recover second-order accuracy in time.
 
 \subsubsection{AMR-Wind}
 
