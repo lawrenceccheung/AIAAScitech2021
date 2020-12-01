@@ -89,8 +89,45 @@ What we implemented in terms of the lower boundary condition.
 Describe Nalu-Wind
 
 \subsubsection{AMR-Wind}
-\fxnote{Mike write this part}\\
-Describe AMR-Wind
+
+\fxnote{Do we want a github link reference for amr-wind? exawind?}\\
+
+As part of a suite of physics codes within the open-source project called ExaWind, 
+AMR-Wind enables more efficient and scalable simulations of wind power plants. 
+This is because it is built on top of the AMReX software framework which contains 
+all of the functionality needed to develop massively parallel, block-structured 
+adaptive mesh refinement (AMR) applications \cite{AMReX_JOSS}.
+Since AMR-Wind is limited to Cartesian block-structured grids it is specialized
+to handle atmospheric boundary layer physics and wind turbine wakes. 
+The block-structured grids enable more efficient algorithms such as 
+Multi-Level Multi-Grid (MLMG) \cite{AMReX_JOSS}
+and are well suited for next generation supercomputers that use GPU's. 
+
+AMR-Wind solves the incompressible Navier-Stokes equations and is generalized to
+handle variable density and viscosity. Additionally scalar transport equations can be 
+solved such as potential temperature or turbulence models. The discretization in AMR-Wind
+is based on the approximate projection method used in IAMR \cite{almgren1998conservative} 
+and incflo \cite{sverdrup2018highly}. It is a semi-staggered scheme where the velocity and scalar 
+variables are located at cell centers and pressure is located at nodes. Pressure is also staggered
+in time so that pressure and the pressure gradient (located at cell centers) are at time $n+1/2$. 
+The time discretization is handled with a Crank Nicholson approach where the right hand side 
+of the system of equations is evaluated at time $n+1/2$. The advection term is handled explicitly
+using an upwind finite-volume method. There are multiple options
+within AMR-Wind, but in this paper only the high-order Godunov Piecewise Parabolic 
+method (PPM) is used \cite{Colella1984}. The advection terms are projected to face 
+centers at $n+1/2$ and are corrected using an exact MAC projection \cite{almgren1998conservative}
+which guarantees a divergence free flow. The diffusion terms can be handled explicitly, semi-implicitly, 
+or fully implicit and are the discretized using a second-order central difference formula. 
+For the simulations in this paper we use a fully implicit scheme as the variable viscosity 
+from the eddy viscosity may cause time step restrictions. After the scalar equations
+and the momentum equations are advanced in time a nodal projection is used to 
+approximately correct the velocity field to make it divergence free. Where the nodal projection
+is based on a node centered finite element method \cite{almgren1998conservative}.
+
+%IAMR paper \cite{almgren1998conservative}
+%AMReX \cite{AMReX_JOSS}
+%incflo \cite{sverdrup2018highly}
+%Godunov ppm \cite{Colella1984}
 
 \subsection{Computational setup}
 % \fxnote{Domains, grids, boundary conditions}
