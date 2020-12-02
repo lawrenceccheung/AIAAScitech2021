@@ -186,8 +186,29 @@ by
 \end{comment}
 
 \subsubsection{\label{sec:wallmodelBC}Lower wall model BC}
-\fxnote{Ganesh write this part}\\
-What we implemented in terms of the lower boundary condition.
+The sub-filter scale stresses are specified at the terrain boundary following
+Moeng~\cite{Moeng1984} as
+\begin{align}
+ (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{S_1 \average{\widetilde{u}_1} + \average{S_1} (\widetilde{u}_1 - \average{\widetilde{u}_1} ) }{ \average{S_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
+ (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{S_1 \average{\widetilde{v}_1} + \average{S_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{S_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } \\
+  (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{S_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{S_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{S_1} ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) },
+\end{align}
+where all quantities with the subscript 1 are values at the first vertical grid
+level, $S_1$ is the resolved wind speed at the first grid level and
+$\average{f}$ represents the horizontal planar average of $f$. The mean
+sub-filter stresses are computed using Monin-Obukhov similarity
+law~\cite{Etling1996}. The formulation for the potential temperature flux could
+potentially experience a singularity when the mean resolved potential
+temperature at the first grid level $\average{\widetilde{\theta}_1}$ crosses the
+reference temperature $\theta_{\circ}$. Hence the model for the sub-filter
+potential temperature flux is reformulated using the Monin-Obukhov similarity
+law as
+\begin{equation}
+(\tau_{\theta z})_0 = \left ( \frac{u_{\tau} \kappa}{ \phi_h} \right ) \frac{S_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{S_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{S_1} },
+\end{equation}
+where $\phi_h$ is the non-dimensional potential temperature gradient from
+Monin-Obukhov similarity law~\cite{Etling1996}.
+
 
 \subsubsection{Nalu-Wind}
 
@@ -232,35 +253,35 @@ minimize splitting errors and recover second-order accuracy in time.
 
 % \fxnote{Do we want a github link reference for amr-wind? exawind?}\\
 
-As part of a suite of physics codes within the open-source project called ExaWind, 
-AMR-Wind enables more efficient and scalable simulations of wind power plants. 
-This is because it is built on top of the AMReX software framework which contains 
-all of the functionality needed to develop massively parallel, block-structured 
+As part of a suite of physics codes within the open-source project called ExaWind,
+AMR-Wind enables more efficient and scalable simulations of wind power plants.
+This is because it is built on top of the AMReX software framework which contains
+all of the functionality needed to develop massively parallel, block-structured
 adaptive mesh refinement (AMR) applications \cite{AMReX_JOSS}.
 Since AMR-Wind is limited to Cartesian block-structured grids it is specialized
-to handle atmospheric boundary layer physics and wind turbine wakes. 
-The block-structured grids enable more efficient algorithms such as 
+to handle atmospheric boundary layer physics and wind turbine wakes.
+The block-structured grids enable more efficient algorithms such as
 Multi-Level Multi-Grid (MLMG) \cite{AMReX_JOSS}
-and are well suited for next generation supercomputers that use GPU's. 
+and are well suited for next generation supercomputers that use GPU's.
 
 AMR-Wind solves the incompressible Navier-Stokes equations and is generalized to
-handle variable density and viscosity. Additionally scalar transport equations can be 
+handle variable density and viscosity. Additionally scalar transport equations can be
 solved such as potential temperature or turbulence models. The discretization in AMR-Wind
-is based on the approximate projection method used in IAMR \cite{almgren1998conservative} 
-and incflo \cite{sverdrup2018highly}. It is a semi-staggered scheme where the velocity and scalar 
+is based on the approximate projection method used in IAMR \cite{almgren1998conservative}
+and incflo \cite{sverdrup2018highly}. It is a semi-staggered scheme where the velocity and scalar
 variables are located at cell centers and pressure is located at nodes. Pressure is also staggered
-in time so that pressure and the pressure gradient (located at cell centers) are at time $n+1/2$. 
-The time discretization is handled with a Crank Nicholson approach where the right hand side 
+in time so that pressure and the pressure gradient (located at cell centers) are at time $n+1/2$.
+The time discretization is handled with a Crank Nicholson approach where the right hand side
 of the system of equations is evaluated at time $n+1/2$. The advection term is handled explicitly
 using an upwind finite-volume method. There are multiple options
-within AMR-Wind, but in this paper only the high-order Godunov Piecewise Parabolic 
-method (PPM) is used \cite{Colella1984}. The advection terms are projected to face 
+within AMR-Wind, but in this paper only the high-order Godunov Piecewise Parabolic
+method (PPM) is used \cite{Colella1984}. The advection terms are projected to face
 centers at $n+1/2$ and are corrected using an exact MAC projection \cite{almgren1998conservative}
-which guarantees a divergence free flow. The diffusion terms can be handled explicitly, semi-implicitly, 
-or fully implicit and are the discretized using a second-order central difference formula. 
-For the simulations in this paper we use a fully implicit scheme as the variable viscosity 
+which guarantees a divergence free flow. The diffusion terms can be handled explicitly, semi-implicitly,
+or fully implicit and are the discretized using a second-order central difference formula.
+For the simulations in this paper we use a fully implicit scheme as the variable viscosity
 from the eddy viscosity may cause time step restrictions. After the scalar equations
-and the momentum equations are advanced in time a nodal projection is used to 
+and the momentum equations are advanced in time a nodal projection is used to
 approximately correct the velocity field to make it divergence free. Where the nodal projection
 is based on a node centered finite element method \cite{almgren1998conservative}.
 
