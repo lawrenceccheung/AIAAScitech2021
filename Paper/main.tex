@@ -204,7 +204,40 @@ differences between the codes are reported.
 \input{results}
 
 \section{Conclusion}
-Put conclusion here.
+In this study we have simulated the stable offshore boundary layer
+matching the characteristics of measurements from Nantucket Sound in
+the Northeastern US.  Three cases with wind speeds of 5 m/s, 10 m/s,
+and 15 m/s were selected, and simulations were performed using the
+ExaWind codes to match the TI and stability levels observed at from
+the Cape Wind platform.  When examining the effect of stratification
+using the Obukhov length, differences in the ABL behavior were seen
+bewteen the very stable boundary layer cases (5 m/s and 10 m/s), and
+the stably stratified case (15 m/s).  The very stable cases had
+shorter turbulent structures and less growth in the boundary layer
+compared to the 15 m/s case.  The behavior of the three stable
+boundary layers was also compared to the neutral and unstable cases
+studied in \cite{cheung2020large}.  As expected, the turbulent
+structures in all stable cases were noticeably smaller than in the
+neutral and unstable boundary layers.
+
+In addition to these simulations, we also examined the domain and mesh
+requirements necessary for the stable offshore boundary layers
+considered here.  Based on the calculated turbulent integral
+lengthscale, horizontal domain sizes of 750m $\times$ 750m were found
+to be necessary for these simulations.  Various mesh resolutions were
+also considered for the stable runs, and it was determined that the
+finest resolution of $dx$=2.5m was able to resolve the longitudinal
+length scales and highest temporal frequencies, but inadequate for
+resolving the turbulence in the lateral direction.  Further study is
+warranted to comprehensively determine the impact of stable
+stratification on the required mesh resolution.
+
+Lastly, a comparison of the ExaWind solvers Nalu-Wind and AMR-Wind was
+conducted using the stable offshore boundary layer at 5 m/s.  The mean
+statistics were found to agree well between the two LES codes.  Small
+differences were found in wind profiles at higher elevations and for
+the peak $S_u$ spectra, and excellent matches were observed for the
+averaged veer, temperature, and TI profiles.
 
 %% \section*{Appendix}
 
