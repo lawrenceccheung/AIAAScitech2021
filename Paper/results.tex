@@ -315,7 +315,7 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
 
 \subsubsection{Computational efficiency}
 
-For the 5 m/s SBL case AMR-Wind had a median time of 2.66 seconds per time step.
+For the 5 m/s SBL case AMR-Wind had a median time of 0.266 seconds per time step.
 This means the entire simulation took about 6 hours to simulate 20k seconds 
 of physical time. For this case a total of $288\times 288 \times 384$ cells were used 
 which were solved in parallel using 972 MPI ranks. Simulations were carried out NREL's 
@@ -323,7 +323,7 @@ Eagle supercomputer and AMR-Wind was compiled using Intel 2018.
 Typically on CPU's we see a strong scaling limit at around 15k cells per MPI rank. 
 But for this case we used 32,768 cells per MPI rank which is about half the strong scaling limit.
 The time per degree of freedom for AMR-Wind is
-\[\frac{n_r t_{ts} }{n_{dofs}} = 8\times10^{-5}\]
+\[\frac{n_r t_{ts} }{n_{dofs}} = 8\times10^{-6}\]
 where $n_r$ is the number of MPI ranks, $t_{ts}$ is time per time step, and $n_{dofs}$ is
 the total number of degrees of freedom (for AMR-Wind we are using the number of cells).
 This value allows us to compare speed relative to Nalu-Wind when using a different
