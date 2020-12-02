@@ -22,7 +22,7 @@
 \affil{Sandia National Laboratories, Livermore, CA 94550}
 
 \author{
-  Shreyas Ananthan\footnote{SOME JOB TITLE, AIAA Member},
+  Shreyas Ananthan\footnote{Researcher V, High-Performance Algorithms and Complex Fluids, AIAA Member},
   Michael J. Brazell\footnote{Researcher III, High-Performance Algorithms and Complex Fluids, AIAA Member},
   Ganesh Vijayakumar\footnote{Researcher III, Mechanical Engineering, AIAA Member}, and
 }
@@ -48,6 +48,8 @@ Put abstract here
 \noindent\begin{longtable*}{@{}l @{\quad=\quad} l@{}}
 $\alpha$  & Wind shear exponent  \\
 $f$       & Frequency \\
+$f_{max}$  & Maximum resolvable frequency due to mesh limits \\
+$f_{Ny}$   & Nyquist frequency \\
 $L$       & Turbulent integral length scale \\
 $u_\tau$   & Friction velocity    \\
 $R_{ij}$   & Two point correlation tensor \\
@@ -56,7 +58,7 @@ $TKE$     & Turbulent kinetic energy
 \end{longtable*}}
 
 \section{Introduction}
-\fxnote{Update this introduction.}
+%\fxnote{Update this introduction.}
 
 \lettrine{T}he planned installation of several offshore wind energy
 plants in the United States has highlighted the need to properly
@@ -174,9 +176,22 @@ including offshore stable ABL conditions has yet to be completed.
 
 
 
-\subsection{Study objective and outline}
-
-The current paper is organized as follows.
+\subsection{Objectives}
+In the current study on stable marine boundary layers, we aim to build
+on the previous work in the literature and complete several
+objectives.  First, a series of stable boundary layer conditions will
+be computed using the Exawind solvers which match the measurements of
+Archer et al \cite{archer2016predominance}.  The behavior of the
+stable boundary layers, including mean flow quantities and turbulent
+statistics, are examined and compared to the neutral and unstable
+cases computed in \cite{cheung2020large}.  Secondly, we examine the
+domain and mesh requirements necessary to capture the turbulent scales
+for the stable offshore boundary layers.  Finally, two LES solvers
+within the Exawind project are compared in this study: the
+unstructured, incompressible Navier-Stokes solver Nalu-Wind and the
+structured, adaptive mesh refinement solver AMR-Wind.  Both codes are
+used to calculate the same stable boundary layer, and the relative
+differences between the codes are reported.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% SECTION 2: METHODOLOGY
@@ -191,9 +206,9 @@ The current paper is organized as follows.
 \section{Conclusion}
 Put conclusion here.
 
-\section*{Appendix}
+%% \section*{Appendix}
 
-An Appendix, if needed, should appear before the acknowledgments.
+%% An Appendix, if needed, should appear before the acknowledgments.
 
 \section*{Acknowledgments}
 
