@@ -323,7 +323,7 @@ Eagle supercomputer and AMR-Wind was compiled using Intel 2018.
 Typically on CPU's we see a strong scaling limit at around 15k cells per MPI rank. 
 But for this case we used 32,768 cells per MPI rank which is about half the strong scaling limit.
 The time per degree of freedom for AMR-Wind is
-\[\frac{n_r t_{ts} }{n_{dofs}} = 8\times10^{-6}\]
+\[\frac{n_r t_{ts} }{n_{dofs}} = 8\times10^{-6} [s]\]
 where $n_r$ is the number of MPI ranks, $t_{ts}$ is time per time step, and $n_{dofs}$ is
 the total number of degrees of freedom (for AMR-Wind we are using the number of cells).
 This value allows us to compare speed relative to Nalu-Wind when using a different
@@ -332,7 +332,7 @@ grid and number of MPI ranks, where a smaller value means a faster time to solut
 In comparison the same case for Nalu-Wind takes x seconds per time step which
 takes a total of x*4*20000/3600 hours to complete the simulation. This simulation was carried out 
 on z MPI ranks on a grid that contains $400\times 400 \times 400$ cells. The equivalent
-time per time step for Nalu-Wind is \fxnote{insert nalu-wind number here and x above}
+time per degree of freedom for Nalu-Wind is \fxnote{insert nalu-wind number here and x above}
 
 \subsection{Comparison of stable offshore ABL for different wind speeds and stabilities}
 
