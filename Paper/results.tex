@@ -57,7 +57,6 @@ that the unsteady characteristics in the boundary layer are resolved.
 % Created in Postprocessing/GridStudy/GridStudy_Spectra.ipynb
 \begin{figure}%[hbt!]
   \centering
-  \fxnote{remove AMR-Wind results from graphs}\\
   \includegraphics[width=2.0in]{figures/GridStudy_Spectra_Su.png}
   \includegraphics[width=2.0in]{figures/GridStudy_Spectra_Sv.png}
   \includegraphics[width=2.0in]{figures/GridStudy_Spectra_Sw.png}
@@ -133,7 +132,6 @@ wind direction on the same horizontal plane.
 % Created in Postprocessing/GridStudy/GridStudy_Rij.ipynb
 \begin{figure}%[hbt!]
   \centering
-  \fxnote{remove AMR-Wind results from graphs}\\
   \includegraphics[width=2.5in]{figures/GridStudy_Rij_Longitudinal.png}
   \includegraphics[width=2.5in]{figures/GridStudy_Rij_Lateral.png}
   \caption{\label{fig:GridStudyRij} Calculation of the averaged
@@ -156,9 +154,10 @@ with turbine features, such as blade motions or downstream wakes.
 However, the additional refinement requires careful balancing against
 the additional computational expense in the simulation.
 
-Similar conclusions can be drawn by examining the turbulent integral
-length scale $L$.  This lengthscale can be calculated from $\langle
-R_{11}(\boldsymbol{\xi}) \rangle$ via
+Additional information about the mesh and domain requirements can be
+drawn by examining the turbulent integral length scale $L$.  This
+lengthscale can be calculated from $\langle R_{11}(\boldsymbol{\xi})
+\rangle$ via
 \begin{equation}
   L = \int_0^\infty \langle R_{11}(\xi) \rangle \: {\textrm d}\xi
 \end{equation}
@@ -400,13 +399,13 @@ strong role in the growth the boundary layer.
 \begin{figure}[hbt!]
   \centering
   \fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
-  \includegraphics[width=3.0in]{figures/snapshots/05ms/velh_mag_z20_samelimits.png}
+  \includegraphics[width=3.0in]{figures/snapshots/05ms/velh_mag_z20.png}
   \includegraphics[width=3.0in]{figures/snapshots/05ms/velz_z20_samelimits.png} \\
   
-  \includegraphics[width=3.0in]{figures/snapshots/10ms/velh_mag_z20_samelimits.png}
+  \includegraphics[width=3.0in]{figures/snapshots/10ms/velh_mag_z20.png}
   \includegraphics[width=3.0in]{figures/snapshots/10ms/velz_z20_samelimits.png} \\
   
-  \includegraphics[width=3.0in]{figures/snapshots/15ms/velh_mag_z20_samelimits.png}
+  \includegraphics[width=3.0in]{figures/snapshots/15ms/velh_mag_z20.png}
   \includegraphics[width=3.0in]{figures/snapshots/15ms/velz_z20_samelimits.png} \\
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
     velocity and vertical velocity, taken at t=20,000 seconds of the
