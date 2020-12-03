@@ -47,7 +47,7 @@ of the frequency $f$
 \end{equation}
 where $\sigma_i$ is the wind speed variance and the index $i=u,v,w$
 denotes the longitudinal, lateral, or vertical velocity, respectively.
-For the LES simulations in this study, we desire that that the mesh
+For the LES simulations in this study, we desire that the mesh
 resolution be sufficiently fine to capture the high frequency
 components of the spectra past the spectral peak.  This helps ensure
 that the unsteady characteristics in the boundary layer are resolved.
@@ -82,10 +82,10 @@ speed $\bar{U}_{horiz}$ can be estimated as
   \label{eq:fmax}
   f_{max} = \frac{0.6\bar{U}_{horiz}}{N\Delta}.
 \end{equation}
-Here, equation \ref{eq:fmax} assumes that the turbulent eddies convect
+Here, Eq. \ref{eq:fmax} assumes that the turbulent eddies convect
 with a velocity of $0.6\bar{U}_{horiz}$ and $N=8$ is chosen for the
 purposes of this study.  Due to the alignment of the flow with the
-mesh directions, the grid size $\Delta = \sqrt{2}\cdot \textrm{dx}$.
+mesh directions, the grid size is defined as $\Delta = \sqrt{2}\cdot \textrm{dx}$.
 In all cases considered here, $f_{max} < f_{Ny}$, so the limiting
 constraint for resolving the high frequency components was the mesh
 resolution.
@@ -93,8 +93,8 @@ resolution.
 The comparison of the wind spectra and maximum resolvable frequency
 $f_{max}$ for the different mesh resolutions is shown in figure
 \ref{fig:GridStudySpectra}.  Here spectra is shown at the $z$=20m
-height and averaged using 1/3 octave-bins to enchance clarity. For the
-$S_u$ and $S_w$ spectra, there noticeable shifts in the peak
+height and averaged using 1/3 octave-bins to enhance clarity. For the
+$S_u$ and $S_w$ spectra, there are noticeable shifts in the peak
 amplitude, while the peak amplitudes for $S_v$ remained fairly
 constant between cases.  In all cases, the peak frequency of $S_i(f)$
 also increased as the resolution increased. While the mesh resolution
@@ -136,7 +136,7 @@ wind direction on the same horizontal plane.
   \includegraphics[width=2.5in]{figures/GridStudy_Rij_Lateral.png}
   \caption{\label{fig:GridStudyRij} Calculation of the averaged
     longitudinal and lateral $\langle R_{11}(\boldsymbol{\xi})
-    \rangle$ coefficient at $z$=20m for LES of stable 5m/s case with
+    \rangle$ coefficients at $z$=20m for LES of stable 5m/s case with
     different resolutions.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,7 +149,7 @@ finer in the lateral direction compared to the longitudinal direction.
 While 2.5m resolution is adequate to resolve the longitudinal
 turbulent structures, the lateral direction may require even finer
 resolution to fully resolve.  This may be an important consideration
-in situations where turbulence in a stable boundary layer interacts
+in situations where turbulence in a SBL interacts
 with turbine features, such as blade motions or downstream wakes.
 However, the additional refinement requires careful balancing against
 the additional computational expense in the simulation.
@@ -211,7 +211,7 @@ calculations.
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Before examining the behavior the offshore ABL across all wind speeds,
+Before examining the behavior of the offshore ABL across all wind speeds,
 we first compare the results for a single case using both LES codes.
 In this section, we consider the stable 5m/s case, calculated in the
 same manner using both AMR-Wind and Nalu-Wind.  Both LES codes used a
@@ -233,7 +233,7 @@ resulting in a value slightly lower than Nalu-Wind.
 
 The comparison of the horizontally averaged wind profiles is shown in
 figure \ref{fig:CompareAMRvsNaluWind_WSDir}.  At the forcing height
-z=20m, the wind speed and wind shear match are close to an exact match
+z=20m, the wind speed and wind shear are close to an exact match
 between the two LES codes.  The horizontal wind speeds continue to
 agree well for $z$<100m, beyond which a relatively constant velocity
 difference is observed.   For both AMR-Wind and Nalu-Wind, an
@@ -255,9 +255,9 @@ the two temperature profiles $T(z)$.
   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_stable_05ms_mesh2p5_2p5_2p5_WS.png}
   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_stable_05ms_mesh2p5_2p5_2p5_Wdir.png}\\
   \caption{\label{fig:CompareAMRvsNaluWind_WSDir} Comparison of
-    AMR-Wind and Nalu-Wind velocity profiles for the stable 5 m/s
-    boundary layer. The dashed horizontal line corresponds to the
-    measurement height z=20m. }
+    AMR-Wind and Nalu-Wind horizontal velocity and wind direction
+    profiles for the stable 5 m/s boundary layer. The dashed
+    horizontal line corresponds to the measurement height z=20m. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -317,7 +317,7 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
 For the 5 m/s SBL case AMR-Wind had a median time of 0.266 seconds per time step.
 This means the entire simulation took about 6 hours to simulate 20k seconds
 of physical time. For this case a total of $288\times 288 \times 384$ cells were used
-which were solved in parallel using 972 MPI ranks. Simulations were carried out NREL's
+which were solved in parallel using 972 MPI ranks. Simulations were carried out using NREL's
 Eagle supercomputer and AMR-Wind was compiled using Intel 2018.
 Typically on CPU's we see a strong scaling limit at around 15k cells per MPI rank.
 But for this case we used 32,768 cells per MPI rank which is about half the strong scaling limit.
@@ -328,7 +328,7 @@ the total number of degrees of freedom (for AMR-Wind we are using the number of 
 This value allows us to compare speed relative to Nalu-Wind when using a different
 grid and number of MPI ranks, where a smaller value means a faster time to solution.
 
-In comparison the same case for Nalu-Wind takes 3.404363 seconds per time step which
+In comparison, the same case for Nalu-Wind takes 3.404363 seconds per time step which
 takes a total of 75.65 hours to complete the simulation. This simulation was carried out
 on 1224 MPI ranks on a grid that contains $300\times 300 \times 400$ cells. The equivalent
 time per degree of freedom for Nalu-Wind is $1.032 \times 10^{-4}$ s.
@@ -406,9 +406,9 @@ stable cases.  Longer streaks are evident in the 15 m/s case compared
 to the 5 m/s and 15 m/s cases, which is consistent with the nearly
 50\% larger integral lengthscale $L$ given in table
 \ref{tab:CompareAMRallWS}.  The differences in the vertical velocity
-are also evident in \ref{fig:SnapshotsZ20}.  At higher wind speeds the
+are also evident in figure \ref{fig:SnapshotsZ20}.  At higher wind speeds the
 magnitude of the vertical $w'$ fluctuations increase, which plays a
-strong role in the growth the boundary layer.
+strong role in the growth of the boundary layer.
 
 %%%%%%%%%%% z=20m snapshot pics %%%%%%%%%%%%%%%%%%%%%%%%%
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
@@ -448,8 +448,8 @@ strong role in the growth the boundary layer.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This observation can also be seen in images taken along the flow
-direction $\theta=225^\circ$, as shown in figure
-\ref{fig:SnapshotsSide}.  At the time t=20,000 seconds, the growth the
+direction $225^\circ$, as shown in figure
+\ref{fig:SnapshotsSide}.  At the time t=20,000 seconds, the growth of the
 of 15 m/s stable boundary layer is considerably larger than the very
 stable 5 m/s and 10 m/s cases, and has nearly reached the inversion
 layer height.  To reach the same level of boundary layer growth, the
@@ -486,7 +486,7 @@ Horizontally averaged flow profiles shown in figures
 more quantitative assessment of the ABL evolution.  The rapid growth
 of the 15 m/s stable case leads to strong shear throughout the
 boundary layer up to the inversion height, while the very stable 5 m/s
-and 10 m/s cases showed minimal shear at higher elevations.  The
+and 10 m/s cases showed minimal shear at higher elevations (figure \ref{CompareAMRallWS}).  The
 change in wind direction is also indicative of the boundary layer
 penetration.  Approximately linear veer profiles are visible up to
 heights of $z\approx$250 m and $z\approx$350 m for the 5 m/s and 10
@@ -501,7 +501,7 @@ reaching the top of the boundary layer.  The effect of the different
 surface temperature changes is also visible in the horizontally
 averaged temperature profiles.  Both the 10 m/s and 15 m/s impose
 similar temperature changes (-1.4 K/hr and -1.5 K/hr, respectively)
-and each similar temperatures at the ocean surface.  However, the
+and similar temperatures at the ocean surface.  However, the
 cooling effect in the very stable 10 m/s case is limited to $z$<350
 m, similar to the veer and turbulence profiles.
 
@@ -579,7 +579,7 @@ study, both neutral and unstable offshore boundary layer cases were
 considered at the same 5 m/s, 10 m/s and 15 m/s wind speeds.  Similar
 to the findings in \ref{sec:stableABLStats}, the 5 m/s and 10 m/s
 unstable cases were classified as ``very unstable'', while the 15 m/s
-was identified as ``stable'' based on the Obukhov length scale.
+was identified as ``unstable'' based on the Obukhov length scale.
 
 The impact of the stability on the turbulent structures can be seen
 through the correlation statistics and calculated lengthscales in
@@ -590,13 +590,13 @@ cases is immediately evident from the calculated $\langle
 R_{11}(\boldsymbol{\xi})\rangle$ coefficients.  The longitudinal
 lengthscales for the unstable ABL cases can also be an order of
 magnitude larger than the stable ABL cases.  The large lateral
-lengthscales for the very unstable ABL cases, compared to the lateral
+lengthscales for the very unstable ABL cases, compared to the smaller lateral
 lengthscales for the neutral and stable cases, is also worth noting.
 For the 5 m/s and 10 m/s very unstable ABL cases, the lateral
 dimensions of the turbulent structures are similar to the longitudinal
 lengthscale.  This is consistent with the large convective structures
-which develops in those cases.  For the unstable 15 m/s case, the
-lateral lengthscales was closer to neutral and stable cases.
+which develop in those cases.  For the unstable 15 m/s case, the
+lateral lengthscales were closer to neutral and stable cases.
 
 %%%%%%%%%%% All stability correlation figure %%%%%%%%%%%%%%%%%%%%
 % created in Postprocessing/ABLLength/CompareAll_ABL_Lengthscales.ipynb
@@ -606,7 +606,7 @@ lateral lengthscales was closer to neutral and stable cases.
   \includegraphics[width=3in]{figures/AllStability_Rij_Lateral.png}
   \caption{ \label{fig:AllStabilityRij} Calculation of the averaged
     longitudinal and lateral $\langle R_{11}(\boldsymbol{\xi})\rangle$
-    coefficient at $z$=20m for all ABL stability cases.}
+    coefficient at $z$=20m for all ABL stability cases and windspeeds.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
