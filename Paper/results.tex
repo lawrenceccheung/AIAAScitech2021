@@ -416,17 +416,36 @@ strong role in the growth the boundary layer.
 \begin{figure}[hbt!]
   \centering
   %\fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
-  \includegraphics[width=3.0in]{figures/snapshots/05ms/velh_mag_z20.png}
-  \includegraphics[width=3.0in]{figures/snapshots/05ms/velz_z20_samelimits.png} \\
+  \begin{tikzpicture}
+    % 5 m/s plots
+    \node[anchor=south west, inner sep=0](image) at (0in,4.50in)
+         {\includegraphics[width=3in]{figures/snapshots/05ms/velh_mag_z20.png}};
+    \node[align=left] at (1in, 4.50in){(a) horizontal vel, 5 m/s};
+    \node[anchor=south west, inner sep=0](image) at (3in,4.35in)
+         {\includegraphics[width=3.20in]{figures/snapshots/05ms/velz_z20_samelimits.png}};
+    \node[align=left] at (4.25in, 4.50in){(b) vertical vel, 5 m/s};
 
-  \includegraphics[width=3.0in]{figures/snapshots/10ms/velh_mag_z20.png}
-  \includegraphics[width=3.0in]{figures/snapshots/10ms/velz_z20_samelimits.png} \\
+    % 10 m/s plots    
+    \node[anchor=south west, inner sep=0](image) at (0in,2.25in)
+         {\includegraphics[width=3in]{figures/snapshots/10ms/velh_mag_z20.png}};
+    \node[align=left] at (1in, 2.25in){(c) horizontal vel, 10 m/s};
+    \node[anchor=south west, inner sep=0](image) at (3in,2.10in)
+         {\includegraphics[width=3.20in]{figures/snapshots/10ms/velz_z20_samelimits.png}};
+    \node[align=left] at (4.25in, 2.25in){(d) vertical vel, 10 m/s};
 
-  \includegraphics[width=3.0in]{figures/snapshots/15ms/velh_mag_z20.png}
-  \includegraphics[width=3.0in]{figures/snapshots/15ms/velz_z20_samelimits.png} \\
+    % 15 m/s plots
+    \node[anchor=south west, inner sep=0](image) at (0in,0in)
+         {\includegraphics[width=3in]{figures/snapshots/15ms/velh_mag_z20.png}};
+    \node[align=left] at (1in, 0in){(e) horizontal vel, 15 m/s};
+    \node[anchor=south west, inner sep=0](image) at (3in,-0.15in)
+         {\includegraphics[width=3.20in]{figures/snapshots/15ms/velz_z20_samelimits.png}};
+    \node[align=left] at (4.25in, 0in){(f) vertical vel, 15 m/s};
+
+  \end{tikzpicture}
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
     velocity and vertical velocity, taken at t=20,000 seconds of the
-    simulations at height z=20m.}
+    simulations at height z=20m, for the AMR-Wind calculation of the
+    stable 5 m/s, 10 m/s, and 15 m/s ABL. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -443,15 +462,24 @@ longer than the nighttime conditions measured experimentally.
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
   \centering
-  %\fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
-  \includegraphics[height=2.5in]{figures/snapshots/05ms/velh_mag_side.png} \\
+  \begin{tikzpicture}         
+    \node[anchor=south west, inner sep=0](image) at (0,0in)
+         {\includegraphics[height=2.5in]{figures/snapshots/15ms/velh_mag_side.png}};
+    \node[align=left] at (2.5in, 0){(c) AMR-Wind stable, 15 m/s};
+         
+    \node[anchor=south west, inner sep=0](image) at (0,2.5in)
+         {\includegraphics[height=2.5in]{figures/snapshots/10ms/velh_mag_side.png}};
+    \node[align=left] at (2.5in, 2.5in){(b) AMR-Wind stable, 10 m/s};         
 
-  \includegraphics[height=2.5in]{figures/snapshots/10ms/velh_mag_side.png} \\
-
-  \includegraphics[height=2.5in]{figures/snapshots/15ms/velh_mag_side.png} \\
-
+    \node[anchor=south west, inner sep=0](image) at (0,5.0in)
+         {\includegraphics[height=2.5in]{figures/snapshots/05ms/velh_mag_side.png}};
+    \node[align=left] at (2.5in, 5.0in){(a) AMR-Wind stable, 5 m/s};
+  \end{tikzpicture}
   \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
-    velocity, taken at t=20,000 seconds along the wind direction. }
+    velocity, taken at t=20,000 seconds along the wind direction, for
+    the (a) 5m/s, (b) 10 m/s, and (c) 15 m/s AMR-Wind stable
+    calculations }
+
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
