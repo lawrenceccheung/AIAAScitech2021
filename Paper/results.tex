@@ -29,9 +29,9 @@ dz=2.5m and the same vertical extent of 1km.
   \hline
   Case              & dx [m] & dy [m] & dz [m] & Domain size \\
   \hline
-  Nalu-wind coarse  &  10.0  & 10.0   & 2.5 & 1.5km $\times$ 1.5km $\times$ 1.0km  \\
-  Nalu-wind medium  &   5.0  &  5.0   & 2.5 & 1.5km $\times$ 1.5km $\times$ 1.0km  \\
-  Nalu-wind fine    &   2.5  &  2.5   & 2.5 & 1.0km $\times$ 1.0km $\times$ 1.0km  \\
+  Nalu-Wind coarse  &  10.0  & 10.0   & 2.5 & 1.5km $\times$ 1.5km $\times$ 1.0km  \\
+  Nalu-Wind medium  &   5.0  &  5.0   & 2.5 & 1.5km $\times$ 1.5km $\times$ 1.0km  \\
+  Nalu-Wind fine    &   2.5  &  2.5   & 2.5 & 1.0km $\times$ 1.0km $\times$ 1.0km  \\
 % AMR-wind fine     &   2.5  &  2.5   & 2.5 & 0.0 \\
 \hline
 \end{tabular}
@@ -187,9 +187,9 @@ calculations.
   \hline
   Case              & dx [m] & Longitudinal L  & Lateral L \\
   \hline
-  Nalu-wind coarse  &  10.0  & 36.4 m         & 0.0 m     \\
-  Nalu-wind medium  &   5.0  & 21.5 m         & 4.52 m    \\
-  Nalu-wind fine    &   2.5  & 25.3 m         & 5.92 m    \\
+  Nalu-Wind coarse  &  10.0  & 36.4 m         & 0.0 m     \\
+  Nalu-Wind medium  &   5.0  & 21.5 m         & 4.52 m    \\
+  Nalu-Wind fine    &   2.5  & 25.3 m         & 5.92 m    \\
 \hline
 \end{tabular}
 \end{table}
@@ -303,7 +303,6 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
 %% % Postprocessing/ABLLength/CompareAMRNalu_ABL_Lengthscales.ipynb
 %% \begin{figure} %[hbt!]
 %%   \centering
-%%   \fxnote{UPDATE THIS FIGURE}\\
 %%   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Longitudinal.png}
 %%   \includegraphics[width=2.5in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Lengthscale_Stable_z20_Lateral.png}
 
@@ -415,7 +414,6 @@ strong role in the growth the boundary layer.
 % Created in Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
 \begin{figure}[hbt!]
   \centering
-  %\fxnote{label plots using pstricks: 5m/s on top, 15m/s on bottom} \\
   \begin{tikzpicture}
     % 5 m/s plots
     \node[anchor=south west, inner sep=0](image) at (0in,4.50in)
