@@ -100,14 +100,17 @@ constant between cases.  In all cases, the peak frequency of $S_i(f)$
 also increased as the resolution increased. While the mesh resolution
 was sufficient to capture the peak frequency for $S_u$, the fine
 resolution with 2.5m mesh cells was required to capture the spectral
-peaks in the lateral and vertical directions.
-\fxnote{OK for temporal resolution}
+peaks for the lateral and vertical velocities.
 
-The second metric for determining the appropriate grid size and mesh
-resolution is through the correlation tensor and turbulence integral
-length scale.  The two-point correlation tensor
-$R_{ij}(\mathbf{x},\boldsymbol{\xi})$ at position $\mathbf{x}$ and
-separation vector $\boldsymbol{\xi}$ is defined as
+However, the above analysis of spectra only provides information to
+determine if the turbulent fluctuations can be resolved temporally,
+and a separate analysis is needed to determine if the fluctuations can
+be resolved in different spatial directions.  The second metric for
+examining the appropriate grid size and mesh resolution is through the
+correlation tensor and turbulence integral length scale.  The
+two-point correlation tensor $R_{ij}(\mathbf{x},\boldsymbol{\xi})$ at
+position $\mathbf{x}$ and separation vector $\boldsymbol{\xi}$ is
+defined as
 \begin{equation}
   \label{eq:Rij}
   R_{ij}({\mathbf x},\boldsymbol{\xi}) =
@@ -420,26 +423,26 @@ strong role in the growth of the boundary layer.
     % 5 m/s plots
     \node[anchor=south west, inner sep=0](image) at (0in,4.50in)
          {\includegraphics[width=3in]{figures/snapshots/05ms/velh_mag_z20.png}};
-    \node[align=left] at (1in, 4.50in){(a) horizontal vel, 5 m/s};
+    \node[align=left] at (1in, 4.50in){(a) horizontal vel., stable 5 m/s};
     \node[anchor=south west, inner sep=0](image) at (3in,4.35in)
          {\includegraphics[width=3.20in]{figures/snapshots/05ms/velz_z20_samelimits.png}};
-    \node[align=left] at (4.25in, 4.50in){(b) vertical vel, 5 m/s};
+    \node[align=left] at (4.25in, 4.50in){(b) vertical vel., stable 5 m/s};
 
     % 10 m/s plots    
     \node[anchor=south west, inner sep=0](image) at (0in,2.25in)
          {\includegraphics[width=3in]{figures/snapshots/10ms/velh_mag_z20.png}};
-    \node[align=left] at (1in, 2.25in){(c) horizontal vel, 10 m/s};
+    \node[align=left] at (1in, 2.25in){(c) horizontal vel., stable 10 m/s};
     \node[anchor=south west, inner sep=0](image) at (3in,2.10in)
          {\includegraphics[width=3.20in]{figures/snapshots/10ms/velz_z20_samelimits.png}};
-    \node[align=left] at (4.25in, 2.25in){(d) vertical vel, 10 m/s};
+    \node[align=left] at (4.25in, 2.25in){(d) vertical vel., stable 10 m/s};
 
     % 15 m/s plots
     \node[anchor=south west, inner sep=0](image) at (0in,0in)
          {\includegraphics[width=3in]{figures/snapshots/15ms/velh_mag_z20.png}};
-    \node[align=left] at (1in, 0in){(e) horizontal vel, 15 m/s};
+    \node[align=left] at (1in, 0in){(e) horizontal vel., stable 15 m/s};
     \node[anchor=south west, inner sep=0](image) at (3in,-0.15in)
          {\includegraphics[width=3.20in]{figures/snapshots/15ms/velz_z20_samelimits.png}};
-    \node[align=left] at (4.25in, 0in){(f) vertical vel, 15 m/s};
+    \node[align=left] at (4.25in, 0in){(f) vertical vel., stable 15 m/s};
 
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
