@@ -169,9 +169,14 @@ and the results are shown in table \ref{tab:GridStudyLscale}.  With a
 resolution of 2.5m, the ratio of the longitudinal length scale to the
 grid size $L/\textrm{d}x \approx 10.1$, while in the lateral direction
 $L/\textrm{d}x \approx 2.36$, suggesting even finer resolution is
-required to capture the lateral scales.
+required to capture the lateral scales.  This may be a critical
+consideration when resolving both the lateral and longitudinal
+turbulent scales are important, such as in SBL simulations with
+turbine interactions.  However, in other situations, the additional
+computational cost incurred may be prohibitive and only the
+longitudinal component can be resolved.
 
-Based on this longitudinal length scale, we also determined the
+Based on the longitudinal length scale, we also determined the
 overall domain size necessary for stable ABL calculations.  To provide
 sufficient space to ensure development and decorrelation of turbulent
 structures, domain sizes of approximately 10 times the longitudinal
@@ -337,21 +342,24 @@ takes a total of 75.65 hours to complete the simulation. This simulation was car
 on 1224 MPI ranks on a grid that contains $300\times 300 \times 400$ cells. The equivalent
 time per degree of freedom for Nalu-Wind is $1.032 \times 10^{-4}$ s.
 
-\subsection{Comparison of stable offshore ABL for different wind speeds and stabilities}
+\subsection{Comparison of the stable offshore ABL for different wind speeds and stabilities}
 
 Using the results of the stable cases described in \ref{sec:CFDsetup},
-as well as the neutral and unstable ABL computations from the previous study in
-Cheung et al. \cite{cheung2020large}, we can examine the influence of wind speed and
-stratification on offshore ABL behavior.  In this section we first
+as well as the neutral and unstable ABL computations from the previous
+study in Cheung et al. \cite{cheung2020large}, we can examine the
+influence of wind speed and stratification on offshore ABL behavior.
+In this section, we use the AMR-Wind code to calculate the stable ABL
+at 5 m/s, 10 m/s, and 15 m/s because of its computational efficiency
+and comparable accuracy to Nalu-Wind.  From the results we first
 compare the differences between the three stable ABL cases, and then
 compare their behavior with the previously computed neutral and
 unstable counterparts.
 
 \subsubsection{\label{sec:stableABLStats} ABL integrated quantities}
-\fxnote{Explain why AMR-Wind only}
-From AMR-Wind calculations of the stable ABL at 5 m/s, 10 m/s, and
-15 m/s, a number of quantities can be computed to compare with the
-measured targets from Archer et al \cite{archer2016predominance}.  In
+
+From AMR-Wind LES calculations, a number of quantities can be computed
+to compare with the measured targets from Archer et al
+\cite{archer2016predominance}.  In
 table \ref{tab:CompareAMRallWS}, we list the TI, shear exponent
 $\alpha$, friction velocity $u_\tau$, Obukhov length $L_{Ob}$,
 longitudinal lengthscale $L$, and stability classification for each of
@@ -517,8 +525,9 @@ m, similar to the veer and turbulence profiles.
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WS.png}
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_WDir.png}
   \caption{ \label{fig:CompareAMRallWS} Comparison of the horizontal
-    wind speed and wind direction profile for the stable 5 m/s, 10 m/s,
-    and 15 m/s boundary layers. }
+    wind speed and wind direction profile for the stable 5 m/s, 10
+    m/s, and 15 m/s boundary layers. The dashed horizontal line
+    corresponds to the measurement height z=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -529,8 +538,9 @@ m, similar to the veer and turbulence profiles.
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_TI.png}
   \includegraphics[width=2.5in]{figures/AMRWind_allWS/AMRWind_stable_T.png}
   \caption{ \label{fig:CompareAMRallTTI} Comparison of the turbulence
-    intensity and temperature profile for the stable 5 m/s, 10 m/s, and
-    15 m/s boundary layers. }
+    intensity and temperature profile for the stable 5 m/s, 10 m/s,
+    and 15 m/s boundary layers. The dashed horizontal line corresponds
+    to the measurement height z=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
