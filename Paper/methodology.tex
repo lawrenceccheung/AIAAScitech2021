@@ -175,12 +175,12 @@ by
 The sub-filter scale stresses are specified at the terrain boundary following
 Moeng~\cite{Moeng1984} as
 \begin{align}
- (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{S_1 \average{\widetilde{u}_1} + \average{S_1} (\widetilde{u}_1 - \average{\widetilde{u}_1} ) }{ \average{S_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
- (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{S_1 \average{\widetilde{v}_1} + \average{S_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{S_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } \\
-  (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{S_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{S_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{S_1} ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) },
+ (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{V_1 \average{\widetilde{u}_1} + \average{V_1} (\widetilde{u}_1 - \average{\widetilde{u}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
+ (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{V_1 \average{\widetilde{v}_1} + \average{V_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } \\
+  (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{V_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{V_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{V_1} ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) },
 \end{align}
 where all quantities with the subscript 1 are values at the first vertical grid
-level, $S_1$ is the resolved wind speed at the first grid level and
+level, $V_1$ is the resolved wind speed at the first grid level and
 $\average{\bullet}$ represents the horizontal planar average. The mean
 sub-filter stresses are computed using Monin-Obukhov similarity
 law~\cite{Etling1996}. The formulation for the potential temperature flux could
@@ -190,7 +190,7 @@ reference temperature $\theta_{\circ}$. Hence the model for the sub-filter
 potential temperature flux is reformulated using the Monin-Obukhov similarity
 law as
 \begin{equation}
-(\tau_{\theta z})_0 = \left ( \frac{u_{\tau} \kappa}{ \phi_h} \right ) \frac{S_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{S_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{S_1} },
+(\tau_{\theta z})_0 = \left ( \frac{u_{\tau} \kappa}{ \phi_h} \right ) \frac{V_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{V_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{V_1} },
 \end{equation}
 where $\phi_h$ is the non-dimensional potential temperature gradient from
 Monin-Obukhov similarity law~\cite{Etling1996}.

@@ -64,21 +64,33 @@
   \noindent\begin{longtable*}{@{}l @{\quad=\quad} l@{}}
 ABL       & Atmospheric Boundary Layer \\
 $\alpha$  & Wind shear exponent  \\
+$\beta$   & Thermal expansion coefficient \\
+$c_p$     & Specific heat capacity \\
+$\Delta, \Delta_{x,y,z}$  & Grid spacing, grid spacing in x, y, z directions \\
 $f$       & Frequency \\
 $f_{max}$  & Maximum resolvable frequency due to mesh limits \\
 $f_{Ny}$   & Nyquist frequency \\
+$g, g_i$   & Gravitational acceleration \\
+$k, TKE$  & Turbulent kinetic energy \\
 $L$       & Turbulent integral length scale \\
 $L_{Ob}$   & Obukhov length scale \\
+$\nu_t$   & Turbulent viscosity \\
 LES       & Large Eddy Simulation \\
-$u_\tau$   & Friction velocity    \\
 $\rho$    & Density \\
 $\rho_\circ$ & Reference density  \\
+$\phi_h$  & Potential temperature gradient \\
+$Pr_t$    & Turbulent Prandtl number \\
+$R$       & Universal gas constant \\
 $R_{ij}$   & Two point correlation tensor \\
 SBL       & Stable Boundary Layer \\
 $\theta$  & Potential temperature \\
+$S_i$     & Wind spectra \\
+$\sigma_i$ & Wind speed variance \\
+$\tau_{ij}$ & Shear stress \\
 $TI$      & Turbulence intensity \\
-$TKE$     & Turbulent kinetic energy \\
-$\overline{U}_{horiz}$ & Time averaged horizontal velocity
+$\overline{U}_{horiz}$ & Time averaged horizontal velocity \\
+$u_\tau$   & Friction velocity    \\
+$V_1$     & Resolved wind speed at first grid level 
 \end{longtable*}}
 
 \section{Introduction}
@@ -249,7 +261,7 @@ considered here.  Based on the calculated turbulent integral
 lengthscale, horizontal domain sizes of 750 m $\times$ 750 m were found
 to be necessary for these simulations.  Various mesh resolutions were
 also considered for the stable runs, and it was determined that the
-finest resolution of $dx$=2.5 m was able to resolve the longitudinal
+finest resolution of $\Delta_x$=2.5 m was able to resolve the longitudinal
 length scales and highest temporal frequencies, but inadequate for
 resolving the turbulence in the lateral direction.  Further study is
 warranted to comprehensively determine the impact of stable

@@ -27,11 +27,11 @@ dz=2.5 m and the same vertical extent of 1 km.
 \caption{\label{tab:GridStudySetup} The setup for the grid resolution study} \centering
 \begin{tabular}{ccccc}
   \hline
-  Case              & dx [m] & dy [m] & dz [m] & Domain size \\
+  Case              & $\Delta_x$ & $\Delta_y$ & $\Delta_z$ & Domain size \\
   \hline
-  Nalu-Wind coarse  &  10.0  & 10.0   & 2.5 & 1.5 km $\times$ 1.5km $\times$ 1.0 km  \\
-  Nalu-Wind medium  &   5.0  &  5.0   & 2.5 & 1.5 km $\times$ 1.5 km $\times$ 1.0 km  \\
-  Nalu-Wind fine    &   2.5  &  2.5   & 2.5 & 1.0 km $\times$ 1.0 km $\times$ 1.0 km  \\
+  Nalu-Wind coarse  &  10.0 m  & 10.0 m & 2.5 m & 1.5 km $\times$ 1.5km $\times$ 1.0 km  \\
+  Nalu-Wind medium  &   5.0 m &  5.0 m  & 2.5 m & 1.5 km $\times$ 1.5 km $\times$ 1.0 km  \\
+  Nalu-Wind fine    &   2.5 m &  2.5 m  & 2.5 m & 1.0 km $\times$ 1.0 km $\times$ 1.0 km  \\
 % AMR-wind fine     &   2.5  &  2.5   & 2.5 & 0.0 \\
 \hline
 \end{tabular}
@@ -85,7 +85,7 @@ speed $\bar{U}_{horiz}$ can be estimated as
 Here, Eq. \ref{eq:fmax} assumes that the turbulent eddies convect
 with a velocity of $0.6\bar{U}_{horiz}$ and $N=8$ is chosen for the
 purposes of this study.  Due to the alignment of the flow with the
-mesh directions, the grid size is defined as $\Delta = \sqrt{2}\cdot \textrm{dx}$.
+mesh directions, the grid size is defined as $\Delta = \sqrt{2} \Delta_x $.
 In all cases considered here, $f_{max} < f_{Ny}$, so the limiting
 constraint for resolving the high frequency components was the mesh
 resolution.
@@ -194,11 +194,11 @@ calculations.
   lengthscale for each of the grid resolutions} \centering
 \begin{tabular}{ccccc}
   \hline
-  Case              & dx [m] & Longitudinal L  & Lateral L \\
+  Case              & $\Delta_x$ & Longitudinal L  & Lateral L \\
   \hline
-  Nalu-Wind coarse  &  10.0  & 36.4 m         & 0.0 m     \\
-  Nalu-Wind medium  &   5.0  & 21.5 m         & 4.52 m    \\
-  Nalu-Wind fine    &   2.5  & 25.3 m         & 5.92 m    \\
+  Nalu-Wind coarse  &  10.0 m  & 36.4 m         & 0.0 m     \\
+  Nalu-Wind medium  &   5.0 m & 21.5 m         & 4.52 m    \\
+  Nalu-Wind fine    &   2.5 m & 25.3 m         & 5.92 m    \\
 \hline
 \end{tabular}
 \end{table}
