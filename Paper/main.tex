@@ -46,7 +46,7 @@
   layers located near the coast of the Northeastern United States.
   Using the ExaWind LES codes, three stable atmospheric conditions
   were chosen to match the Cape Wind measurements of Archer \emph{et
-    al.} with wind speeds of 5 m/s, 10 m/s, and 15 m/s at the 20m
+    al.} with wind speeds of 5 m/s, 10 m/s, and 15 m/s at the 20 m
   measurement height.  The behavior of the stable boundary layers,
   including mean flow quantities and turbulent statistics, are
   examined and compared to previous computations of the neutral and
@@ -78,7 +78,8 @@ $R_{ij}$   & Two point correlation tensor \\
 SBL       & Stable Boundary Layer \\
 $\theta$  & Potential temperature \\
 $TI$      & Turbulence intensity \\
-$TKE$     & Turbulent kinetic energy
+$TKE$     & Turbulent kinetic energy \\
+$\overline{U}_{horiz}$ & Time averaged horizontal velocity
 \end{longtable*}}
 
 \section{Introduction}
@@ -154,7 +155,7 @@ to the Beaufort Sea Arctic Stratus Experiment (BASE) measurements,
 showing that the SBL could reach a quasi steady-state. They also
 showed good agreement with the Nieustadt analytical model. In the same
 year, Saiki et al. \cite{Saiki2000} simulated an SBL with
-a strong capping inversion at z=500m, producing reasonable surface layer profiles and
+a strong capping inversion at z=500 m, producing reasonable surface layer profiles and
 identifying a need for SBL specific SGS models. Beare and MacVean \cite{Beare2004}
 presented the first grid-focused work on LES of the SBL, using grids with deltas
 between 2m and 12.5m, finding significant variation between grid sizes. The inclusion
@@ -193,7 +194,7 @@ closure, as well as Sullivan et al.\ \cite{sullivan2016turbulent}. Several resea
 have applied SBL simulation in the wind energy space \cite{Aitken2014, Abkar2015, Ghaisas2017}.
 In 2020, Wurps et al. \cite{Wurps2020} provided a rigorous grid resolution study for the SBL,
 looking at mean flow, turbulence variables, and two-point correlations, using a dynamic
-SGS model that allows backscatter. They found grid requirements to be 2.5m, 10m, and 20m
+SGS model that allows backscatter. They found grid requirements to be 2.5 m, 10 m, and 20 m
 for stable, neutral, and convective boundary layers respectively. They advocate looking
 at two point correlations in order to quantify flow structure size, which in turn
 provides a basis for evaluating grid resolution. In all of the reviewed literature, SBL LES
@@ -201,17 +202,18 @@ has been run in the onshore context only, a complete comparison
 including offshore stable ABL conditions has yet to be completed.
 
 \subsection{Objectives}
+\fxnote{fix order of objectives}
 In the current study on stable marine boundary layers, we aim to build
 on the previous work in the literature and complete several
 objectives.  First, a series of stable boundary layer conditions will
-be computed using the Exawind solvers which match the measurements of
+be computed using the ExaWind solvers which match the measurements of
 Archer et al. \cite{archer2016predominance}.  The behavior of the
 stable boundary layers, including mean flow quantities and turbulent
 statistics, are examined and compared to the neutral and unstable
 cases computed in \cite{cheung2020large}.  Secondly, we examine the
 domain and mesh requirements necessary to capture the turbulent scales
 for the stable offshore boundary layers.  Finally, two LES solvers
-within the Exawind project are compared in this study: the
+within the ExaWind project are compared in this study: the
 unstructured, incompressible Navier-Stokes solver Nalu-Wind and the
 structured, adaptive mesh refinement solver AMR-Wind.  Both codes are
 used to calculate the same SBL, and the relative differences between
@@ -247,10 +249,10 @@ neutral and unstable boundary layers.
 In addition to these simulations, we also examined the domain and mesh
 requirements necessary for the stable offshore boundary layers
 considered here.  Based on the calculated turbulent integral
-lengthscale, horizontal domain sizes of 750m $\times$ 750m were found
+lengthscale, horizontal domain sizes of 750 m $\times$ 750 m were found
 to be necessary for these simulations.  Various mesh resolutions were
 also considered for the stable runs, and it was determined that the
-finest resolution of $dx$=2.5m was able to resolve the longitudinal
+finest resolution of $dx$=2.5 m was able to resolve the longitudinal
 length scales and highest temporal frequencies, but inadequate for
 resolving the turbulence in the lateral direction.  Further study is
 warranted to comprehensively determine the impact of stable
