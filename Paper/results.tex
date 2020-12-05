@@ -347,7 +347,7 @@ time per degree of freedom for Nalu-Wind is $1.147 \times 10^{-4}$ s, where degr
 are the number of nodes in the mesh. 
 
 For both AMR-Wind and Nalu-Wind each time step is dominated by the linear solver work. 
-A time step within AMR-Wind requires two poisson solves (MAC and nodal projection),
+A time step within AMR-Wind requires two Poisson solves (MAC and nodal projection),
 a tensor Helmholtz solve for Momentum equations, and two scalar Helmholtz solves 
 (potential temperature equation and subgrid-scale kinetic energy equation).
 Nalu-Wind is a fully implicit scheme and requires a non-linear Picard iteration for each time
@@ -355,7 +355,8 @@ step, in this work we use two Picard iterations for every time step.
 Each Picard iteration requires a Poisson solve and five Helmholtz solves
 (three momentum equations, an enthalpy equation, and the subgrid-scale kinetic energy equation).
 It is difficult to compare AMR-Wind and Nalu-Wind due to the differences in discretization and numerical
-implementation. The most significant difference between the two solvers is that AMR-Wind uses structured grids
+implementation, and additional study is required to understand the performance comparisons.
+The most significant difference between the two solvers is that AMR-Wind uses structured grids
 whereas Nalu-Wind uses unstructured grids. The differences in performance can be attributed with the 
 computational overhead of storing and manipulating unstructured data.  
 
