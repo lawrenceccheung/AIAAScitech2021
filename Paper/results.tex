@@ -353,7 +353,7 @@ a tensor Helmholtz solve for Momentum equations, and two scalar Helmholtz solves
 Nalu-Wind is a fully implicit scheme and requires a non-linear Picard iteration for each time
 step, in this work we use two Picard iterations for every time step.
 Each Picard iteration requires a Poisson solve and five Helmholtz solves
-(three momentum equations, an Enthalpy equation, and the subgrid-scale kinetic energy equation).
+(three momentum equations, an enthalpy equation, and the subgrid-scale kinetic energy equation).
 It is difficult to compare AMR-Wind and Nalu-Wind due to the differences in discretization and numerical
 implementation. The most significant difference between the two solvers is that AMR-Wind uses structured grids
 whereas Nalu-Wind uses unstructured grids. There is a lot of computational overhead with storing
