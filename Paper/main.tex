@@ -274,7 +274,18 @@ conducted using the stable offshore boundary layer at 5 m/s.  The mean
 statistics were found to agree well between the two LES codes.  Small
 differences were found in wind profiles at higher elevations and for
 the peak $S_u$ spectra, and excellent matches were observed for the
-averaged veer, temperature, and TI profiles.
+averaged veer, temperature, and TI profiles.  For the problem sizes
+considered here, it was also found that AMR-Wind was significantly
+more computationally efficient than Nalu-Wind when measured on a time
+per degree of freedom basis.  However, the good agreement is a
+promising indication that the two codes can be used together
+effectively for future wind farm applications, where the highly
+efficient, structured nature of AMR-Wind handles the free stream
+boundary layer and is combined with the unstructured Nalu-Wind solver
+for complex turbine geometries.
+
+% The performance difference may be caused
+% by XXX, but warrants further investigation in future work.  
 
 %% \section*{Appendix}
 
