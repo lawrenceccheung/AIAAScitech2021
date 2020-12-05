@@ -331,16 +331,34 @@ Eagle supercomputer and AMR-Wind was compiled using Intel 2018.
 Typically on CPU's we see a strong scaling limit at around 15k cells per MPI rank.
 But for this case we used 32,768 cells per MPI rank which is about half the strong scaling limit.
 The time per degree of freedom for AMR-Wind is
-\[\frac{n_r t_{ts} }{n_{dofs}} = 8\times10^{-6} [s]\]
+\[\frac{n_r t_{ts} }{n_{dofs}} = 8.118\times10^{-6} [s]\]
 where $n_r$ is the number of MPI ranks, $t_{ts}$ is time per time step, and $n_{dofs}$ is
-the total number of degrees of freedom (for AMR-Wind we are using the number of cells).
-This value allows us to compare speed relative to Nalu-Wind when using a different
-grid and number of MPI ranks, where a smaller value means a faster time to solution.
+the total number of degrees of freedom (for AMR-Wind degrees of freedom are taken to be
+ number of cells in the grid). This value allows us to compare speed relative to 
+Nalu-Wind when using a different grid and number of MPI ranks, where a smaller value 
+means a faster time to solution. It should be noted that the choice to use fewer 
+elements for AMR-Wind was to ensure perfect load balancing across MPI ranks. This 
+$288 \times 288 \times 384$ grid can be perfectly decomposed into smaller $32^3$ blocks.
 
-In comparison, the same case for Nalu-Wind takes 3.404363 seconds per time step which
-takes a total of 75.65 hours to complete the simulation. This simulation was carried out
-on 1224 MPI ranks on a grid that contains $300\times 300 \times 400$ cells. The equivalent
-time per degree of freedom for Nalu-Wind is $1.032 \times 10^{-4}$ s.
+In comparison, the same case for Nalu-Wind takes 3.404 seconds per time step which
+takes a total of 75.64 hours to complete the simulation. This simulation was carried out
+on 1224 MPI ranks for a grid that contains $300\times 300 \times 400$ cells. The equivalent
+time per degree of freedom for Nalu-Wind is $1.147 \times 10^{-4}$ s, where degrees of freedom
+are the number of nodes in the mesh. 
+
+For both AMR-Wind and Nalu-Wind each time step is dominated by the linear solver work. 
+A time step within AMR-Wind requires two poisson solves (MAC and nodal projection),
+a tensor Helmholtz solve for Momentum equations, and two scalar Helmholtz solves 
+(potential temperature equation and subgrid-scale kinetic energy equation).
+Nalu-Wind is a fully implicit scheme and requires a non-linear Picard iteration for each time
+step, in this work we use two Picard iterations for every time step.
+Each Picard iteration requires a Poisson solve and five Helmholtz solves
+(three momentum equations, an Enthalpy equation, and the subgrid-scale kinetic energy equation).
+It is difficult to compare AMR-Wind and Nalu-Wind due to the differences in discretization and numerical
+implementation. The most significant difference between the two solvers is that AMR-Wind uses structured grids
+whereas Nalu-Wind uses unstructured grids. There is a lot of computational overhead with storing
+and manipulating unstructured data. 
+
 
 \subsection{Comparison of the stable offshore ABL for different wind speeds and stabilities}
 
