@@ -19,7 +19,8 @@
 % Setup fixme env for collaborative notes
 \fxsetup{status=draft, layout=inline, theme=color}
 
-\title{Computation and comparison of the stable Northeastern US marine boundary layer}
+\title{Computation and comparison of the stable northeastern United States
+  marine boundary layer}
 
 \author{Lawrence C. Cheung\footnote{Principal member of technical staff, Thermal/Fluid Science \& Engineering, AIAA member}}
 \affil{Sandia National Laboratories, Livermore, CA 94550}
@@ -42,20 +43,18 @@
 \maketitle
 
 \begin{abstract}
-  In this work we investigate the behavior of stable marine boundary
-  layers located near the coast of the Northeastern United States.
-  Using the ExaWind LES codes, three stable atmospheric conditions
-  were chosen to match the Cape Wind measurements of Archer \emph{et
-    al.} with wind speeds of 5 m/s, 10 m/s, and 15 m/s at the 20 m
-  measurement height.  The behavior of the stable boundary layers,
-  including mean flow quantities and turbulent statistics, are
-  examined and compared to previous computations of the neutral and
-  unstable offshore boundary layer at the same location.  This study
-  also examines the domain and mesh requirements necessary to capture
-  the turbulent scales for the stable offshore boundary layers.
-  Finally, we compare solutions computed using both Nalu-Wind and
-  AMR-Wind solvers, and report on their relative accuracy and
-  performance in this study.
+  In this work we investigate the behavior of stable marine boundary layers
+  located near the coast of the Northeastern United States.  Using the ExaWind
+  large eddy simulation (LES) codes, three stable atmospheric conditions were
+  chosen to match the Cape Wind measurements of Archer \emph{et al.} with wind
+  speeds of 5 m/s, 10 m/s, and 15 m/s at the 20 m measurement height.  The
+  behavior of the stable boundary layers, including mean flow quantities and
+  turbulent statistics, are examined and compared to previous computations of
+  the neutral and unstable offshore boundary layer at the same location.  This
+  study also examines the domain and mesh requirements necessary to capture the
+  turbulent scales for the stable offshore boundary layers.  Finally, we compare
+  solutions computed using both Nalu-Wind and AMR-Wind solvers, and report on
+  their relative accuracy and performance in this study.
 
 \end{abstract}
 
@@ -95,20 +94,20 @@ $TI$      & Turbulence intensity \\
 $t_{ts}$  & Time per time-step \\
 $\overline{U}_{horiz}$ & Time averaged horizontal velocity \\
 $u_\tau$   & Friction velocity    \\
-$V_1$     & Resolved wind speed at first grid level 
+$V_1$     & Resolved wind speed at first grid level
 \end{longtable*}}
 
 \section{Introduction}
 
 \lettrine{T}he planned installation of several offshore wind energy
 plants in the United States has highlighted the need to properly
-understand the wind resource and atmospheric characteristics of the US
+understand the wind resource and atmospheric characteristics of the U.S.
 Atlantic Coast.  Several atmospheric phenomena particular to this
 region, such as coastal low-level jets or seasonal Nor’easters, have
 the potential to substantially impact the operation and power
 production of offshore wind plants.  Of particular interest to the
 current study is the atmospheric stability of the marine boundary
-layer in the Northeastern US.
+layer in the Northeastern United States.
 
 Atmospheric stability plays a large role in determining the power
 production of wind plants because it directly affects the vertical
@@ -122,7 +121,7 @@ fatigue loads on offshore wind turbines.
 
 Several recent measurement campaigns have provided data to understand
 the ABL and wind characteristics for potential offshore wind farms in
-the Northeastern US.  Pichugina et al. \cite{pichugina2017properties}
+the Northeastern United States.  Pichugina et al. \cite{pichugina2017properties}
 measured the wind profiles and vertical shear profiles in the Gulf of
 Maine using a ship-borne lidar approach.  Analysis of measured data
 sets from Nantucket Sound by Archer et
@@ -168,16 +167,16 @@ In 2000, Kosovic and Curry \cite{Kosovic2000} used an LES simulation
 with a nonlinear SGS model containing backscatter to favorably compare
 to the Beaufort Sea Arctic Stratus Experiment (BASE) measurements,
 showing that the SBL could reach a quasi steady-state. They also
-showed good agreement with the Nieustadt analytical model. In the same
+showed good agreement with the Nieuwstadt analytical model. In the same
 year, Saiki et al. \cite{Saiki2000} simulated an SBL with
 a strong capping inversion at z=500 m, producing reasonable surface layer profiles and
 identifying a need for SBL specific SGS models. Beare and MacVean \cite{Beare2004}
 presented the first grid-focused work on LES of the SBL, using grids with deltas
-between 2m and 12.5m, finding significant variation between grid sizes. The inclusion
-of a backscatter model resulted in significant variation at a 6.25m resolution, but
-very little at a 2m resolution. Basu et al. \cite{Basu2005} published a set of
+between 2 m and 12.5 m, finding significant variation between grid sizes. The inclusion
+of a backscatter model resulted in significant variation at a 6.25 m resolution, but
+very little at a 2 m resolution. Basu et al. \cite{Basu2005} published a set of
 turbulence statistics, measurements, and LES simulations in support
-of the viability of Nieustadt's local scaling hypothesis under very stable
+of the viability of Nieuwstadt's local scaling hypothesis under very stable
 conditions. Jimenez and Cuxart \cite{Jimenez2005} set out to quantify the range
 for which standard SGS models, using the Kolmogorov theory for dissipation, were
 valid for increasingly stable flows. They found the model to perform adequately
@@ -187,10 +186,10 @@ An inter-comparison of LES simulations of the SBL was organized in 2006, the
 results of which are published in Beare et al.\ \cite{Beare2006}. Collectively,
 this is known as the GABLS initiative, and involved simulating a moderately
 stable flow taken from Kosovic and Curry \cite{Kosovic2000}. Eleven codes
-were compared in all, wherein grid deltas of less than 12.5m were found to
+were compared in all, wherein grid deltas of less than 12.5 m were found to
 successfully maintain resolved turbulence, grid deltas less than 3.125m
 showed little statistical change, and results became independent of SGS
-modeling at 1m resolution. In the same year, Kumar et al. \cite{Kumar2006}
+modeling at 1 m resolution. In the same year, Kumar et al. \cite{Kumar2006}
 successfully simulated an entire diurnal cycle with LES using a Lagrangian
 dynamic scale dependent SGS model. This model has been used by several
 researchers since 2011, including Lu and Porte-Agel \cite{Lu2011}, Huang
@@ -213,7 +212,7 @@ SGS model that allows backscatter. They found grid requirements to be 2.5 m, 10 
 for stable, neutral, and convective boundary layers respectively. They advocate looking
 at two point correlations in order to quantify flow structure size, which in turn
 provides a basis for evaluating grid resolution. In all of the reviewed literature, SBL LES
-has been run in the onshore context only, a complete comparison
+has been run in the onshore context only; a complete comparison
 including offshore stable ABL conditions has yet to be completed.
 
 \subsection{Objectives}
@@ -227,7 +226,7 @@ unstructured, incompressible Navier-Stokes solver Nalu-Wind and the
 structured, adaptive mesh refinement solver AMR-Wind.  Both codes are
 used to calculate the same SBL, and the relative differences between
 the codes are reported.  Finally, a series of stable boundary layer
-conditions will be computed using AMR-Wind which match the
+conditions will be computed using AMR-Wind that match the
 measurements of Archer et al. \cite{archer2016predominance}.  The
 behavior of the stable boundary layers, including mean flow quantities
 and turbulent statistics, are examined and compared to the neutral and
@@ -244,26 +243,24 @@ unstable cases computed in \cite{cheung2020large}.
 \input{results}
 
 \section{Conclusion}
-In this study we have simulated the stable offshore boundary layer
-matching the characteristics of measurements from Nantucket Sound in
-the Northeastern US.  Three cases with wind speeds of 5 m/s, 10 m/s,
-and 15 m/s were selected, and simulations were performed using the
-ExaWind codes to match the TI and stability levels observed at from
-the Cape Wind platform.  When examining the effect of stratification
-using the Obukhov length, differences in the ABL behavior were seen
-between the very stable boundary layer cases (5 m/s and 10 m/s), and
-the stably stratified case (15 m/s).  The very stable cases had
-shorter turbulent structures and less growth in the boundary layer
-compared to the 15 m/s case.  The behavior of the three stable
-boundary layers was also compared to the neutral and unstable cases
-studied in \cite{cheung2020large}.  As expected, the turbulent
-structures in all stable cases were noticeably smaller than in the
-neutral and unstable boundary layers.
+In this study, we have simulated the stable offshore boundary layer matching the
+characteristics of measurements from Nantucket Sound in the Northeastern United
+States. Three cases with wind speeds of 5 m/s, 10 m/s, and 15 m/s were
+selected, and simulations were performed using the ExaWind codes to match the TI
+and stability levels observed at the Cape Wind platform.  When examining
+the effect of stratification using the Obukhov length, differences in the ABL
+behavior were seen between the very stable boundary layer cases (5 m/s and 10
+m/s), and the stably stratified case (15 m/s).  The very stable cases had
+shorter turbulent structures and less growth in the boundary layer compared to
+the 15 m/s case.  The behavior of the three stable boundary layers was also
+compared to the neutral and unstable cases studied in \cite{cheung2020large}.
+As expected, the turbulent structures in all stable cases were noticeably
+smaller than in the neutral and unstable boundary layers.
 
 In addition to these simulations, we also examined the domain and mesh
 requirements necessary for the stable offshore boundary layers
 considered here.  Based on the calculated turbulent integral
-lengthscale, horizontal domain sizes of 750 m $\times$ 750 m were found
+length scale, horizontal domain sizes of 750 m $\times$ 750 m were found
 to be necessary for these simulations.  Various mesh resolutions were
 also considered for the stable runs, and it was determined that the
 finest resolution of $\Delta_x$=2.5 m was able to resolve the longitudinal
@@ -288,7 +285,7 @@ boundary layer and is combined with the unstructured Nalu-Wind solver
 for complex turbine geometries.
 
 % The performance difference may be caused
-% by XXX, but warrants further investigation in future work.  
+% by XXX, but warrants further investigation in future work.
 
 %% \section*{Appendix}
 
@@ -300,27 +297,25 @@ The authors wish to acknowledge the contributions from M. Churchfield
 and S. Yellapantula for their development of the LES boundary
 conditions and for their efforts in validating the ExaWind codes.
 
-This research was supported by the Wind Energy Technologies Office of
-the US Department of Energy Office of Energy Efficiency and Renewable
-Energy.  Sandia National Laboratories is a multimission laboratory
-managed and operated by National Technology \& Engineering Solutions
-of Sandia, LLC, a wholly owned subsidiary of Honeywell International
-Inc., for the U.S. Department of Energy's National Nuclear Security
-Administration under contract DE-NA0003525. The views expressed in the
-article do not necessarily represent the views of the U.S. Department
-of Energy or the United States Government.
+This research was supported by the Wind Energy Technologies Office of the
+U.S. Department of Energy (DOE) Office of Energy Efficiency and Renewable
+Energy.  Sandia National Laboratories is a multimission laboratory managed and
+operated by National Technology \& Engineering Solutions of Sandia, LLC, a
+wholly owned subsidiary of Honeywell International Inc., for the U.S. Department
+of Energy's National Nuclear Security Administration under contract
+DE-NA0003525. The views expressed in the article do not necessarily represent
+the views of the U.S. Department of Energy or the United States Government.
 
-This work was authored in part by the National Renewable Energy
-Laboratory, operated by Alliance for Sustainable Energy, LLC, for the
-U.S. Department of Energy (DOE) under Contract No. DE-AC36-
-08GO28308. M. Brazell was funded by the Exascale Computing
-Project (17-SC-20-SC), a collaborative effort of two DOE organizations
-(Office of Science and the National Nuclear Security Administration).
+This work was authored in part by the National Renewable Energy Laboratory,
+operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of
+Energy (DOE) under Contract No. DE-AC36- 08GO28308. M. Brazell was funded by the
+Exascale Computing Project (17-SC-20-SC), a collaborative effort of two DOE
+organizations (Office of Science and the National Nuclear Security
+Administration).
 
-A portion of the research was performed using computational
-resources sponsored by the Department of Energy's Office of Energy
-Efficiency and Renewable Energy and located at the National Renewable
-Energy Laboratory.
+A portion of the research was performed using computational resources sponsored
+by the DOE's Office of Energy Efficiency and Renewable Energy and located at the
+National Renewable Energy Laboratory.
 
 \bibliography{references}
 

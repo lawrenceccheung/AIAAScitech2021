@@ -4,13 +4,13 @@
 
 \subsection{Measured offshore conditions}
 
-Following the work of Cheung et al \cite{cheung2020large}, we use
+Following the work of Cheung et al.~\cite{cheung2020large}, we use
 measurements of the offshore coastal marine boundary layer, collected
 by the Cape Wind meteorological tower in Nantucket Sound, as the basis
 for this computational study.  The Cape Wind platform collected wind
 measurements at 20 m, 41 m, and 60 m above the mean water level, along
 with temperature and barometric measurements from the years 2003-2011.
-From the observations, Archer et al.\cite{archer2016predominance}
+From the observations, Archer et al.~\cite{archer2016predominance}
 found that the marine boundary layer is predominantly unstable, with
 61\% of conditions were classified as unstable, versus 21\% neutral and
 18\% stable.  The stratification of the marine boundary layer, as
@@ -22,7 +22,7 @@ From the measured distribution of atmospheric stabilities, turbulent
 kinetic energies (TKE), and wind speeds from the Cape Wind platform at
 z=20 m, a stable set of conditions were chosen as targets for this
 computational study.  A summary of the conditions for all stability
-classes is given in table \ref{tab:CapeWindMeasurements}. In this work we
+classes is given in Table~\ref{tab:CapeWindMeasurements}. In this work we
 focus on the three stable atmospheric conditions at wind speeds of
 5 m/s, 10 m/s, and 15 m/s, while the neutral and unstable conditions
 where studied in previous work \cite{cheung2020large}.
@@ -66,7 +66,7 @@ predominant stable direction of 225 degrees southwest.
 %Provide a general description of the LES codes that we use.
 
 Large Eddy Simulations of the stable atmopsheric conditions described in
-table~\ref{tab:CapeWindMeasurements} are performed using the open-source,
+Table~\ref{tab:CapeWindMeasurements} are performed using the open-source,
 ExaWind simulation environment\footnote{\url{https://github.com/exawind}}.
 ExaWind is a suite of high-fidelity modeling tools for analyzing complex
 microscale atmospheric boundary layer flows and wind farm flows. The present
@@ -82,16 +82,17 @@ discretization in the two codes.
 \subsection{LES formulation}
 
 \subsubsection{Governing equations}
-Both CFD codes solve the incompressible form of the Navier-Stokes equations with
-appropriate models for turbulence closure. Equation~\ref{eqn:ns-les} shows the
-continuity and momentum equations with all the terms necessary to model the
-atmospheric boundary layer problem. Term $\mathbf{I}$ represents the pressure
-gradient forces as a deviation from hydrostatic and horizontal mean gradients,
-term $\mathbf{II}$ represents the contribution from viscous and sub-filter scale
-stresses, term $\mathbf{III}$ represents the contribution from Coriolis forces
-due to earth's rotation, term $\mathbf{IV}$ represents the effects of buoyancy,
-and term $\mathbf{V}$ represents source terms necessary to drive the flow to a
-desired horizontal mean velocity at prescribed heights.
+Both computational fluid dynamics (CFD) codes solve the incompressible form of
+the Navier-Stokes equations with appropriate models for turbulence
+closure. Equation~\ref{eqn:ns-les} shows the continuity and momentum equations
+with all the terms necessary to model the atmospheric boundary layer
+problem. Term $\mathbf{I}$ represents the pressure gradient forces as a
+deviation from hydrostatic and horizontal mean gradients, term $\mathbf{II}$
+represents the contribution from viscous and sub-filter scale stresses, term
+$\mathbf{III}$ represents the contribution from Coriolis forces due to earth's
+rotation, term $\mathbf{IV}$ represents the effects of buoyancy, and term
+$\mathbf{V}$ represents source terms necessary to drive the flow to a desired
+horizontal mean velocity at prescribed heights.
 
 \begin{align}
   \frac{\partial \bar{\rho}} {\partial t} + \frac{\partial \bar{\rho} \widetilde{u_j}}{\partial x_j} & = 0, \nonumber\\
@@ -143,7 +144,7 @@ shown below
 \end{align}
 It is noted here that the terms $\hat{q}_j$ (Eq.~\ref{eqn:pot-temp-les}) and
 $q_j$ (Eq.~\ref{eqn:enthalpy-les}) are not equivalent and must be scaled
-appropriately. User can still provide the appropriate initial and boundary
+appropriately. Users can still provide the appropriate initial and boundary
 conditions in terms of potential temperature field. Under these assumptions and
 conditions, the resulting solution can then be interpreted as the variation of
 potential temperature field in the computational domain.
@@ -182,7 +183,7 @@ Moeng~\cite{Moeng1984} as
 where all quantities with the subscript 1 are values at the first vertical grid
 level, $V_1$ is the resolved wind speed at the first grid level and
 $\average{\bullet}$ represents the horizontal planar average. The mean
-sub-filter stresses are computed using Monin-Obukhov similarity
+sub-filter stresses are computed using the Monin-Obukhov similarity
 law~\cite{Etling1996}. The formulation for the potential temperature flux could
 potentially experience a singularity when the mean resolved potential
 temperature at the first grid level $\average{\widetilde{\theta}_1}$ crosses the
@@ -207,10 +208,10 @@ within the codebase: the edge-based scheme and control-volume finite-element
 scheme. The edge-based scheme, used in the present study, is similar to the
 classical cell-centered finite volume formulation formulated on a dual volume
 surrounding the nodes of the mesh. The governing equations are discretized in
-time using a split-operator approach. Implicit backward difference formula
-(BDF2) timestepping algorithm with an approximate pressure projection
+time using a split-operator approach. An implicit backward difference formula
+(BDF2) time-stepping algorithm with an approximate pressure projection
 scheme~\cite{Moen-Domino:2003} is used to advance the equations in time.
-Multiple Picard-style outer-loop iterations are employed within each timestep
+Multiple Picard-style outer-loop iterations are employed within each time step
 to minimize the errors introduced from split-operator approximations. Nalu-Wind
 comes equipped with a suite of Reynolds-Averaged Navier-Stokes (RANS), LES, and
 Detached Eddy Simulation (DES) turbulence models to resolve the disparate
@@ -221,7 +222,7 @@ for managing the unstructured mesh data structures. The linear systems resulting
 from the discretized equations are solved using solvers available within the
 Belos and MueLu libraries within Trilinos. The momentum and scalar transport
 equations are solved using GMRES iterative solvers with symmetric Gauss-Seidel
-(SGS) preconditioners. The elliptic pressure-Poisson equation is solved using
+(SGS) preconditioners. The elliptic pressure Poisson equation is solved using
 GMRES solvers with a smoothed-aggregated algebraic multigrid preconditioner. The
 reader is referred to Sprague et al.~\cite{SpragueAVR2020} and
 Domino~\cite{Domino:2015} for more details.
@@ -232,45 +233,47 @@ with all the physics models necessary for modeling atmospheric boundary flows.
 In the present work, the prognostic equation for temperature is solved using the
 enthalpy equation (Eq.~\ref{eqn:enthalpy-les}). The prognostic one-equation,
 subgrid-scale kinetic energy equation (Eq.~\ref{eqn:ksgs-les}) is used for LES
-turbulence closure. Two Picard iterations were employed within each timestep to
+turbulence closure. Two Picard iterations were employed within each time step to
 minimize splitting errors and recover second-order accuracy in time.
 
 \subsubsection{AMR-Wind}
 
-As part of a suite of physics codes within the open-source project called ExaWind,
+As part of a suite of physics codes within the open-source project ExaWind,
 AMR-Wind enables more efficient and scalable simulations of wind power plants.
-This is because it is built on top of the AMReX software framework which contains
-all of the functionality needed to develop massively parallel, block-structured
-adaptive mesh refinement (AMR) applications \cite{AMReX_JOSS}.
-Since AMR-Wind is limited to Cartesian block-structured grids, it is specialized
-to handle ABL physics and wind turbine wakes.
-The block-structured grids enable more efficient algorithms such as
-Multi-Level Multi-Grid (MLMG) \cite{AMReX_JOSS}
-and are well suited for next generation supercomputers that use GPU's.
-In the current work, we focus on applying AMR-Wind to ABL computations
-using statically refined, uniform meshes, and will examine adaptive
-mesh capabilities in future studies.
+This is because it is built on top of the AMReX software framework, which
+contains all of the functionality needed to develop massively parallel,
+block-structured adaptive mesh refinement (AMR) applications \cite{AMReX_JOSS}.
+Because AMR-Wind is limited to Cartesian block-structured grids, it is
+specialized to handle ABL physics and wind turbine wakes.  The block-structured
+grids enable more efficient algorithms such as Multi-Level Multi-Grid (MLMG)
+\cite{AMReX_JOSS} and are well suited for next generation supercomputers that
+use graphical processing units (GPUs).  In the current work, we focus on
+applying AMR-Wind to ABL computations using statically refined, uniform meshes,
+and will examine adaptive mesh capabilities in future studies.
 
 AMR-Wind solves the incompressible Navier-Stokes equations and is generalized to
-handle variable density and viscosity. Additionally scalar transport equations can be
-solved such as potential temperature or turbulence models. The discretization in AMR-Wind
-is based on the approximate projection method used in IAMR \cite{almgren1998conservative}
-and incflo \cite{sverdrup2018highly}. It is a semi-staggered scheme where the velocity and scalar
-variables are located at cell centers and pressure is located at nodes. Pressure is also staggered
-in time so that pressure and the pressure gradient (located at cell centers) are at time $n+1/2$.
-The time discretization is handled with a Crank Nicholson approach where the right hand side
-of the system of equations is evaluated at time $n+1/2$. The advection term is handled explicitly
-using an upwind finite-volume method. There are multiple options
-within AMR-Wind, but in this paper only the high-order Godunov Piecewise Parabolic
-method (PPM) is used \cite{Colella1984}. The advection terms are projected to face
-centers at $n+1/2$ and are corrected using an exact MAC projection \cite{almgren1998conservative}
-which guarantees a divergence free flow. The diffusion terms can be handled explicitly, semi-implicitly,
-or fully implicit and are discretized using a second-order central difference formula.
-For the simulations in this paper, we use a fully implicit scheme as the variable viscosity
-from the eddy viscosity may cause time step restrictions. After the scalar equations
-and the momentum equations are advanced in time, a nodal projection is used to
-approximately correct the velocity field to make it divergence free.  The nodal projection
-is based on a node centered finite element method \cite{almgren1998conservative}.
+handle variable density and viscosity. Additionally, scalar transport equations
+can be solved, such as potential temperature or turbulence models. The
+discretization in AMR-Wind is based on the approximate projection method used in
+IAMR \cite{almgren1998conservative} and incflo \cite{sverdrup2018highly}. It is
+a semi-staggered scheme where the velocity and scalar variables are located at
+cell centers and pressure is located at nodes. Pressure is also staggered in
+time so that pressure and the pressure gradient (located at cell centers) are at
+time $n+1/2$.  The time discretization is handled with a Crank Nicolson
+approach where the right-hand side of the system of equations is evaluated at
+time $n+1/2$. The advection term is handled explicitly using an upwind
+finite-volume method. There are multiple options within AMR-Wind, but in this
+paper only the high-order Godunov Piecewise Parabolic Method (PPM) is used
+\cite{Colella1984}. The advection terms are projected to face centers at $n+1/2$
+and are corrected using an exact MAC projection~\cite{almgren1998conservative},
+which guarantees a divergence free flow. The diffusion terms can be handled
+explicitly, semi-implicitly, or fully implicit and are discretized using a
+second-order central difference formula.  For the simulations in this paper, we
+use a fully implicit scheme, as the variable viscosity from the eddy viscosity
+may cause time step restrictions. After the scalar equations and the momentum
+equations are advanced in time, a nodal projection is used to approximately
+correct the velocity field to make it divergence free.  The nodal projection is
+based on a node centered finite element method \cite{almgren1998conservative}.
 
 %IAMR paper \cite{almgren1998conservative}
 %AMReX \cite{AMReX_JOSS}
@@ -285,7 +288,7 @@ is based on a node centered finite element method \cite{almgren1998conservative}
 \begin{tabular}{ccccc}
   \hline
   Stability & Wind speed & Surface roughness $z_0$ & Surface
-  temperature change & timestep\\
+  temperature change & Time step\\
   \hline
   Stable       & 5  m/s           & 0.0005 m       & -0.32 K/hr   & 0.25 sec   \\
   Stable       & 10 m/s           & 0.0005 m       & -1.40 K/hr   & 0.125 sec  \\
@@ -329,10 +332,10 @@ prescribed surface temperature as a function of time.  At the upper
 surface of the domain, a potential flow based boundary condition is
 applied along with a normal temperature gradient of 0.003 K/m.
 
-The initial temperature profile in all cases was a constant 300K until
+The initial temperature profile in all cases was a constant 300 K until
 the specified inversion height of 650 m.  The inversion layer thickness
 was 100 m, and above this, the temperature linearly increased until it
-reached 308.75K at the upper boundary.  The initial mean velocity
+reached 308.75 K at the upper boundary.  The initial mean velocity
 profile was uniform throughout the domain with superimposed sinusoidal
 velocity perturbations of magnitude 1 m/s to promote the development
 of turbulence.
@@ -342,7 +345,7 @@ To match the measured TI conditions given in table
 \ref{tab:CapeWindMeasurements}, the surface roughness and prescribed
 surface temperature change were adjusted through an initial
 trial-and-error process.  The final surface roughness of $z_0$=0.0005m
-used for the stable offshore conditions (see table \ref{tab:z0tempparam})
+used for the stable offshore conditions (see Table~\ref{tab:z0tempparam})
 matched the roughness used in the neutral 15m/s and unstable 5m/s and
 10 m/s cases from the previous study \cite{cheung2020large}.  This
 value of surface roughness is consistent with the measurements from
@@ -350,7 +353,7 @@ the North Sea \cite{taylor2001dependence}, which found values of $z_0$
 ranging from $5 \times 10^{-5}$m to $5\times 10^{-3}$m.
 
 The values of the prescribed temperature change at the ocean surface
-is also given in table \ref{tab:z0tempparam}.  As the wind
+is also given in Table~\ref{tab:z0tempparam}.  As the wind
 speed increases, a larger temperature decrease was used to maintain
 similar levels of stable stratification, as expected from
 Monin-Obukhov similarity theory.
@@ -361,5 +364,5 @@ section \ref{sec:gridstudy}, the LES computations for the stable 5 m/s,
 10 m/s, and 15 m/s ABL cases could be set up and run.  Each of the cases
 was run for 15,000 seconds before collecting statistics for another
 5,000 seconds.  To maintain a CFL number less than unity during these
-runs, a smaller timestep was used for the higher wind speeds (see
-table \ref{tab:z0tempparam}).
+runs, a smaller time step was used for the higher wind speeds (see
+Table~\ref{tab:z0tempparam}).
