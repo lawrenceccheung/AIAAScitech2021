@@ -32,7 +32,7 @@ intensity (TI) is calculated using the TKE as
 \begin{equation}
   \textrm{TI} =
   \frac{\sqrt{\frac{2}{3}\times\textrm{TKE}}}{\overline{U}_{horiz}} =
-  \frac{\sqrt{\frac{1}{3}\left( \overline{u'u'} + \overline{v'v'} + \overline{w'w'}
+  \frac{\sqrt{\frac{1}{3}\left( \overline{u'_1 u'_1} + \overline{u'_2 u'_2} + \overline{u'_3 u'_3}
       \right)}}{\overline{U}_{horiz}}
 \end{equation}
 The averaged wind speeds were enforced at the measurement height of
@@ -62,7 +62,7 @@ predominant stable direction of 225 degrees southwest.
 \end{table}
 
 
-\subsection{Computational methodology}
+\subsection{Computational methodology and LES formulation}
 %Provide a general description of the LES codes that we use.
 
 Large Eddy Simulations of the stable atmopsheric conditions described in
@@ -79,7 +79,7 @@ the specifics of the turbulence model and the wall shear stress
 formulation used to model the terrain, and the details of the numerical
 discretization in the two codes.
 
-\subsection{LES formulation}
+% \subsection{LES formulation}
 
 \subsubsection{Governing equations}
 Both computational fluid dynamics (CFD) codes solve the incompressible form of
@@ -167,8 +167,8 @@ by
 \begin{align}
   l =
   \begin{cases}
-    \Delta = \sqrt[3]{\Delta_x \Delta_y \Delta_z}, & \frac{\partial \widetilde{\theta}}{\partial z} < 0 \\
-    0.76\, \sqrt{k}\, \frac{g}{\theta_\circ}\, \left( \frac{\partial \widetilde{\theta}}{\partial z}\right)^{-1/2}, &  \frac{\partial \widetilde{\theta}}{\partial z} > 0 \\
+    \Delta = \sqrt[3]{\Delta_x \Delta_y \Delta_z}, & \frac{\partial \widetilde{\theta}}{\partial z} < 0 , \\
+    0.76\, \sqrt{k}\, \frac{g}{\theta_\circ}\, \left( \frac{\partial \widetilde{\theta}}{\partial z}\right)^{-1/2}, &  \frac{\partial \widetilde{\theta}}{\partial z} > 0 .\\
   \end{cases}
 \end{align}
 
@@ -177,12 +177,12 @@ The sub-filter scale stresses are specified at the terrain boundary following
 Moeng~\cite{Moeng1984} as
 \begin{align}
  (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{V_1 \average{\widetilde{u}_1} + \average{V_1} (\widetilde{u}_1 - \average{\widetilde{u}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
- (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{V_1 \average{\widetilde{v}_1} + \average{V_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } \\
+ (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{V_1 \average{\widetilde{v}_1} + \average{V_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
   (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{V_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{V_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{V_1} ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) },
 \end{align}
 where all quantities with the subscript 1 are values at the first vertical grid
 level, $V_1$ is the resolved wind speed at the first grid level and
-$\average{\bullet}$ represents the horizontal planar average. The mean
+$\average{\bullet}$ represents the horizontal plane average at that height. The mean
 sub-filter stresses are computed using the Monin-Obukhov similarity
 law~\cite{Etling1996}. The formulation for the potential temperature flux could
 potentially experience a singularity when the mean resolved potential
@@ -234,11 +234,11 @@ In the present work, the prognostic equation for temperature is solved using the
 enthalpy equation (Eq.~\ref{eqn:enthalpy-les}). The prognostic one-equation,
 subgrid-scale kinetic energy equation (Eq.~\ref{eqn:ksgs-les}) is used for LES
 turbulence closure. Two Picard iterations were employed within each time step to
-minimize splitting errors and recover second-order accuracy in time.
+reduce splitting errors and improving time accuracy.
 
 \subsubsection{AMR-Wind}
 
-As part of a suite of physics codes within the open-source project ExaWind,
+As part of a suite of physics codes within the open-source ExaWind simulation environment,
 AMR-Wind enables more efficient and scalable simulations of wind power plants.
 This is because it is built on top of the AMReX software framework, which
 contains all of the functionality needed to develop massively parallel,
@@ -266,8 +266,8 @@ finite-volume method. There are multiple options within AMR-Wind, but in this
 paper only the high-order Godunov Piecewise Parabolic Method (PPM) is used
 \cite{Colella1984}. The advection terms are projected to face centers at $n+1/2$
 and are corrected using an exact MAC projection~\cite{almgren1998conservative},
-which guarantees a divergence free flow. The diffusion terms can be handled
-explicitly, semi-implicitly, or fully implicit and are discretized using a
+which guarantees a divergence-free flow. The diffusion terms can be handled
+explicitly, semi-implicitly, or implicitly and are spatially discretized using a
 second-order central difference formula.  For the simulations in this paper, we
 use a fully implicit scheme, as the variable viscosity from the eddy viscosity
 may cause time step restrictions. After the scalar equations and the momentum
@@ -310,7 +310,7 @@ the boundary layer, and in all cases the vertical dimension of 1000 m
 was also used.  The grid study in section \ref{sec:gridstudy} also
 showed that the stable stratification required greater mesh refinement
 to capture the smaller turbulent scales, and a uniform cell size of
-2.5m was adopted for the offshore LES computations across both codes.
+2.5 m was adopted for the offshore LES computations across both codes.
 
 Momentum source terms were included in Nalu-Wind and AMR-Wind to
 ensure that the horizontally averaged velocity matched the targeted
@@ -341,16 +341,16 @@ velocity perturbations of magnitude 1 m/s to promote the development
 of turbulence.
 
 \subsubsection{Determination of surface roughness and prescribed temperature }
-To match the measured TI conditions given in table
+To match the measured TI conditions given in Table
 \ref{tab:CapeWindMeasurements}, the surface roughness and prescribed
 surface temperature change were adjusted through an initial
-trial-and-error process.  The final surface roughness of $z_0$=0.0005m
+trial-and-error process.  The final surface roughness of $z_0$=0.0005 m
 used for the stable offshore conditions (see Table~\ref{tab:z0tempparam})
-matched the roughness used in the neutral 15m/s and unstable 5m/s and
+matched the roughness used in the neutral 15 m/s and unstable 5 m/s and
 10 m/s cases from the previous study \cite{cheung2020large}.  This
 value of surface roughness is consistent with the measurements from
 the North Sea \cite{taylor2001dependence}, which found values of $z_0$
-ranging from $5 \times 10^{-5}$m to $5\times 10^{-3}$m.
+ranging from $5 \times 10^{-5}$m to $5\times 10^{-3}$ m.
 
 The values of the prescribed temperature change at the ocean surface
 is also given in Table~\ref{tab:z0tempparam}.  As the wind
