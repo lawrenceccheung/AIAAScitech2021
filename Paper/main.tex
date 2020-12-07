@@ -53,8 +53,8 @@
   the neutral and unstable offshore boundary layer at the same location.  This
   study also examines the domain and mesh requirements necessary to capture the
   turbulent scales for the stable offshore boundary layers.  Finally, we compare
-  solutions computed using both Nalu-Wind and AMR-Wind solvers, and report on
-  their relative accuracy and performance in this study.
+  solutions computed using both Nalu-Wind and AMR-Wind solvers, and
+  compare their predicted solutions and performance in this study.
 
 \end{abstract}
 
@@ -123,7 +123,7 @@ Several recent measurement campaigns have provided data to understand
 the ABL and wind characteristics for potential offshore wind farms in
 the Northeastern United States.  Pichugina et al. \cite{pichugina2017properties}
 measured the wind profiles and vertical shear profiles in the Gulf of
-Maine using a ship-borne lidar approach.  Analysis of measured data
+Maine using a ship-borne LIDAR approach.  Analysis of measured data
 sets from Nantucket Sound by Archer et
 al. \cite{archer2016predominance} showed a predominance of low-shear,
 unstable conditions at the site.  However, strong seasonal variations
@@ -154,7 +154,7 @@ to develop the stable ABL. They recorded a need for implausibly strong initial
 perturbations to sustain turbulence using the Smagorinsky SGS model. Brown et
 al.\ \cite{Brown1994} worked with Mason and Derbyshire to add stochastic backscatter
 to the SGS model, resulting in better agreement with surface layer observations.
-Andren \cite{Andren1995}, simulated two SBL types, one with a neutral layer aloft, and
+Andren \cite{Andren1995} simulated two SBL types, one with a neutral layer aloft, and
 one capped by an inversion, comparing two SGS models. He found significant improvements
 with the Sullivan SGS model, on par with the earlier backscatter model. Kemp and
 Thompson \cite{Kemp1996} used the same model as \cite{Brown1994} to study particle
@@ -169,7 +169,7 @@ to the Beaufort Sea Arctic Stratus Experiment (BASE) measurements,
 showing that the SBL could reach a quasi steady-state. They also
 showed good agreement with the Nieuwstadt analytical model. In the same
 year, Saiki et al. \cite{Saiki2000} simulated an SBL with
-a strong capping inversion at z=500 m, producing reasonable surface layer profiles and
+a strong capping inversion at $z$=500 m, producing reasonable surface layer profiles and
 identifying a need for SBL specific SGS models. Beare and MacVean \cite{Beare2004}
 presented the first grid-focused work on LES of the SBL, using grids with deltas
 between 2 m and 12.5 m, finding significant variation between grid sizes. The inclusion
@@ -187,7 +187,7 @@ results of which are published in Beare et al.\ \cite{Beare2006}. Collectively,
 this is known as the GABLS initiative, and involved simulating a moderately
 stable flow taken from Kosovic and Curry \cite{Kosovic2000}. Eleven codes
 were compared in all, wherein grid deltas of less than 12.5 m were found to
-successfully maintain resolved turbulence, grid deltas less than 3.125m
+successfully maintain resolved turbulence, grid deltas less than 3.125 m
 showed little statistical change, and results became independent of SGS
 modeling at 1 m resolution. In the same year, Kumar et al. \cite{Kumar2006}
 successfully simulated an entire diurnal cycle with LES using a Lagrangian
@@ -216,21 +216,21 @@ has been run in the onshore context only; a complete comparison
 including offshore stable ABL conditions has yet to be completed.
 
 \subsection{Objectives}
-In the current study on stable marine
-boundary layers, we aim to build on the previous work in the
-literature and complete several objectives.  First, we examine the
-domain and mesh requirements necessary to capture the turbulent scales
-for the stable offshore boundary layers.  Secondly, two LES solvers
-within the ExaWind project will be compared in this study: the
-unstructured, incompressible Navier-Stokes solver Nalu-Wind and the
-structured, adaptive mesh refinement solver AMR-Wind.  Both codes are
-used to calculate the same SBL, and the relative differences between
-the codes are reported.  Finally, a series of stable boundary layer
-conditions will be computed using AMR-Wind that match the
-measurements of Archer et al. \cite{archer2016predominance}.  The
-behavior of the stable boundary layers, including mean flow quantities
-and turbulent statistics, are examined and compared to the neutral and
-unstable cases computed in \cite{cheung2020large}.
+In the current study on stable marine boundary layers, we aim to build
+on the previous work in the literature and complete several
+objectives.  First, we examine the domain and mesh requirements
+necessary to capture the turbulent scales for the stable offshore
+boundary layers.  Secondly, two incompressible-flow LES solvers within
+the ExaWind simulation suite will be compared in this study: The
+unstructured-grid solver Nalu-Wind and the structured, adaptive mesh
+refinement (AMR) solver AMR-Wind.  Both codes are used to calculate
+the same SBL, and the relative differences between the codes are
+reported.  Finally, a series of stable boundary layer conditions will
+be computed using AMR-Wind that match the measurements of Archer et
+al. \cite{archer2016predominance}.  The behavior of the stable
+boundary layers, including mean flow quantities and turbulent
+statistics, are examined and compared to the neutral and unstable
+cases computed in \cite{cheung2020large}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% SECTION 2: METHODOLOGY
