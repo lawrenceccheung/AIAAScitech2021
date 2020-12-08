@@ -20,7 +20,7 @@ conservative estimates for the domain size required.  As shown in
 table \ref{tab:GridStudySetup}, the horizontal resolutions varied from
 10 m to 2.5 m cells for the coarse and fine cases, respectively.  All
 simulations for the grid study also used a vertical resolution of
-dz=2.5 m and the same vertical extent of 1 km.
+$\Delta_z$=2.5 m and the same vertical extent of 1 km.
 
 %%%%%%%%%%%%%%% GRID STUDY: INTEGRAL LENGTH %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
@@ -230,8 +230,8 @@ After running each case for 15,000 s, the boundary layer
 statistics and horizontally averaged profiles were averaged for
 another 5,000 s.  In Table \ref{tab:CompareAMRvsNalu}, some mean
 statistics are given for both cases, including the friction velocity
-$u_\tau$, the turbulence intensity TI at z=20 m, and local shear
-exponent $\alpha$ at z=20 m, defined as
+$u_\tau$, the turbulence intensity TI at $z$=20 m, and local shear
+exponent $\alpha$ at $z$=20 m, defined as
 $$ \alpha = \frac{z}{U_{horiz}} \frac{d U_{horiz}}{dz}.
 $$ AMR-Wind and Nalu-Wind produced nearly identical values for the
 TI=0.048, which is close to measured target of 4.5\%, and similar
@@ -241,13 +241,17 @@ resulting in a value slightly lower than Nalu-Wind.
 
 The comparison of the horizontally averaged wind profiles is shown in
 Figure  \ref{fig:CompareAMRvsNaluWind_WSDir}.  At the forcing height
-z=20 m, the wind speed and wind shear are close to an exact match
+$z$=20 m, the wind speed and wind shear are close to an exact match
 between the two LES codes.  The horizontal wind speeds continue to
 agree well for $z < 100$ m, beyond which a relatively constant velocity
 difference is observed.   For both AMR-Wind and Nalu-Wind, an
 approximately linear veer profile was observed until $z\approx$ 250 m,
 at which point the wind direction remained constant until the
 inversion layer height.
+The level of agreement between AMR-Wind and Nalu-Wind at the higher
+elevations is comparable to the inter-comparison of LES simulations
+Beare et al.~\cite{Beare2006}, and may be improved through finer scale
+simulations which fully resolve the lateral turbulent lengthscales. 
 
 The computed TI and temperature profiles were observed to agree
 remarkably well between the LES codes. As shown in Figure
@@ -265,7 +269,7 @@ the two temperature profiles $T(z)$.
   \caption{\label{fig:CompareAMRvsNaluWind_WSDir} Comparison of
     AMR-Wind and Nalu-Wind horizontal velocity and wind direction
     profiles for the stable 5 m/s boundary layer. The dashed
-    horizontal line corresponds to the measurement height z=20 m. }
+    horizontal line corresponds to the measurement height $z$=20 m. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -278,7 +282,7 @@ the two temperature profiles $T(z)$.
   \caption{\label{fig:CompareAMRvsNaluWind_TTI} Comparison of AMR-Wind
     and Nalu-Wind turbulence intensity and temperature profiles for
     the stable 5 m/s boundary layer. The dashed horizontal line
-    corresponds to the measurement height z=20 m.}
+    corresponds to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -299,7 +303,7 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
   \includegraphics[width=7.0in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Spectra_Stable_z20.png}
 
   \caption{\label{fig:CompareAMRvsNaluSpectra} Comparison of AMR-Wind
-    and Nalu-Wind wind spectra at z=20 m for the stable 5 m/s boundary
+    and Nalu-Wind wind spectra at $z$=20 m for the stable 5 m/s boundary
     layer. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -435,7 +439,7 @@ The qualitative behavior of the stable boundary layers can be seen
 through snapshots of the flow taken from each of the simulations.  In
 Figure \ref{fig:SnapshotsZ20}, instantaneous snapshots of the
 horizontal and vertical velocities for each of the three cases at the
-z=20 m measurement height are shown.  The largest difference can be
+$z$=20 m measurement height are shown.  The largest difference can be
 seen in the size of the flow structures between the very unstable and
 stable cases.  Longer streaks are evident in the 15 m/s case compared
 to the 5 m/s and 15 m/s cases, which is consistent with the nearly
@@ -477,7 +481,7 @@ strong role in the growth of the boundary layer.
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
     velocity and vertical velocity, taken at $t$=20,000 s of the
-    simulations at height z=20 m, for the AMR-Wind calculation of the
+    simulations at height $z$=20 m, for the AMR-Wind calculation of the
     stable 5 m/s, 10 m/s, and 15 m/s ABL. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -549,7 +553,7 @@ m, similar to the veer and turbulence profiles.
   \caption{ \label{fig:CompareAMRallWS} Comparison of the horizontal
     wind speed and wind direction profile for the stable 5 m/s, 10
     m/s, and 15 m/s boundary layers. The dashed horizontal line
-    corresponds to the measurement height z=20 m.}
+    corresponds to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -562,7 +566,7 @@ m, similar to the veer and turbulence profiles.
   \caption{ \label{fig:CompareAMRallTTI} Comparison of the turbulence
     intensity and temperature profile for the stable 5 m/s, 10 m/s,
     and 15 m/s boundary layers. The dashed horizontal line corresponds
-    to the measurement height z=20 m.}
+    to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
