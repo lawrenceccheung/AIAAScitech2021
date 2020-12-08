@@ -269,7 +269,7 @@ and are corrected using an exact MAC projection~\cite{almgren1998conservative},
 which guarantees a divergence-free flow. The diffusion terms can be handled
 explicitly, semi-implicitly, or implicitly and are spatially discretized using a
 second-order central difference formula.  For the simulations in this paper, we
-use a fully implicit scheme, as the variable viscosity from the eddy viscosity
+use an implicit scheme for the viscous terms, as the variable viscosity from the eddy viscosity
 may cause time step restrictions. After the scalar equations and the momentum
 equations are advanced in time, a nodal projection is used to approximately
 correct the velocity field to make it divergence free.  The nodal projection is
