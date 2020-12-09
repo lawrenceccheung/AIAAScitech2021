@@ -33,11 +33,12 @@ intensity (TI) is calculated using the TKE as
   \textrm{TI} =
   \frac{\sqrt{\frac{2}{3}\times\textrm{TKE}}}{\overline{U}_{horiz}} =
   \frac{\sqrt{\frac{1}{3}\left( \overline{u'_1 u'_1} + \overline{u'_2 u'_2} + \overline{u'_3 u'_3}
-      \right)}}{\overline{U}_{horiz}}
+      \right)}}{\overline{U}_{horiz}},
 \end{equation}
-The averaged wind speeds were enforced at the measurement height of
-20 m, and the applied wind directions were consistent with the
-predominant stable direction of 225 degrees southwest.
+where $u'_i$ is the fluctuating wind velocity in the $i$
+direction. The averaged wind speeds were enforced at the measurement
+height of 20 m, and the applied wind directions were consistent with
+the predominant stable direction of 225 degrees southwest.
 
 \begin{table}
 \caption{\label{tab:CapeWindMeasurements} Measured conditions at Cape
@@ -86,7 +87,8 @@ Both computational fluid dynamics (CFD) codes solve the incompressible form of
 the Navier-Stokes equations with appropriate models for turbulence
 closure. Equation~\ref{eqn:ns-les} shows the continuity and momentum equations
 with all the terms necessary to model the atmospheric boundary layer
-problem. Term $\mathbf{I}$ represents the pressure gradient forces as a
+problem. LES filtered variables are denoted using the operation ${\left(\bullet \right)}$.
+Term $\mathbf{I}$ represents the pressure gradient forces as a
 deviation from hydrostatic and horizontal mean gradients, term $\mathbf{II}$
 represents the contribution from viscous and sub-filter scale stresses, term
 $\mathbf{III}$ represents the contribution from Coriolis forces due to earth's
@@ -95,16 +97,15 @@ $\mathbf{V}$ represents source terms necessary to drive the flow to a desired
 horizontal mean velocity at prescribed heights.
 
 \begin{align}
-  \frac{\partial \bar{\rho}} {\partial t} + \frac{\partial \bar{\rho} \widetilde{u_j}}{\partial x_j} & = 0, \nonumber\\
-  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{u}_i\right) +
-  \frac{\partial}{\partial x_j} \left( \bar{\rho}\, \widetilde{u}_i \widetilde{u}_j \right) &=
+  \frac{\partial {u_j}}{\partial x_j} & = 0 \nonumber\\
+  \frac{\partial}{\partial t} \left(\rho\, {u}_i\right) +
+  \frac{\partial}{\partial x_j} \left( \rho\, {u}_i {u}_j \right) &=
   - \underbrace{\frac{\partial p'}{\partial x_j} \delta_{ij}}_\mathbf{I}
   - \underbrace{\frac{\partial \tau_{ij}}{\partial x_j}}_\mathbf{II}
-  - \underbrace{2\bar{\rho}\,\epsilon_{ijk}\,\Omega_j\widetilde{u_k}}_\mathbf{III}
+  - \underbrace{2\rho\,\epsilon_{ijk}\,\Omega_j{u_k}}_\mathbf{III}
   + \underbrace{\left(\rho - \rho_\circ \right) g_i}_\mathbf{IV}
   + \underbrace{S^{u}_{i}}_\mathbf{V} \label{eqn:ns-les}
 \end{align}
-
 For the simulations presented in this paper, the buoyancy term ($\mathbf{IV}$)
 is approximated using the Bousinessq model. The Bousinessq model ignores the
 effect of density gradients on inertia while retaining its effects on buoyancy.
@@ -114,7 +115,7 @@ The density fluctuations governing the buoyancy effects are approximated as
   \frac{\rho}{\rho_\circ} \approx 1 - \beta \left( \theta - \theta_\circ \right)
 \end{align}
 This leads to a forcing term that depends on potential temperature ($\theta$),
-the reference density $\rho_\circ = \bar{\rho}$, and thermal expansion
+the reference density $\rho_\circ = \rho$, and thermal expansion
 coefficient $\beta \approx 1 / \theta_\circ$ as
 \begin{align}
   \left(\rho - \rho_\circ \right) g_i = -\rho_\circ\, \beta\, g_i \left( \theta - \theta_\circ \right)
@@ -123,8 +124,8 @@ coefficient $\beta \approx 1 / \theta_\circ$ as
 For ABL problems, the conservation of energy equation is usually written in
 terms of potential temperature as shown in Eq.~\ref{eqn:pot-temp-les}.
 \begin{align}
-  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{\theta}\right) +
-  \frac{\partial}{\partial x_j} \left(\bar{\rho}\, \widetilde{u}_j \widetilde{\theta} \right) = - \frac{\partial}{\partial x_j} \hat{q}_j \label{eqn:pot-temp-les}
+  \frac{\partial}{\partial t} \left(\rho\, {\theta}\right) +
+  \frac{\partial}{\partial x_j} \left(\rho\, {u}_j {\theta} \right) = - \frac{\partial}{\partial x_j} \hat{q}_j \label{eqn:pot-temp-les}
 \end{align}
 Under the assumption of ideal gas conditions and constant specific heat capacity
 $c_p$, the gradients in potential temperature are proportional to the gradients
@@ -133,14 +134,13 @@ in absolute temperature, i.e.,
    \left[ \frac{\partial T}{\partial t}, \frac{\partial T}{\partial x}, \frac{\partial T}{\partial y} \right] =
    \left( \frac{\bar{p}}{p_\circ} \right)^{\left(\frac{R}{c_p}\right)} \left[ \frac{\partial \theta}{\partial t}, \frac{\partial \theta}{\partial x}, \frac{\partial \theta}{\partial y} \right]
 \end{align}
-Furthermore, ignoring the pressure and viscous work terms in
-Eq.~\ref{eqn:pot-temp-les}, for incompressible flows, it can be shown that
-solving the enthalpy equation is equivalent to solving the potential temperature
-equation. The enthalpy equation solved in Nalu-Wind for wind energy problems is
-shown below
+Furthermore, ignoring the pressure and viscous work terms, for incompressible
+flows, it can be shown that solving the enthalpy equation is equivalent to
+solving the potential temperature equation. The enthalpy equation solved in
+Nalu-Wind for wind energy problems is shown below
 \begin{align}
-  \frac{\partial}{\partial t} \left(\bar{\rho}\, \widetilde{h}\right) +
-  \frac{\partial}{\partial x_j} \left(\bar{\rho}\, \widetilde{u}_j \widetilde{h} \right) = - \frac{\partial}{\partial x_j} q_j . \label{eqn:enthalpy-les}
+  \frac{\partial}{\partial t} \left(\rho\, {h}\right) +
+  \frac{\partial}{\partial x_j} \left(\rho\, {u}_j {h} \right) = - \frac{\partial}{\partial x_j} q_j . \label{eqn:enthalpy-les}
 \end{align}
 It is noted here that the terms $\hat{q}_j$ (Eq.~\ref{eqn:pot-temp-les}) and
 $q_j$ (Eq.~\ref{eqn:enthalpy-les}) are not equivalent and must be scaled
@@ -154,21 +154,21 @@ The subgrid-scale kinetic energy ($k$) one-equation turbulence model
 LES turbulence closure,
 
 \begin{align}
-  \frac{\partial}{\partial t}\left(\bar{\rho} k \right) + \frac{\partial}{\partial x_j} \bar{\rho} k \widetilde{u_j} &= \frac{\partial}{\partial x_j} \left (2 \nu_t \frac{\partial k}{\partial x_j} \right) - 2 \nu_t \widetilde{S_{ij}} \widetilde{S_{ij}} + \frac{g}{\theta_\circ} \tau_{\theta_i} - C_{\epsilon} \frac{k^{3/2}}{l} \label{eqn:ksgs-les}
+  \frac{\partial}{\partial t}\left(\rho k \right) + \frac{\partial}{\partial x_j} \rho k {u_j} &= \frac{\partial}{\partial x_j} \left (2 \nu_t \frac{\partial k}{\partial x_j} \right) - 2 \nu_t {S_{ij}} {S_{ij}} + \frac{g}{\theta_\circ} \tau_{\theta_i} - C_{\epsilon} \frac{k^{3/2}}{l} \label{eqn:ksgs-les}
 \end{align}
 where
-\begin{align}
+\begin{align*}
   C_\epsilon &= 0.93 & \nu_t &= C_\epsilon l \sqrt{k} \\
-  \tau_{\theta i} &= - 2\ \frac{\nu_t}{\mathrm{Pr}_t}\ \frac{\partial \widetilde{\theta}}{\partial x_i} & \mathrm{Pr}_t &= \left( 1 + \frac{2l}{\Delta} \right)^{-1} \\
-\end{align}
+  \tau_{\theta i} &= - 2\ \frac{\nu_t}{\mathrm{Pr}_t}\ \frac{\partial {\theta}}{\partial x_i} & \mathrm{Pr}_t &= \left( 1 + \frac{2l}{\Delta} \right)^{-1}
+\end{align*}
 The choice of the length scale ($l$) depends on whether the stratification is positive
 or negative, based on the recommendation by Moeng~\cite{Moeng1984}, and is given
 by
 \begin{align}
   l =
   \begin{cases}
-    \Delta = \sqrt[3]{\Delta_x \Delta_y \Delta_z}, & \frac{\partial \widetilde{\theta}}{\partial z} < 0 , \\
-    0.76\, \sqrt{k}\, \frac{g}{\theta_\circ}\, \left( \frac{\partial \widetilde{\theta}}{\partial z}\right)^{-1/2}, &  \frac{\partial \widetilde{\theta}}{\partial z} > 0 .\\
+    \Delta = \sqrt[3]{\Delta_x \Delta_y \Delta_z}, & \frac{\partial {\theta}}{\partial z} < 0 , \\
+    0.76\, \sqrt{k}\, \frac{g}{\theta_\circ}\, \left( \frac{\partial {\theta}}{\partial z}\right)^{-1/2}, &  \frac{\partial {\theta}}{\partial z} > 0 .\\
   \end{cases}
 \end{align}
 
@@ -176,9 +176,9 @@ by
 The sub-filter scale stresses are specified at the terrain boundary following
 Moeng~\cite{Moeng1984} as
 \begin{align}
- (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{V_1 \average{\widetilde{u}_1} + \average{V_1} (\widetilde{u}_1 - \average{\widetilde{u}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
- (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{V_1 \average{\widetilde{v}_1} + \average{V_1} (\widetilde{v}_1 - \average{\widetilde{v}_1} ) }{ \average{V_1} \sqrt{\average{\widetilde{u}_1}^2 + \average{\widetilde{v}_1}^2 } } , \\
-  (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{V_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{V_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{V_1} ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) },
+ (\tau_{xz})_0 &= \average{\tau_{xz}}_0 \frac{V_1 \average{{u}_1} + \average{V_1} ({u}_1 - \average{{u}_1} ) }{ \average{V_1} \sqrt{\average{{u}_1}^2 + \average{{v}_1}^2 } } , \\
+ (\tau_{yz})_0 &= \average{\tau_{yz}}_0 \frac{V_1 \average{{v}_1} + \average{V_1} ({v}_1 - \average{{v}_1} ) }{ \average{V_1} \sqrt{\average{{u}_1}^2 + \average{{v}_1}^2 } } , \\
+  (\tau_{\theta z})_0 &= \average{\tau_{\theta z}}_0 \frac{V_1 ( \average{{\theta}_1} - \theta_{\circ} ) + \average{V_1} ({\theta}_1 - \average{{\theta}_1} ) }{ \average{V_1} ( \average{{\theta}_1} - \theta_{\circ} ) },
 \end{align}
 where all quantities with the subscript 1 are values at the first vertical grid
 level, $V_1$ is the resolved wind speed at the first grid level and
@@ -186,12 +186,12 @@ $\average{\bullet}$ represents the horizontal plane average at that height. The 
 sub-filter stresses are computed using the Monin-Obukhov similarity
 law~\cite{Etling1996}. The formulation for the potential temperature flux could
 potentially experience a singularity when the mean resolved potential
-temperature at the first grid level $\average{\widetilde{\theta}_1}$ crosses the
+temperature at the first grid level $\average{{\theta}_1}$ crosses the
 reference temperature $\theta_{\circ}$. Hence the model for the sub-filter
 potential temperature flux is reformulated using the Monin-Obukhov similarity
 law as
 \begin{equation}
-(\tau_{\theta z})_0 = \left ( \frac{u_{\tau} \kappa}{ \phi_h} \right ) \frac{V_1 ( \average{\widetilde{\theta}_1} - \theta_{\circ} ) + \average{V_1} (\widetilde{\theta}_1 - \average{\widetilde{\theta}_1} ) }{ \average{V_1} },
+(\tau_{\theta z})_0 = \left ( \frac{u_{\tau} \kappa}{ \phi_h} \right ) \frac{V_1 ( \average{{\theta}_1} - \theta_{\circ} ) + \average{V_1} ({\theta}_1 - \average{{\theta}_1} ) }{ \average{V_1} },
 \end{equation}
 where $\phi_h$ is the non-dimensional potential temperature gradient from
 Monin-Obukhov similarity law~\cite{Etling1996}.
@@ -269,7 +269,7 @@ and are corrected using an exact MAC projection~\cite{almgren1998conservative},
 which guarantees a divergence-free flow. The diffusion terms can be handled
 explicitly, semi-implicitly, or implicitly and are spatially discretized using a
 second-order central difference formula.  For the simulations in this paper, we
-use a fully implicit scheme, as the variable viscosity from the eddy viscosity
+use an implicit scheme for the viscous terms, as the variable viscosity from the eddy viscosity
 may cause time step restrictions. After the scalar equations and the momentum
 equations are advanced in time, a nodal projection is used to approximately
 correct the velocity field to make it divergence free.  The nodal projection is
@@ -350,7 +350,7 @@ matched the roughness used in the neutral 15 m/s and unstable 5 m/s and
 10 m/s cases from the previous study \cite{cheung2020large}.  This
 value of surface roughness is consistent with the measurements from
 the North Sea \cite{taylor2001dependence}, which found values of $z_0$
-ranging from $5 \times 10^{-5}$m to $5\times 10^{-3}$ m.
+ranging from $5 \times 10^{-5}$ m to $5\times 10^{-3}$ m.
 
 The values of the prescribed temperature change at the ocean surface
 is also given in Table~\ref{tab:z0tempparam}.  As the wind

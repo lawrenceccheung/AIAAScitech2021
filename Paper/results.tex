@@ -1,6 +1,6 @@
 \section{Results}
 
-\subsection{\label{sec:gridstudy}Domain and grid resolution study}
+\subsection{\label{sec:gridstudy}Domain and mesh resolution study}
 
 In order to ensure that the large and small turbulence scales were
 properly resolved in the offshore LES simulations, the appropriate
@@ -20,7 +20,14 @@ conservative estimates for the domain size required.  As shown in
 table \ref{tab:GridStudySetup}, the horizontal resolutions varied from
 10 m to 2.5 m cells for the coarse and fine cases, respectively.  All
 simulations for the grid study also used a vertical resolution of
-dz=2.5 m and the same vertical extent of 1 km.
+$\Delta_z$=2.5 m and the same vertical extent of 1 km.
+
+Note that in this paper, we focus our attention on the horizontal
+resolution required to resolve key physical features in the SBL, and
+some additional impacts deserve additional study.  For instance, the
+impact of non-isotropic meshes with the k-sgs turbulence model and
+wall function treatment is not addressed here and worthy of additional
+attention.
 
 %%%%%%%%%%%%%%% GRID STUDY: INTEGRAL LENGTH %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
@@ -90,7 +97,7 @@ constraint for resolving the high frequency components was the mesh
 resolution.
 
 The comparison of the wind spectra and maximum resolvable frequency
-$f_{max}$ for the different mesh resolutions is shown in figure
+$f_{max}$ for the different mesh resolutions is shown in Figure
 \ref{fig:GridStudySpectra}.  Here spectra is shown at the $z$=20 m
 height and averaged using 1/3 octave-bins to enhance clarity. For the
 $S_u$ and $S_w$ spectra, there are noticeable shifts in the peak
@@ -230,8 +237,8 @@ After running each case for 15,000 s, the boundary layer
 statistics and horizontally averaged profiles were averaged for
 another 5,000 s.  In Table \ref{tab:CompareAMRvsNalu}, some mean
 statistics are given for both cases, including the friction velocity
-$u_\tau$, the turbulence intensity TI at z=20 m, and local shear
-exponent $\alpha$ at z=20 m, defined as
+$u_\tau$, the turbulence intensity TI at $z$=20 m, and local shear
+exponent $\alpha$ at $z$=20 m, defined as
 $$ \alpha = \frac{z}{U_{horiz}} \frac{d U_{horiz}}{dz}.
 $$ AMR-Wind and Nalu-Wind produced nearly identical values for the
 TI=0.048, which is close to measured target of 4.5\%, and similar
@@ -241,13 +248,17 @@ resulting in a value slightly lower than Nalu-Wind.
 
 The comparison of the horizontally averaged wind profiles is shown in
 Figure  \ref{fig:CompareAMRvsNaluWind_WSDir}.  At the forcing height
-z=20 m, the wind speed and wind shear are close to an exact match
+$z$=20 m, the wind speed and wind shear are close to an exact match
 between the two LES codes.  The horizontal wind speeds continue to
 agree well for $z < 100$ m, beyond which a relatively constant velocity
 difference is observed.   For both AMR-Wind and Nalu-Wind, an
 approximately linear veer profile was observed until $z\approx$ 250 m,
 at which point the wind direction remained constant until the
 inversion layer height.
+The level of agreement between AMR-Wind and Nalu-Wind at the higher
+elevations is comparable to the inter-comparison of LES simulations
+Beare et al.~\cite{Beare2006}, and may be improved through finer scale
+simulations which fully resolve the lateral turbulent lengthscales. 
 
 The computed TI and temperature profiles were observed to agree
 remarkably well between the LES codes. As shown in Figure
@@ -265,7 +276,7 @@ the two temperature profiles $T(z)$.
   \caption{\label{fig:CompareAMRvsNaluWind_WSDir} Comparison of
     AMR-Wind and Nalu-Wind horizontal velocity and wind direction
     profiles for the stable 5 m/s boundary layer. The dashed
-    horizontal line corresponds to the measurement height z=20 m. }
+    horizontal line corresponds to the measurement height $z$=20 m. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -278,14 +289,14 @@ the two temperature profiles $T(z)$.
   \caption{\label{fig:CompareAMRvsNaluWind_TTI} Comparison of AMR-Wind
     and Nalu-Wind turbulence intensity and temperature profiles for
     the stable 5 m/s boundary layer. The dashed horizontal line
-    corresponds to the measurement height z=20 m.}
+    corresponds to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In addition to the mean profiles described above, we also examined the
 wind spectra and turbulent correlation statistics from both AMR-Wind
 and Nalu-Wind for the stable 5 m/s case.  A comparison of the computed
-wind spectra $S_i(f)$ from both LES codes is shown in figure
+wind spectra $S_i(f)$ from both LES codes is shown in Figure
 \ref{fig:CompareAMRvsNaluSpectra}.  At low frequencies, both AMR-Wind
 and Nalu-Wind predict similar spectral behavior, and both codes
 predict relatively similar spectral peaks for the $S_v$ and $S_w$
@@ -299,7 +310,7 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
   \includegraphics[width=7.0in]{figures/Compare_AMRWind_NaluWind/AMRWind_NaluWind_Spectra_Stable_z20.png}
 
   \caption{\label{fig:CompareAMRvsNaluSpectra} Comparison of AMR-Wind
-    and Nalu-Wind wind spectra at z=20 m for the stable 5 m/s boundary
+    and Nalu-Wind wind spectra at $z$=20 m for the stable 5 m/s boundary
     layer. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,7 +333,7 @@ predicts a slightly lower the peak amplitude than Nalu-Wind.
 
 \subsubsection{Computational efficiency}
 
-For the 5 m/s SBL case AMR-Wind had a median time of 0.266 s per time step.
+For the 5 m/s SBL case AMR-Wind had a median time of 0.27 s per time step.
 This means the entire simulation took about 6 hours to simulate 20000 s
 of physical time. For this case a total of $288\times 288 \times 384$ cells were used
 which were solved in parallel using 972 MPI ranks. Simulations were carried out using NREL's
@@ -330,7 +341,7 @@ Eagle supercomputer and AMR-Wind was compiled using Intel 2018.
 Typically on CPU's we see a strong scaling limit at around 15k cells per MPI rank.
 But for this case we used 32,768 cells per MPI rank which is about half the strong scaling limit.
 The time per degree of freedom for AMR-Wind is
-\[\frac{n_r t_{ts} }{n_{dofs}} = 8.118\times10^{-6} [s]\]
+\[\frac{n_r t_{ts} }{n_{dofs}} = 8.2\times10^{-6} [s]\]
 where $n_r$ is the number of MPI ranks, $t_{ts}$ is time per time step, and $n_{dofs}$ is
 the total number of degrees of freedom (for AMR-Wind degrees of freedom are taken to be
  number of cells in the grid). This value allows us to compare speed relative to
@@ -339,26 +350,30 @@ means a faster time to solution. It should be noted that the choice to use fewer
 elements for AMR-Wind was to ensure perfect load balancing across MPI ranks. This
 $288 \times 288 \times 384$ grid can be perfectly decomposed into smaller $32^3$ blocks.
 
-In comparison, the same case for Nalu-Wind takes 3.404 s per time step which
-takes a total of 75.64 hours to complete the simulation. This simulation was carried out
+In comparison, the same case for Nalu-Wind takes 3.4 s per time step which
+takes about 75 hours to complete the simulation. This simulation was carried out
 on 1224 MPI ranks for a grid that contains $300\times 300 \times 400$ cells. The equivalent
-time per degree of freedom for Nalu-Wind is $1.147 \times 10^{-4}$ s, where degrees of freedom
-are the number of nodes in the mesh.
+time per degree of freedom for Nalu-Wind is $1.1 \times 10^{-4}$ s, where degrees of freedom
+are the number of nodes in the mesh. For this case AMR-Wind is more than an order of magnitude
+faster per degree of freedom than Nalu-Wind. This significant speed difference is due to the use
+of structured grids in AMR-Wind compared with unstructured grids in Nalu-Wind. There are many 
+benefits to using structured grids and for AMR-Wind this speed advantage is mostly attributed
+ to the MLMG linear solver in the AMReX library \cite{AMReX_JOSS}. This is because for each 
+ time step the computational work is dominated by solving two Poisson equations (MAC projection and nodal projection). 
 
-For both AMR-Wind and Nalu-Wind each time step is dominated by the linear solver work.
-A time step within AMR-Wind requires two Poisson solves (MAC and nodal projection),
-a tensor Helmholtz solve for Momentum equations, and two scalar Helmholtz solves
-(potential temperature equation and subgrid-scale kinetic energy equation).
-Nalu-Wind is a fully implicit scheme and requires a non-linear Picard iteration for each time
-step, in this work we use two Picard iterations for every time step.
-Each Picard iteration requires a Poisson solve and five Helmholtz solves
-(three momentum equations, an enthalpy equation, and the subgrid-scale kinetic energy equation).
-It is difficult to compare AMR-Wind and Nalu-Wind due to the differences in discretization and numerical
-implementation, and additional study is required to understand the performance comparisons.
-The most significant difference between the two solvers is that AMR-Wind uses structured grids
-whereas Nalu-Wind uses unstructured grids. The differences in performance could be attributed with the
-computational overhead of storing and manipulating unstructured data.
-
+%For both AMR-Wind and Nalu-Wind each time step is dominated by the linear solver work.
+%A time step within AMR-Wind requires two Poisson solves (MAC and nodal projection),
+%a tensor Helmholtz solve for Momentum equations, and two scalar Helmholtz solves
+%(potential temperature equation and subgrid-scale kinetic energy equation).
+%Nalu-Wind is a fully implicit scheme and requires a non-linear Picard iteration for each time
+%step, in this work we use two Picard iterations for every time step.
+%Each Picard iteration requires a Poisson solve and five Helmholtz solves
+%(three momentum equations, an enthalpy equation, and the subgrid-scale kinetic energy equation).
+%It is difficult to compare AMR-Wind and Nalu-Wind due to the differences in discretization and numerical
+%implementation, and additional study is required to understand the performance comparisons.
+%The most significant difference between the two solvers is that AMR-Wind uses structured grids
+%whereas Nalu-Wind uses unstructured grids. The differences in performance could be attributed with the
+%computational overhead of storing and manipulating unstructured data.
 
 \subsection{Comparison of the stable offshore ABL for different wind speeds and stabilities}
 
@@ -376,7 +391,7 @@ unstable counterparts.
 \subsubsection{\label{sec:stableABLStats} ABL integrated quantities}
 
 From AMR-Wind LES calculations, a number of quantities can be computed
-to compare with the measured targets from Archer et al
+to compare with the measured targets from Archer et al. 
 \cite{archer2016predominance}.  In
 table \ref{tab:CompareAMRallWS}, we list the TI, shear exponent
 $\alpha$, friction velocity $u_\tau$, Obukhov length $L_{Ob}$,
@@ -406,7 +421,7 @@ as ``very stable.''  From the values listed in Table
 ``stable.''  This is consistent with the measured Cape Wind
 distributions, where very stable conditions are more frequent than
 stable conditions at lower wind speeds, and gradually disappear beyond
-13 m/s (c.f. figure 5b in \cite{archer2016predominance}).
+13 m/s (c.f. Figure 5b in \cite{archer2016predominance}).
 
 %%%%%%%%%%%%%%% Compare AMR integrated quantities, all WS %%%%%%%%%%%%%%
 % See Postprocessing/ABLStats/AMRWind_NaluWind_stable_AllWS_2p5Cubed.ipynb
@@ -431,7 +446,7 @@ The qualitative behavior of the stable boundary layers can be seen
 through snapshots of the flow taken from each of the simulations.  In
 Figure \ref{fig:SnapshotsZ20}, instantaneous snapshots of the
 horizontal and vertical velocities for each of the three cases at the
-z=20 m measurement height are shown.  The largest difference can be
+$z$=20 m measurement height are shown.  The largest difference can be
 seen in the size of the flow structures between the very unstable and
 stable cases.  Longer streaks are evident in the 15 m/s case compared
 to the 5 m/s and 15 m/s cases, which is consistent with the nearly
@@ -472,15 +487,15 @@ strong role in the growth of the boundary layer.
 
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsZ20} Snapshots of the horizontal
-    velocity and vertical velocity, taken at t=20,000 s of the
-    simulations at height z=20 m, for the AMR-Wind calculation of the
+    velocity and vertical velocity, taken at $t$=20,000 s of the
+    simulations at height $z$=20 m, for the AMR-Wind calculation of the
     stable 5 m/s, 10 m/s, and 15 m/s ABL. }
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 This observation can also be seen in images taken along the flow
 direction $225^\circ$, as shown in Figure
-\ref{fig:SnapshotsSide}.  At the time t=20,000 s, the growth of the
+\ref{fig:SnapshotsSide}.  At the time $t$=20,000 s, the growth of the
 of 15 m/s stable boundary layer is considerably larger than the very
 stable 5 m/s and 10 m/s cases, and has nearly reached the inversion
 layer height.  To reach the same level of boundary layer growth, the
@@ -505,7 +520,7 @@ longer than the nighttime conditions measured experimentally.
     \node[align=left] at (2.5in, 5.0in){(a) AMR-Wind stable, 5 m/s};
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
-    velocity, taken at t=20,000 s along the wind direction, for
+    velocity, taken at $t$=20,000 s along the wind direction, for
     the (a) 5 m/s, (b) 10 m/s, and (c) 15 m/s AMR-Wind stable
     calculations }
 
@@ -517,14 +532,14 @@ Horizontally averaged flow profiles shown in Figures
 more quantitative assessment of the ABL evolution.  The rapid growth
 of the 15 m/s stable case leads to strong shear throughout the
 boundary layer up to the inversion height, while the very stable 5 m/s
-and 10 m/s cases showed minimal shear at higher elevations (figure \ref{fig:CompareAMRallWS}).  The
+and 10 m/s cases showed minimal shear at higher elevations (Figure \ref{fig:CompareAMRallWS}).  The
 change in wind direction is also indicative of the boundary layer
 penetration.  Approximately linear veer profiles are visible up to
 heights of $z\approx$250 m and $z\approx$350 m for the 5 m/s and 10
 m/s cases, respectively, while the linear veer is present in the 15
 m/s stable case up to $z$=650 m.
 
-The behavior of the TI and temperature profiles in figure
+The behavior of the TI and temperature profiles in Figure
 \ref{fig:CompareAMRallTTI} closely follows the shear and veer profiles
 discussed above.  Despite all cases reaching similar TI levels at
 $z$=20 m, the turbulence decays at different rates for each case until
@@ -545,7 +560,7 @@ m, similar to the veer and turbulence profiles.
   \caption{ \label{fig:CompareAMRallWS} Comparison of the horizontal
     wind speed and wind direction profile for the stable 5 m/s, 10
     m/s, and 15 m/s boundary layers. The dashed horizontal line
-    corresponds to the measurement height z=20 m.}
+    corresponds to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -558,7 +573,7 @@ m, similar to the veer and turbulence profiles.
   \caption{ \label{fig:CompareAMRallTTI} Comparison of the turbulence
     intensity and temperature profile for the stable 5 m/s, 10 m/s,
     and 15 m/s boundary layers. The dashed horizontal line corresponds
-    to the measurement height z=20 m.}
+    to the measurement height $z$=20 m.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

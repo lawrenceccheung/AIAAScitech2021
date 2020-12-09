@@ -67,6 +67,7 @@ $\beta$   & Thermal expansion coefficient \\
 $c_p$     & Specific heat capacity \\
 $C_\epsilon$  & Turbulence model constant \\
 $\Delta, \Delta_{x,y,z}$  & Grid spacing, grid spacing in x, y, z directions \\
+$\epsilon_{ijk}$ & Levi-Civita symbol\\
 $f$       & Frequency \\
 $f_{max}$  & Maximum resolvable frequency due to mesh limits \\
 $f_{Ny}$   & Nyquist frequency \\
@@ -79,22 +80,27 @@ $\nu_t$   & Turbulent viscosity \\
 LES       & Large Eddy Simulation \\
 $n_{dofs}$ & Number of degrees of freedom \\
 $n_r$     & Number MPI ranks \\
+$\phi_h$  & Potential temperature gradient \\
+$q_j$     & Energy flux vector\\
 $\rho$    & Density \\
 $\rho_\circ$ & Reference density  \\
-$\phi_h$  & Potential temperature gradient \\
 $Pr_t$    & Turbulent Prandtl number \\
 $R$       & Universal gas constant \\
 $R_{ij}$   & Two point correlation tensor \\
 SBL       & Stable Boundary Layer \\
-$\theta$  & Potential temperature \\
+$S^u_i$    & ABL forcing source term \\
 $S_i$     & Wind spectra \\
 $\sigma_i$ & Wind speed variance \\
 $\tau_{ij}$ & Stress tensor \\
+$\theta$  & Potential temperature \\
+$T$       & Absolute temperature \\
 $TI$      & Turbulence intensity \\
 $t_{ts}$  & Time per time-step \\
 $\overline{U}_{horiz}$ & Time averaged horizontal velocity \\
+$u_i$     & Wind velocity in the $i$ direction  \\
 $u_\tau$   & Friction velocity    \\
-$V_1$     & Resolved wind speed at first grid level
+$V_1$     & Resolved wind speed at first grid level \\
+$\Omega_i$ & Earth angular velocity vector
 \end{longtable*}}
 
 \section{Introduction}
@@ -258,16 +264,20 @@ As expected, the turbulent structures in all stable cases were noticeably
 smaller than in the neutral and unstable boundary layers.
 
 In addition to these simulations, we also examined the domain and mesh
-requirements necessary for the stable offshore boundary layers
-considered here.  Based on the calculated turbulent integral
-length scale, horizontal domain sizes of 750 m $\times$ 750 m were found
-to be necessary for these simulations.  Various mesh resolutions were
-also considered for the stable runs, and it was determined that the
-finest resolution of $\Delta_x$=2.5 m was able to resolve the longitudinal
-length scales and highest temporal frequencies, but inadequate for
-resolving the turbulence in the lateral direction.  Further study is
-warranted to comprehensively determine the impact of stable
-stratification on the required mesh resolution.
+requirements necessary to capture important physical features of the
+stable offshore boundary layers.  Based on the calculated turbulent
+integral length scale, horizontal domain sizes of 750 m $\times$ 750 m
+were found to be necessary for these simulations.  Various horizontal
+mesh resolutions were also considered for the stable runs, and it was
+determined that the finest resolution of $\Delta_x$=2.5 m was able to
+resolve the longitudinal length scales and highest temporal
+frequencies, but inadequate for resolving the turbulence in the
+lateral direction.  However, the possible effects of mesh anisotropy
+on the one equation turbulence model and the wall function treatment
+are not included in this work, and could be important for future
+simulations.  We believe that further study is warranted to
+comprehensively determine the impact of stable stratification on the
+required mesh resolution.
 
 Lastly, a comparison of the ExaWind solvers Nalu-Wind and AMR-Wind was
 conducted using the stable offshore boundary layer at 5 m/s.  The mean
@@ -316,6 +326,8 @@ Administration).
 A portion of the research was performed using computational resources sponsored
 by the DOE's Office of Energy Efficiency and Renewable Energy and located at the
 National Renewable Energy Laboratory.
+
+Sandia Report \texttt{SAND2020-13732C}
 
 \bibliography{references}
 
