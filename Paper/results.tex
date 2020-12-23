@@ -518,6 +518,28 @@ longer than the nighttime conditions measured experimentally.
     \node[anchor=south west, inner sep=0](image) at (0,5.0in)
          {\includegraphics[height=2.5in]{figures/snapshots/05ms/velh_mag_side.png}};
     \node[align=left] at (2.5in, 5.0in){(a) AMR-Wind stable, 5 m/s};
+
+    % Draw some axes arrows for fig C
+    \coordinate[label=90:$z$]  (cZ) at (0.25in, 0.9in);
+    \coordinate                (cO) at (0.25in, 0.5in);
+    \coordinate                (cX) at (0.65in, 0.5in);
+    \draw[->, >=stealth, thick] (cO) -- (cZ);
+    \draw[->, >=stealth, thick] (cO) -- (cX);
+
+    % Draw some axes arrows for fig B
+    \coordinate[label=90:$z$]  (bZ) at (0.25in, 3.4in);
+    \coordinate                (bO) at (0.25in, 3.0in);
+    \coordinate                (bX) at (0.65in, 3.0in);
+    \draw[->, >=stealth, thick] (bO) -- (bZ);
+    \draw[->, >=stealth, thick] (bO) -- (bX);
+
+    % Draw some axes arrows for fig A
+    \coordinate[label=90:$z$]  (aZ) at (0.25in, 5.9in);
+    \coordinate                (aO) at (0.25in, 5.5in);
+    \coordinate                (aX) at (0.65in, 5.5in);
+    \draw[->, >=stealth, thick] (aO) -- (aZ);
+    \draw[->, >=stealth, thick] (aO) -- (aX);
+
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
     velocity, taken at $t$=20,000 s along the wind direction, for
