@@ -540,6 +540,27 @@ longer than the nighttime conditions measured experimentally.
     \draw[->, >=stealth, thick] (aO) -- (aZ);
     \draw[->, >=stealth, thick] (aO) -- (aX);
 
+    % Draw tick marks for fig C
+    \draw (0.125in, 0.28in) -- (0.125in, 2.3in);
+    \foreach \z in {0.28, 1.29, 2.3} \draw (0.05in, \z in) -- (0.125in, \z in);
+    \node[anchor=east] at (0.075in, 0.28in){0m};
+    \node[anchor=east] at (0.075in, 1.29in){500m};
+    \node[anchor=east] at (0.075in, 2.3in){1000m};
+
+    % Draw tick marks for fig B
+    \draw (0.125in, 2.78in) -- (0.125in, 4.8in);
+    \foreach \z in {2.78, 3.79, 4.8} \draw (0.05in, \z in) -- (0.125in, \z in);
+    \node[anchor=east] at (0.075in, 2.78in){0m};
+    \node[anchor=east] at (0.075in, 3.79in){500m};
+    \node[anchor=east] at (0.075in, 4.8in){1000m};
+
+    % Draw tick marks for fig A
+    \draw (0.125in, 5.28in) -- (0.125in, 7.3in);
+    \foreach \z in {5.28, 6.29, 7.3} \draw (0.05in, \z in) -- (0.125in, \z in);
+    \node[anchor=east] at (0.075in, 5.28in){0m};
+    \node[anchor=east] at (0.075in, 6.29in){500m};
+    \node[anchor=east] at (0.075in, 7.3in){1000m};
+
   \end{tikzpicture}
   \caption{ \label{fig:SnapshotsSide} Snapshots of the horizontal
     velocity, taken at $t$=20,000 s along the wind direction, for
